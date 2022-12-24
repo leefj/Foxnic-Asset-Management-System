@@ -200,6 +200,7 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 
 		//保存当前使用人
 		dao.execute("update eam_asset_item a,eam_asset b set a.before_use_user_id=b.use_user_id,a.before_asset_status=b.asset_status where a.asset_id=b.id and a.handle_id=?",id);
+
 		//资产记录保存借用单据
 		dao.execute("update eam_asset_item a,eam_asset b set b.borrow_id=? where a.asset_id=b.id and a.handle_id=?",id,id);
 

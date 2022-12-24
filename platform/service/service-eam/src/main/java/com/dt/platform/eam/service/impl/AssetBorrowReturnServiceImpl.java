@@ -287,7 +287,7 @@ public class AssetBorrowReturnServiceImpl extends SuperService<AssetBorrowReturn
 			dao.execute("update eam_asset_item a set a.asset_id=?,flag=? where a.asset_id=? and a.handle_id=?",newAssetId,oldAssetId,oldAssetId,id);
 		}
 
-		dao.execute("update eam_asset_item a,eam_asset b set b.borrow_id='' where  b.owner_code='asset'  and a.asset_id=b.id and a.handle_id=?",id);
+		dao.execute("update eam_asset_item a,eam_asset b set b.borrow_id='' where b.owner_code='asset'  and a.flag=b.id and a.handle_id=?",id);
 
 		return  ErrorDesc.success();
 	}
