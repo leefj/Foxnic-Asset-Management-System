@@ -170,9 +170,7 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 			bill.setBorrowStatus(AssetBorrowStatusEnum.RETURNED.code());
 			bill.setReturnDate(new Date());
 			super.update(bill,SaveMode.NOT_NULL_FIELDS);
-
-			dao.execute("update eam_asset_item a,eam_asset b set b.borrow_id='' where a.asset_id=b.id and a.handle_id=?",id);
-
+			dao.execute("update eam_asset_item a,eam_asset b set b.borrow_id='' where a.flag=b.id and a.handle_id=?",id);
 			return  ErrorDesc.success();
 		}else{
 			return ErrorDesc.failureMessage(str);

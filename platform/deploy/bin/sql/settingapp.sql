@@ -63,31 +63,28 @@ update sys_menu set hidden=1 where id='623153794699493376';
 -- 接口管理
 update sys_menu set hidden=1 where id='622447317160558592';
 
-
-
 -- #########
 -- 授权管理
-delete from sys_menu where id='558628496125984768';
-
-delete from sys_menu where id='616256291005792256';
-delete from sys_menu where id='495201409763901440';
-delete from sys_menu where id='610152549789466624';
-delete from sys_menu where id='473612721665867776';
+update sys_menu set hidden=1 where id='558628496125984768';
+update sys_menu set hidden=1  where id='616256291005792256';
+update sys_menu set hidden=1  where id='495201409763901440';
+update sys_menu set hidden=1  where id='610152549789466624';
+update sys_menu set hidden=1  where id='473612721665867776';
 -- delete from sys_menu where id='577783476611198976';
-delete from sys_menu where id='472358185009676289';
+update sys_menu set hidden=1  where id='472358185009676289';
 -- delete from sys_menu where id='472036810977968129';
-delete from sys_menu where id='474157822892834817';
-delete from sys_menu where id='472036556115279872';
-delete from sys_menu where id='474155549546512385';
-delete from sys_menu where id='568076619713875968';
-delete from sys_menu where id='562317041218879488';
+update sys_menu set hidden=1  where id='474157822892834817';
+update sys_menu set hidden=1  where id='472036556115279872';
+update sys_menu set hidden=1  where id='474155549546512385';
+update sys_menu set hidden=1  where id='568076619713875968';
+update sys_menu set hidden=1  where id='562317041218879488';
 -- delete from sys_menu where id='592108832759488512';
-delete from sys_menu where id='592348823129427968';
+update sys_menu set hidden=1  where id='592348823129427968';
 -- delete from sys_menu where id='475955437510852608';
 -- delete from sys_menu where id='566986193363795968';
 -- delete from sys_menu where id='471985681850171393';
-delete from sys_menu where id='487568362436558848';
-delete from sys_menu where id='487559533120454656';
-delete from sys_menu where id='578624635919138816';
+update sys_menu set hidden=1  where id='487568362436558848';
+update sys_menu set hidden=1  where id='487559533120454656';
+update sys_menu set hidden=1  where id='578624635919138816';
 
 

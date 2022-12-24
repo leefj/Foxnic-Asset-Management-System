@@ -4,6 +4,10 @@ Foxnic-EAM 2.5.0
 3、提高EAM操作逻辑
 
 
+
+
+
+
 Foxnic-EAM 2.4.0
 1、新增资产复制功能
 2、升级Foxnic-web
