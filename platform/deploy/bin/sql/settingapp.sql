@@ -1,5 +1,5 @@
 -- foxnic config
-update sys_config set value='2.4.0' where code='system.version.code';
+update sys_config set value='2.5.0' where code='system.version.code';
 update sys_config set value='PROD' where code='system.version.name';
 update sys_config set value='PROD' where code='system.version.type';
 update sys_config set value='PROD' where code='system.version.type';
@@ -8,7 +8,7 @@ update sys_config set value='0' where code='system.external.portal.enable';
 
 update sys_config set value='{account:"",password:"",captcha:""}'  where code='system.login.default';
 update sys_config set value=0 where code='system.login.captcha.any';
-update sys_config set value='FoxnicT001' where value='system.password.default';
+update sys_config set value='123456' where value='system.password.default';
 update sys_config set value=0 where code='eam.assetDataPermissions';
 
 update sys_config set value=1 where code='eam.assetDirectUpdateMode';

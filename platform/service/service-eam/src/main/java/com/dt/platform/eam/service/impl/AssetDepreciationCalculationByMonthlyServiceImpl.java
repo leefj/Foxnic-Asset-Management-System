@@ -280,6 +280,7 @@ public class AssetDepreciationCalculationByMonthlyServiceImpl implements IAssetD
                     if(asset.getAssetUsedServiceLife()==null){
                         return ErrorDesc.failureMessage("资产已使用周期为空,资产编号:"+detail.getAssetCode());
                     }
+                    //getAssetUsedServiceLife>=getAssetFinanceServiceLife
                     if(asset.getAssetUsedServiceLife().compareTo(detail.getAssetFinanceServiceLife())>-1){
                         detail.setResult(AssetDetailDepreciationResultEnum.DEPRECIATION_FINISHED.code());
                     }
@@ -546,11 +547,11 @@ public class AssetDepreciationCalculationByMonthlyServiceImpl implements IAssetD
         //返回0，和1 是ok的，-1 不满足要求
         if("-1".equals(assetDepreciationUtilService.compareDate(assetDepreciationDetail.getBusinessDate(),assetDepreciationDetail.getAssetPurchaseDate()))){
             assetDepreciationDetail.setResultStatus(AssetDetailDepreciationResultStatusEnum.FAILED.code());
-            assetDepreciationDetail.setResultDetail("启用日期需要大于等于入账日期");
+            assetDepreciationDetail.setResultDetail("启用日期需要大于等于验收日期");
           //  assetDepreciationDetailService.update(assetDepreciationDetail, SaveMode.NOT_NULL_FIELDS);
-            return ErrorDesc.failureMessage("启用日期需要大于等于入账日期");
+            return ErrorDesc.failureMessage("启用日期需要大于等于验收日期");
         }else{
-           Logger.info("正常折旧内部定义的前置条件-启用日期需要大于等于入账日期,符合要求");
+           Logger.info("正常折旧内部定义的前置条件-启用日期需要大于等于验收日期,符合要求");
         }
         //前置条件-业务日期大于上次折旧日期
         // assetDepreciationDetail.getBusinessDate()>assetDepreciationDetail.getLastOperTime()
