@@ -5,14 +5,19 @@ import com.dt.platform.domain.hr.PersonVO;
 import java.util.List;
 import com.dt.platform.domain.hr.Person;
 import java.util.Date;
+import com.dt.platform.domain.hr.Position;
+import com.dt.platform.domain.hr.Rank;
+import com.dt.platform.domain.hr.ProfessionalLevel;
+import org.github.foxnic.web.domain.system.DictItem;
+import org.github.foxnic.web.domain.hrm.Employee;
 import javax.persistence.Transient;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-09-17 07:13:41
- * @sign 0D48095740FD04B69DB3F28C0F155746
+ * @since 2022-12-29 15:01:36
+ * @sign A897D79572BDA58814D64EEDB389EFD6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -99,6 +104,26 @@ public class PersonVOMeta extends PersonMeta {
 	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,java.lang.String> SORT_TYPE_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,SORT_TYPE, java.lang.String.class, "排序方式", "", java.lang.String.class, null);
 	
 	/**
+	 * 数据来源 , 前端指定不同的来源，后端按来源执行不同的逻辑 , 类型: java.lang.String
+	*/
+	public static final String DATA_ORIGIN="dataOrigin";
+	
+	/**
+	 * 数据来源 , 前端指定不同的来源，后端按来源执行不同的逻辑 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,java.lang.String> DATA_ORIGIN_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,DATA_ORIGIN, java.lang.String.class, "数据来源", "前端指定不同的来源，后端按来源执行不同的逻辑", java.lang.String.class, null);
+	
+	/**
+	 * 查询逻辑 , 默认and，可指定 or  , 类型: java.lang.String
+	*/
+	public static final String QUERY_LOGIC="queryLogic";
+	
+	/**
+	 * 查询逻辑 , 默认and，可指定 or  , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,java.lang.String> QUERY_LOGIC_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,QUERY_LOGIC, java.lang.String.class, "查询逻辑", "默认and，可指定 or ", java.lang.String.class, null);
+	
+	/**
 	 * 主键清单 , 用于接收批量主键参数 , 集合类型: LIST , 类型: java.lang.String
 	*/
 	public static final String IDS="ids";
@@ -117,16 +142,6 @@ public class PersonVOMeta extends PersonMeta {
 	 * 主键 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
-	
-	/**
-	 * 员工 , 类型: java.lang.String
-	*/
-	public static final String EMPLOY_ID="employId";
-	
-	/**
-	 * 员工 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,java.lang.String> EMPLOY_ID_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,EMPLOY_ID, java.lang.String.class, "员工", "员工", java.lang.String.class, null);
 	
 	/**
 	 * 工号 , 类型: java.lang.String
@@ -559,6 +574,16 @@ public class PersonVOMeta extends PersonMeta {
 	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,java.lang.String> PERSON_PICTURE_ID_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,PERSON_PICTURE_ID, java.lang.String.class, "照片", "照片", java.lang.String.class, null);
 	
 	/**
+	 * 员工 , 类型: java.lang.String
+	*/
+	public static final String EMPLOYEE_ID="employeeId";
+	
+	/**
+	 * 员工 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,java.lang.String> EMPLOYEE_ID_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,EMPLOYEE_ID, java.lang.String.class, "员工", "员工", java.lang.String.class, null);
+	
+	/**
 	 * 附件 , 类型: java.lang.String
 	*/
 	public static final String FILE_ID="fileId";
@@ -669,9 +694,89 @@ public class PersonVOMeta extends PersonMeta {
 	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
 	
 	/**
+	 * position , 类型: com.dt.platform.domain.hr.Position
+	*/
+	public static final String POSITION="position";
+	
+	/**
+	 * position , 类型: com.dt.platform.domain.hr.Position
+	*/
+	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,com.dt.platform.domain.hr.Position> POSITION_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,POSITION, com.dt.platform.domain.hr.Position.class, "position", "position", com.dt.platform.domain.hr.Position.class, null);
+	
+	/**
+	 * rank , 类型: com.dt.platform.domain.hr.Rank
+	*/
+	public static final String RANK="rank";
+	
+	/**
+	 * rank , 类型: com.dt.platform.domain.hr.Rank
+	*/
+	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,com.dt.platform.domain.hr.Rank> RANK_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,RANK, com.dt.platform.domain.hr.Rank.class, "rank", "rank", com.dt.platform.domain.hr.Rank.class, null);
+	
+	/**
+	 * professionalLevel , 类型: com.dt.platform.domain.hr.ProfessionalLevel
+	*/
+	public static final String PROFESSIONAL_LEVEL="professionalLevel";
+	
+	/**
+	 * professionalLevel , 类型: com.dt.platform.domain.hr.ProfessionalLevel
+	*/
+	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,com.dt.platform.domain.hr.ProfessionalLevel> PROFESSIONAL_LEVEL_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,PROFESSIONAL_LEVEL, com.dt.platform.domain.hr.ProfessionalLevel.class, "professionalLevel", "professionalLevel", com.dt.platform.domain.hr.ProfessionalLevel.class, null);
+	
+	/**
+	 * bloodTypeDict , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String BLOOD_TYPE_DICT="bloodTypeDict";
+	
+	/**
+	 * bloodTypeDict , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,org.github.foxnic.web.domain.system.DictItem> BLOOD_TYPE_DICT_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,BLOOD_TYPE_DICT, org.github.foxnic.web.domain.system.DictItem.class, "bloodTypeDict", "bloodTypeDict", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
+	 * sexDict , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String SEX_DICT="sexDict";
+	
+	/**
+	 * sexDict , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,org.github.foxnic.web.domain.system.DictItem> SEX_DICT_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,SEX_DICT, org.github.foxnic.web.domain.system.DictItem.class, "sexDict", "sexDict", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
+	 * maritalStatusDict , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String MARITAL_STATUS_DICT="maritalStatusDict";
+	
+	/**
+	 * maritalStatusDict , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,org.github.foxnic.web.domain.system.DictItem> MARITAL_STATUS_DICT_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,MARITAL_STATUS_DICT, org.github.foxnic.web.domain.system.DictItem.class, "maritalStatusDict", "maritalStatusDict", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
+	 * employeeOwnerType , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String EMPLOYEE_OWNER_TYPE_DICT="employeeOwnerTypeDict";
+	
+	/**
+	 * employeeOwnerType , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,org.github.foxnic.web.domain.system.DictItem> EMPLOYEE_OWNER_TYPE_DICT_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,EMPLOYEE_OWNER_TYPE_DICT, org.github.foxnic.web.domain.system.DictItem.class, "employeeOwnerType", "employeeOwnerType", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
+	 * employee , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final String EMPLOYEE="employee";
+	
+	/**
+	 * employee , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,org.github.foxnic.web.domain.hrm.Employee> EMPLOYEE_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,EMPLOYEE, org.github.foxnic.web.domain.hrm.Employee.class, "employee", "employee", org.github.foxnic.web.domain.hrm.Employee.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , EMPLOY_ID , JOB_NUMBER , NAME , SEX_CODE , BIRTHDAY , NATIVE_PLACE_CODE , NATION_CODE , MARITAL_STATUS , EMPLOYEE_STATUS , EMPLOYEE_TYPE_CODE , IDENTITY_CARD , CONTACT_INFORMATION , EMAIL , EMERGENCY_CONTACT , EMERGENCY_CONTACT_NO , HOME_ADDRESS , WEIXIN_ID , EDUCATION_CODE , GRADUATION_SCHOOL , MAJOR , GRADUATION_DATE , FOREIGN_LANGUAGE , FOREIGN_LANGUAGE_LEVEL , COMPUTER_ABILITY , COMPUTER_LEVEL , POLITIC_COUNTENANCE_CODE , JOIN_PART_DATE , BLOOD_TYPE , BODY_HEIGHT , BODY_WEIGHT , EMPLOYMENT_DATE , EMPLOYMENT_CONFIRM_DATE , FIRST_EMPLOYMENT_DATE , FIRST_WORK_DATE , ORG_ID , POSITION_CODE , EMPLOYEE_TITLE_CODE , RANK_CODE , WORK_KIND_CODE , LEAVE_DATE , LEAVE_RESON , PAYROLL_CARD_BANK_CODE , PAYROLL_CARD , PERSON_PICTURE_ID , FILE_ID , NOTE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , DATA_ORIGIN , QUERY_LOGIC , IDS , ID , JOB_NUMBER , NAME , SEX_CODE , BIRTHDAY , NATIVE_PLACE_CODE , NATION_CODE , MARITAL_STATUS , EMPLOYEE_STATUS , EMPLOYEE_TYPE_CODE , IDENTITY_CARD , CONTACT_INFORMATION , EMAIL , EMERGENCY_CONTACT , EMERGENCY_CONTACT_NO , HOME_ADDRESS , WEIXIN_ID , EDUCATION_CODE , GRADUATION_SCHOOL , MAJOR , GRADUATION_DATE , FOREIGN_LANGUAGE , FOREIGN_LANGUAGE_LEVEL , COMPUTER_ABILITY , COMPUTER_LEVEL , POLITIC_COUNTENANCE_CODE , JOIN_PART_DATE , BLOOD_TYPE , BODY_HEIGHT , BODY_WEIGHT , EMPLOYMENT_DATE , EMPLOYMENT_CONFIRM_DATE , FIRST_EMPLOYMENT_DATE , FIRST_WORK_DATE , ORG_ID , POSITION_CODE , EMPLOYEE_TITLE_CODE , RANK_CODE , WORK_KIND_CODE , LEAVE_DATE , LEAVE_RESON , PAYROLL_CARD_BANK_CODE , PAYROLL_CARD , PERSON_PICTURE_ID , EMPLOYEE_ID , FILE_ID , NOTE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , POSITION , RANK , PROFESSIONAL_LEVEL , BLOOD_TYPE_DICT , SEX_DICT , MARITAL_STATUS_DICT , EMPLOYEE_OWNER_TYPE_DICT , EMPLOYEE };
 	
 	/**
 	 * 代理类
@@ -770,6 +875,28 @@ public class PersonVOMeta extends PersonMeta {
 		}
 		
 		/**
+		 * 设置 数据来源
+		 * @param dataOrigin 数据来源
+		 * @return 当前对象
+		*/
+		public PersonVO setDataOrigin(String dataOrigin) {
+			super.change(DATA_ORIGIN,super.getDataOrigin(),dataOrigin);
+			super.setDataOrigin(dataOrigin);
+			return this;
+		}
+		
+		/**
+		 * 设置 查询逻辑
+		 * @param queryLogic 查询逻辑
+		 * @return 当前对象
+		*/
+		public PersonVO setQueryLogic(String queryLogic) {
+			super.change(QUERY_LOGIC,super.getQueryLogic(),queryLogic);
+			super.setQueryLogic(queryLogic);
+			return this;
+		}
+		
+		/**
 		 * 设置 主键清单
 		 * @param ids 主键清单
 		 * @return 当前对象
@@ -788,17 +915,6 @@ public class PersonVOMeta extends PersonMeta {
 		public Person setId(String id) {
 			super.change(ID,super.getId(),id);
 			super.setId(id);
-			return this;
-		}
-		
-		/**
-		 * 设置 员工
-		 * @param employId 员工
-		 * @return 当前对象
-		*/
-		public Person setEmployId(String employId) {
-			super.change(EMPLOY_ID,super.getEmployId(),employId);
-			super.setEmployId(employId);
 			return this;
 		}
 		
@@ -1276,6 +1392,17 @@ public class PersonVOMeta extends PersonMeta {
 		}
 		
 		/**
+		 * 设置 员工
+		 * @param employeeId 员工
+		 * @return 当前对象
+		*/
+		public Person setEmployeeId(String employeeId) {
+			super.change(EMPLOYEE_ID,super.getEmployeeId(),employeeId);
+			super.setEmployeeId(employeeId);
+			return this;
+		}
+		
+		/**
 		 * 设置 附件
 		 * @param fileId 附件
 		 * @return 当前对象
@@ -1395,6 +1522,94 @@ public class PersonVOMeta extends PersonMeta {
 			super.setTenantId(tenantId);
 			return this;
 		}
+		
+		/**
+		 * 设置 position
+		 * @param position position
+		 * @return 当前对象
+		*/
+		public Person setPosition(Position position) {
+			super.change(POSITION,super.getPosition(),position);
+			super.setPosition(position);
+			return this;
+		}
+		
+		/**
+		 * 设置 rank
+		 * @param rank rank
+		 * @return 当前对象
+		*/
+		public Person setRank(Rank rank) {
+			super.change(RANK,super.getRank(),rank);
+			super.setRank(rank);
+			return this;
+		}
+		
+		/**
+		 * 设置 professionalLevel
+		 * @param professionalLevel professionalLevel
+		 * @return 当前对象
+		*/
+		public Person setProfessionalLevel(ProfessionalLevel professionalLevel) {
+			super.change(PROFESSIONAL_LEVEL,super.getProfessionalLevel(),professionalLevel);
+			super.setProfessionalLevel(professionalLevel);
+			return this;
+		}
+		
+		/**
+		 * 设置 bloodTypeDict
+		 * @param bloodTypeDict bloodTypeDict
+		 * @return 当前对象
+		*/
+		public Person setBloodTypeDict(DictItem bloodTypeDict) {
+			super.change(BLOOD_TYPE_DICT,super.getBloodTypeDict(),bloodTypeDict);
+			super.setBloodTypeDict(bloodTypeDict);
+			return this;
+		}
+		
+		/**
+		 * 设置 sexDict
+		 * @param sexDict sexDict
+		 * @return 当前对象
+		*/
+		public Person setSexDict(DictItem sexDict) {
+			super.change(SEX_DICT,super.getSexDict(),sexDict);
+			super.setSexDict(sexDict);
+			return this;
+		}
+		
+		/**
+		 * 设置 maritalStatusDict
+		 * @param maritalStatusDict maritalStatusDict
+		 * @return 当前对象
+		*/
+		public Person setMaritalStatusDict(DictItem maritalStatusDict) {
+			super.change(MARITAL_STATUS_DICT,super.getMaritalStatusDict(),maritalStatusDict);
+			super.setMaritalStatusDict(maritalStatusDict);
+			return this;
+		}
+		
+		/**
+		 * 设置 employeeOwnerType
+		 * @param employeeOwnerTypeDict employeeOwnerType
+		 * @return 当前对象
+		*/
+		public Person setEmployeeOwnerTypeDict(DictItem employeeOwnerTypeDict) {
+			super.change(EMPLOYEE_OWNER_TYPE_DICT,super.getEmployeeOwnerTypeDict(),employeeOwnerTypeDict);
+			super.setEmployeeOwnerTypeDict(employeeOwnerTypeDict);
+			return this;
+		}
+		
+		/**
+		 * 设置 employee
+		 * @param employee employee
+		 * @return 当前对象
+		*/
+		public Person setEmployee(Employee employee) {
+			super.change(EMPLOYEE,super.getEmployee(),employee);
+			super.setEmployee(employee);
+			return this;
+		}
 
 		/**
 		 * 克隆当前对象
@@ -1452,8 +1667,8 @@ public class PersonVOMeta extends PersonMeta {
 			inst.setFirstWorkDate(this.getFirstWorkDate());
 			inst.setPayrollCard(this.getPayrollCard());
 			inst.setWeixinId(this.getWeixinId());
+			inst.setEmployeeId(this.getEmployeeId());
 			inst.setUpdateTime(this.getUpdateTime());
-			inst.setEmployId(this.getEmployId());
 			inst.setJoinPartDate(this.getJoinPartDate());
 			inst.setLeaveReson(this.getLeaveReson());
 			inst.setSexCode(this.getSexCode());
@@ -1469,14 +1684,24 @@ public class PersonVOMeta extends PersonMeta {
 			inst.setBodyWeight(this.getBodyWeight());
 			if(all) {
 				inst.setSearchField(this.getSearchField());
+				inst.setFuzzyField(this.getFuzzyField());
+				inst.setProfessionalLevel(this.getProfessionalLevel());
+				inst.setPageSize(this.getPageSize());
+				inst.setEmployeeOwnerTypeDict(this.getEmployeeOwnerTypeDict());
+				inst.setEmployee(this.getEmployee());
+				inst.setBloodTypeDict(this.getBloodTypeDict());
 				inst.setPageIndex(this.getPageIndex());
 				inst.setSortType(this.getSortType());
-				inst.setFuzzyField(this.getFuzzyField());
 				inst.setDirtyFields(this.getDirtyFields());
 				inst.setSortField(this.getSortField());
-				inst.setPageSize(this.getPageSize());
+				inst.setDataOrigin(this.getDataOrigin());
 				inst.setIds(this.getIds());
+				inst.setRank(this.getRank());
+				inst.setQueryLogic(this.getQueryLogic());
+				inst.setPosition(this.getPosition());
 				inst.setSearchValue(this.getSearchValue());
+				inst.setSexDict(this.getSexDict());
+				inst.setMaritalStatusDict(this.getMaritalStatusDict());
 			}
 			inst.clearModifies();
 			return inst;

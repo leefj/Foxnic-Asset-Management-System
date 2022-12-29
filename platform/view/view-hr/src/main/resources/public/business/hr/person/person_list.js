@@ -1,13 +1,14 @@
 /**
  * 人员信息 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-09-17 07:13:43
+ * @since 2022-12-29 15:01:37
  */
 
 
 function ListPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect;
+	
 	//模块基础路径
 	const moduleURL="/service-hr/hr-person";
 	var dataTable=null;
@@ -18,7 +19,7 @@ function ListPage() {
 	this.init=function(layui) {
 
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate;
-		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,dropdown=layui.dropdown;;
+		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,dropdown=layui.dropdown;
 
 		if(window.pageExt.list.beforeInit) {
 			window.pageExt.list.beforeInit();
@@ -69,7 +70,7 @@ function ListPage() {
 			var tableConfig={
 				elem: '#data-table',
 				toolbar: '#toolbarTemplate',
-				defaultToolbar: ['filter', 'print',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
+				defaultToolbar: ['filter', 'print',{title: fox.translate('刷新数据','','cmp:table'),layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
 				url: moduleURL +'/query-paged-list',
 				height: 'full-'+(h+28),
 				limit: 50,
@@ -78,16 +79,15 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
-					,{ field: 'employId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('员工') , templet: function (d) { return templet('employId',d.employId,d);}  }
 					,{ field: 'jobNumber', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('工号') , templet: function (d) { return templet('jobNumber',d.jobNumber,d);}  }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('姓名') , templet: function (d) { return templet('name',d.name,d);}  }
-					,{ field: 'sexCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('性别') , templet: function (d) { return templet('sexCode',d.sexCode,d);}  }
-					,{ field: 'birthday', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('出生日期') ,templet: function (d) { return templet('birthday',fox.dateFormat(d.birthday,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'sexCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('性别'), templet: function (d) { return templet('sexCode' ,fox.joinLabel(d.sexDict,"label",',','','sexCode'),d);}}
+					,{ field: 'birthday', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('出生日期') ,templet: function (d) { return templet('birthday',fox.dateFormat(d.birthday,"yyyy-MM-dd"),d); }  }
 					,{ field: 'nativePlaceCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('籍贯') , templet: function (d) { return templet('nativePlaceCode',d.nativePlaceCode,d);}  }
 					,{ field: 'nationCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('民族') , templet: function (d) { return templet('nationCode',d.nationCode,d);}  }
-					,{ field: 'maritalStatus', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('婚姻状况') , templet: function (d) { return templet('maritalStatus',d.maritalStatus,d);}  }
+					,{ field: 'maritalStatus', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('婚姻状况'), templet: function (d) { return templet('maritalStatus' ,fox.joinLabel(d.maritalStatusDict,"label",',','','maritalStatus'),d);}}
 					,{ field: 'employeeStatus', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('员工状态') , templet: function (d) { return templet('employeeStatus',d.employeeStatus,d);}  }
-					,{ field: 'employeeTypeCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('人员类型') , templet: function (d) { return templet('employeeTypeCode',d.employeeTypeCode,d);}  }
+					,{ field: 'employeeTypeCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('人员类型'), templet: function (d) { return templet('employeeTypeCode' ,fox.joinLabel(d.employeeOwnerTypeDict,"label",',','','employeeTypeCode'),d);}}
 					,{ field: 'identityCard', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('身份证') , templet: function (d) { return templet('identityCard',d.identityCard,d);}  }
 					,{ field: 'contactInformation', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('联系方式') , templet: function (d) { return templet('contactInformation',d.contactInformation,d);}  }
 					,{ field: 'email', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('电子邮件') , templet: function (d) { return templet('email',d.email,d);}  }
@@ -104,29 +104,27 @@ function ListPage() {
 					,{ field: 'computerAbility', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('计算机能力') , templet: function (d) { return templet('computerAbility',d.computerAbility,d);}  }
 					,{ field: 'computerLevel', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('计算机等级') , templet: function (d) { return templet('computerLevel',d.computerLevel,d);}  }
 					,{ field: 'politicCountenanceCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('政治面貌') , templet: function (d) { return templet('politicCountenanceCode',d.politicCountenanceCode,d);}  }
-					,{ field: 'joinPartDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('入党时间') ,templet: function (d) { return templet('joinPartDate',fox.dateFormat(d.joinPartDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
-					,{ field: 'bloodType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('血型') , templet: function (d) { return templet('bloodType',d.bloodType,d);}  }
+					,{ field: 'joinPartDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('入党时间') ,templet: function (d) { return templet('joinPartDate',fox.dateFormat(d.joinPartDate,"yyyy-MM-dd"),d); }  }
+					,{ field: 'bloodType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('血型'), templet: function (d) { return templet('bloodType' ,fox.joinLabel(d.bloodTypeDict,"label",',','','bloodType'),d);}}
 					,{ field: 'bodyHeight', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('身高') , templet: function (d) { return templet('bodyHeight',d.bodyHeight,d);}  }
 					,{ field: 'bodyWeight', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('体重') , templet: function (d) { return templet('bodyWeight',d.bodyWeight,d);}  }
-					,{ field: 'employmentDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('入职日期') ,templet: function (d) { return templet('employmentDate',fox.dateFormat(d.employmentDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
-					,{ field: 'employmentConfirmDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('转正日期') ,templet: function (d) { return templet('employmentConfirmDate',fox.dateFormat(d.employmentConfirmDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
-					,{ field: 'firstEmploymentDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('初次日期') ,templet: function (d) { return templet('firstEmploymentDate',fox.dateFormat(d.firstEmploymentDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
-					,{ field: 'firstWorkDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('参加工作时间') ,templet: function (d) { return templet('firstWorkDate',fox.dateFormat(d.firstWorkDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'employmentDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('入职日期') ,templet: function (d) { return templet('employmentDate',fox.dateFormat(d.employmentDate,"yyyy-MM-dd"),d); }  }
+					,{ field: 'employmentConfirmDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('转正日期') ,templet: function (d) { return templet('employmentConfirmDate',fox.dateFormat(d.employmentConfirmDate,"yyyy-MM-dd"),d); }  }
+					,{ field: 'firstEmploymentDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('初次日期') ,templet: function (d) { return templet('firstEmploymentDate',fox.dateFormat(d.firstEmploymentDate,"yyyy-MM-dd"),d); }  }
+					,{ field: 'firstWorkDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('参加工作时间') ,templet: function (d) { return templet('firstWorkDate',fox.dateFormat(d.firstWorkDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'orgId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('员工部门') , templet: function (d) { return templet('orgId',d.orgId,d);}  }
-					,{ field: 'positionCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('员工岗位') , templet: function (d) { return templet('positionCode',d.positionCode,d);}  }
-					,{ field: 'employeeTitleCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('员工职称') , templet: function (d) { return templet('employeeTitleCode',d.employeeTitleCode,d);}  }
-					,{ field: 'rankCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('员工职级') , templet: function (d) { return templet('rankCode',d.rankCode,d);}  }
-					,{ field: 'workKindCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('员工工种') , templet: function (d) { return templet('workKindCode',d.workKindCode,d);}  }
-					,{ field: 'leaveDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('离职日期') ,templet: function (d) { return templet('leaveDate',fox.dateFormat(d.leaveDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'positionCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('员工岗位'), templet: function (d) { return templet('positionCode' ,fox.joinLabel(d.position,"name",',','','positionCode'),d);}}
+					,{ field: 'employeeTitleCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('员工职称'), templet: function (d) { return templet('employeeTitleCode' ,fox.joinLabel(d.professionalLevel,"name",',','','employeeTitleCode'),d);}}
+					,{ field: 'rankCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('员工职级'), templet: function (d) { return templet('rankCode' ,fox.joinLabel(d.rank,"code",',','','rankCode'),d);}}
+					,{ field: 'leaveDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('离职日期') ,templet: function (d) { return templet('leaveDate',fox.dateFormat(d.leaveDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'leaveReson', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('离职原因') , templet: function (d) { return templet('leaveReson',d.leaveReson,d);}  }
 					,{ field: 'payrollCardBankCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('工资卡开户行') , templet: function (d) { return templet('payrollCardBankCode',d.payrollCardBankCode,d);}  }
 					,{ field: 'payrollCard', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('工资卡帐号') , templet: function (d) { return templet('payrollCard',d.payrollCard,d);}  }
-					,{ field: 'personPictureId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('照片') , templet: function (d) { return templet('personPictureId',d.personPictureId,d);}  }
-					,{ field: 'fileId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('附件') , templet: function (d) { return templet('fileId',d.fileId,d);}  }
+					,{ field: 'employeeId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('员工') , templet: function (d) { return templet('employeeId',fox.getProperty(d,["employee","name"],0,'','employeeId'),d);} }
 					,{ field: 'note', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('note',d.note,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
-					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
-					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
+					,{ field: fox.translate('空白列','','cmp:table'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
+					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作','','cmp:table'), width: 160 }
 				]],
 				done: function (data) { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(data); },
 				footer : {
@@ -176,6 +174,8 @@ function ListPage() {
 		value.jobNumber={ inputType:"button",value: $("#jobNumber").val()};
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.employeeStatus={ inputType:"button",value: $("#employeeStatus").val()};
+		value.identityCard={ inputType:"button",value: $("#identityCard").val()};
+		value.employmentDate={ inputType:"date_input", begin: $("#employmentDate-begin").val(), end: $("#employmentDate-end").val() ,matchType:"auto" };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -222,6 +222,24 @@ function ListPage() {
 
 		fox.switchSearchRow(1);
 
+		laydate.render({
+			elem: '#employmentDate-begin',
+			trigger:"click",
+			done: function(value, date, endDate) {
+				setTimeout(function () {
+					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("employmentDate",value, date, endDate);
+				},1);
+			}
+		});
+		laydate.render({
+			elem: '#employmentDate-end',
+			trigger:"click",
+			done: function(value, date, endDate) {
+				setTimeout(function () {
+					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("employmentDate",value, date, endDate);
+				},1);
+			}
+		});
 		fox.renderSearchInputs();
 		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
 	}
@@ -302,11 +320,11 @@ function ListPage() {
 
 			var ids=getCheckedList("id");
             if(ids.length==0) {
-				top.layer.msg(fox.translate('请选择需要删除的')+fox.translate('人员信息')+"!");
+				top.layer.msg(fox.translate('请选择需要删除的'+'人员信息'+"!"));
             	return;
             }
             //调用批量删除接口
-			top.layer.confirm(fox.translate('确定删除已选中的')+fox.translate('人员信息')+fox.translate('吗？'), function (i) {
+			top.layer.confirm(fox.translate('确定删除已选中的'+'人员信息'+'吗？'), function (i) {
                 top.layer.close(i);
 				admin.post(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
                     if (data.success) {
@@ -317,6 +335,9 @@ function ListPage() {
 						fox.showMessage(data);
                         refreshTableData();
                     } else {
+						if(data.data>0) {
+							refreshTableData();
+						}
 						fox.showMessage(data);
                     }
                 },{delayLoading:200,elms:[$("#delete-button")]});
@@ -365,7 +386,7 @@ function ListPage() {
 					if(!doNext) return;
 				}
 
-				top.layer.confirm(fox.translate('确定删除此')+fox.translate('人员信息')+fox.translate('吗？'), function (i) {
+				top.layer.confirm(fox.translate('确定删除此'+'人员信息'+'吗？'), function (i) {
 					top.layer.close(i);
 					admin.post(moduleURL+"/delete", { id : data.id }, function (data) {
 						top.layer.closeAll('loading');
@@ -406,9 +427,9 @@ function ListPage() {
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
 		var title = fox.translate('人员信息');
-		if(action=="create") title=fox.translate('添加')+title;
-		else if(action=="edit") title=fox.translate('修改')+title;
-		else if(action=="view") title=fox.translate('查看')+title;
+		if(action=="create") title=fox.translate('添加','','cmp:table')+title;
+		else if(action=="edit") title=fox.translate('修改','','cmp:table')+title;
+		else if(action=="view") title=fox.translate('查看','','cmp:table')+title;
 
 		admin.popupCenter({
 			title: title,

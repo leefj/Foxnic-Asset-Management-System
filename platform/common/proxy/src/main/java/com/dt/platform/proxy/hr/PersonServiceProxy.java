@@ -16,10 +16,10 @@ import com.dt.platform.proxy.ServiceNames;
 
 /**
  * <p>
- * 人员信息  控制器服务代理
+ * 人员信息 控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-09-17 07:13:42
+ * @since 2022-12-29 15:01:36
  */
 @FeignClient(value = ServiceNames.HR, contextId = PersonServiceProxy.API_CONTEXT_PATH, configuration = FeignConfiguration.class)
 public interface PersonServiceProxy {
