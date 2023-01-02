@@ -24,7 +24,7 @@ import java.util.Map;
  * 职级序列服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-29 14:24:23
+ * @since 2023-01-02 14:12:44
 */
 
 public interface IRankService extends  ISimpleIdService<Rank,String> {

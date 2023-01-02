@@ -2,7 +2,7 @@
 /**
  * 人员合同 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-29 15:52:05
+ * @since 2023-01-02 14:12:03
  */
  -->
  <!DOCTYPE html>
@@ -36,47 +36,21 @@
 
          <!--开始：group 循环-->
 
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-2793-fieldset">
+            <legend>员工信息</legend>
+        </fieldset>
 
-        <div class="layui-row form-row" id="random-5040-content">
+        <div class="layui-row form-row" id="random-2793-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
-            <div class="layui-col-xs6 form-column" >
+            <div class="layui-col-xs12 form-column" >
 
-                <!-- text_input : 状态 ,  status -->
+                <!-- text_input : 姓名 ,  employeeName -->
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('状态')}">状态</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('姓名')}">姓名</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="status" id="status" name="status" th:placeholder="${ lang.translate('请输入'+'状态') }" type="text" class="layui-input"  />
-                    </div>
-                </div>
-            
-                <!-- select_box : 合同周期 ,  contractDuration  -->
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('合同周期')}">合同周期</div><div class="layui-required">*</div></div>
-                    <div class="layui-input-block ">
-                        <div id="contractDuration" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=hr_contract_duration'}" extraParam="{}"></div>
-                    </div>
-                </div>
-            <!--结束：栏次内字段循环-->
-            </div>
-             <!--开始：column 循环-->
-            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
-            <div class="layui-col-xs6 form-column" >
-
-                <!-- date_input : 合同开始时间 ,  contractStartDate  -->
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('合同开始时间')}">合同开始时间</div><div class="layui-required">*</div></div>
-                    <div class="layui-input-block ">
-                        <input input-type="date" lay-filter="contractStartDate" id="contractStartDate" name="contractStartDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择'+'合同开始时间') }" type="text" class="layui-input"    lay-verify="|required"   />
-                    </div>
-                </div>
-            
-                <!-- date_input : 合同结束时间 ,  contractFinishDate  -->
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('合同结束时间')}">合同结束时间</div><div class="layui-required">*</div></div>
-                    <div class="layui-input-block ">
-                        <input input-type="date" lay-filter="contractFinishDate" id="contractFinishDate" name="contractFinishDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择'+'合同结束时间') }" type="text" class="layui-input"    lay-verify="|required"   />
+                        <input lay-filter="employeeName" id="employeeName" name="employeeName" th:placeholder="${ lang.translate('请输入'+'姓名') }" type="text" class="layui-input"  />
                     </div>
                 </div>
             <!--结束：栏次内字段循环-->
@@ -85,23 +59,197 @@
         </div>
          <!--开始：group 循环-->
 
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-9393-fieldset">
+            <legend>合同信息</legend>
+        </fieldset>
 
-        <div class="layui-row form-row" id="random-3515-content">
+        <div class="layui-row form-row" id="random-9393-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
-            <div class="layui-col-xs12 form-column"  style="padding-top: 0px" >
+            <div class="layui-col-xs4 form-column" >
+
+                <!-- text_input : 合同编号 ,  businessCode -->
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('合同编号')}">合同编号</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="businessCode" id="businessCode" name="businessCode" th:placeholder="${ lang.translate('请输入'+'合同编号') }" type="text" class="layui-input"  />
+                    </div>
+                </div>
+            
+                <!-- radio_box : 状态 ,  status  -->
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('状态')}">状态</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input input-type="radio" type="radio" name="status" lay-filter="status" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.hr.ContractStatusEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)}">
+                    </div>
+                </div>
+            <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+                <!-- select_box : 合同类型 ,  type  -->
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('合同类型')}">合同类型</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <div id="type" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=hr_contract_type'}" extraParam="{}"></div>
+                    </div>
+                </div>
+            
+                <!-- number_input : 合同期限 ,  contractDuration  -->
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('合同期限')}">合同期限</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="contractDuration" id="contractDuration" name="contractDuration" th:placeholder="${ lang.translate('请输入'+'合同期限') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
+                    </div>
+                </div>
+            <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+                <!-- select_box : 合同年份 ,  contractYear  -->
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('合同年份')}">合同年份</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <div id="contractYear" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=hr_contract_year'}" extraParam="{}"></div>
+                    </div>
+                </div>
+            
+                <!-- radio_box : 是否转正 ,  transferToRegular  -->
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('是否转正')}">是否转正</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input input-type="radio" type="radio" name="transferToRegular" lay-filter="transferToRegular" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.hr.ContractTransferToRegularEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==0)}">
+                    </div>
+                </div>
+            <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-5388-fieldset">
+            <legend>试用期信息</legend>
+        </fieldset>
+
+        <div class="layui-row form-row" id="random-5388-content">
+
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+                <!-- number_input : 试用期工资 ,  probationSalary  -->
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('试用期工资')}">试用期工资</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="probationSalary" id="probationSalary" name="probationSalary" th:placeholder="${ lang.translate('请输入'+'试用期工资') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
+                    </div>
+                </div>
+            <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+                <!-- date_input : 试用期生效时间 ,  probationStartDate  -->
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('试用期生效时间')}">试用期生效时间</div></div>
+                    <div class="layui-input-block ">
+                        <input input-type="date" lay-filter="probationStartDate" id="probationStartDate" name="probationStartDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择'+'试用期生效时间') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+            <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+                <!-- text_input : 试用期到期时间 ,  probationFinishDate -->
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('试用期到期时间')}">试用期到期时间</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="probationFinishDate" id="probationFinishDate" name="probationFinishDate" th:placeholder="${ lang.translate('请输入'+'试用期到期时间') }" type="text" class="layui-input"  />
+                    </div>
+                </div>
+            <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-0554-fieldset">
+            <legend>转正信息</legend>
+        </fieldset>
+
+        <div class="layui-row form-row" id="random-0554-content">
+
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+                <!-- number_input : 工资 ,  salary  -->
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('工资')}">工资</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="salary" id="salary" name="salary" th:placeholder="${ lang.translate('请输入'+'工资') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
+                    </div>
+                </div>
+            <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+                <!-- date_input : 生效时间 ,  contractStartDate  -->
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('生效时间')}">生效时间</div></div>
+                    <div class="layui-input-block ">
+                        <input input-type="date" lay-filter="contractStartDate" id="contractStartDate" name="contractStartDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择'+'生效时间') }" type="text" class="layui-input"    lay-verify=""   />
+                    </div>
+                </div>
+            <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+                <!-- date_input : 到期时间 ,  contractFinishDate  -->
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('到期时间')}">到期时间</div></div>
+                    <div class="layui-input-block ">
+                        <input input-type="date" lay-filter="contractFinishDate" id="contractFinishDate" name="contractFinishDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择'+'到期时间') }" type="text" class="layui-input"    lay-verify=""   />
+                    </div>
+                </div>
+            <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-7117-fieldset">
+            <legend>其他信息</legend>
+        </fieldset>
+
+        <div class="layui-row form-row" id="random-7117-content">
+
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs12 form-column" >
 
                 <!-- text_area : 备注 ,  notes  -->
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div><div class="layui-required">*</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
                     <div class="layui-input-block ">
                         <textarea lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入'+'备注') }" class="layui-textarea" style="height: 120px" ></textarea>
                     </div>
                 </div>
-                            <!-- upload : 合同 ,  fileId  -->
+                            <!-- upload : 合同附件 ,  fileId  -->
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('合同')}">合同</div><div class="layui-required">*</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('合同附件')}">合同附件</div></div>
                     <div class="layui-upload layui-input-block ">
                         <input input-type="upload" id="fileId"  name="fileId" lay-filter="fileId" style="display: none">
                         <button type="button" class="layui-btn" id="fileId-button" th:text="${lang.translate('选择附件')}">选择附件</button>
@@ -133,7 +281,9 @@
 <script type="text/javascript" src="/assets/libs/toast/js/toast.js" th:src="'/assets/libs/toast/js/toast.js?'+${cacheKey}"></script>
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var VALIDATE_CONFIG={"notes":{"labelInForm":"备注","inputType":"text_area","required":true},"contractDuration":{"labelInForm":"合同周期","inputType":"select_box","required":true},"contractStartDate":{"date":true,"labelInForm":"合同开始时间","inputType":"date_input","required":true},"contractFinishDate":{"date":true,"labelInForm":"合同结束时间","inputType":"date_input","required":true},"fileId":{"labelInForm":"合同","inputType":"upload","required":true}};
+    var RADIO_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.hr.ContractStatusEnum')}]];
+    var RADIO_TRANSFERTOREGULAR_DATA = [[${enum.toArray('com.dt.platform.constants.enums.hr.ContractTransferToRegularEnum')}]];
+    var VALIDATE_CONFIG={"contractYear":{"labelInForm":"合同年份","inputType":"select_box","required":true},"contractStartDate":{"date":true,"labelInForm":"生效时间","inputType":"date_input"},"contractFinishDate":{"date":true,"labelInForm":"到期时间","inputType":"date_input"},"transferToRegular":{"labelInForm":"是否转正","inputType":"radio_box","required":true},"type":{"labelInForm":"合同类型","inputType":"select_box","required":true},"status":{"labelInForm":"状态","inputType":"radio_box","required":true}};
     var AUTH_PREFIX="hr_person_contract";
 
 

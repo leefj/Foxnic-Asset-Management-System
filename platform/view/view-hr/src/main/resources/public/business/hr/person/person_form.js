@@ -1,7 +1,7 @@
 /**
  * 人员信息 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-29 15:01:38
+ * @since 2023-01-02 15:21:57
  */
 
 function FormPage() {
@@ -172,14 +172,50 @@ function FormPage() {
 				return opts;
 			}
 		});
+		form.on('radio(employeeStatus)', function(data){
+			var checked=[];
+			$('input[type=radio][lay-filter=employeeStatus]:checked').each(function() {
+				checked.push($(this).val());
+			});
+			window.pageExt.form.onRadioBoxChanged && window.pageExt.form.onRadioBoxChanged("employeeStatus",data,checked);
+		});
 		//渲染 employeeTypeCode 下拉字段
 		fox.renderSelectBox({
 			el: "employeeTypeCode",
 			radio: true,
 			filterable: false,
+			layVerify: 'required',
+			layVerType: 'msg',
 			on: function(data){
 				setTimeout(function () {
 					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("employeeTypeCode",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 educationCode 下拉字段
+		fox.renderSelectBox({
+			el: "educationCode",
+			radio: true,
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("educationCode",data.arr,data.change,data.isAdd);
 				},1);
 			},
 			//转换数据
@@ -205,6 +241,35 @@ function FormPage() {
 			trigger:"click",
 			done: function(value, date, endDate){
 				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("graduationDate",value, date, endDate);
+			}
+		});
+		//渲染 politicCountenanceCode 下拉字段
+		fox.renderSelectBox({
+			el: "politicCountenanceCode",
+			radio: true,
+			filterable: false,
+			layVerify: 'required',
+			layVerType: 'msg',
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("politicCountenanceCode",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
 			}
 		});
 		laydate.render({
@@ -427,6 +492,22 @@ function FormPage() {
 				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterRemove",elId:elId,index:index,upload:upload});
 			}
 	    });
+		laydate.render({
+			elem: '#contractStartDate',
+			format:"yyyy-MM-dd HH:mm:ss",
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("contractStartDate",value, date, endDate);
+			}
+		});
+		laydate.render({
+			elem: '#contractFinishDate',
+			format:"yyyy-MM-dd HH:mm:ss",
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("contractFinishDate",value, date, endDate);
+			}
+		});
 	}
 
 	/**
@@ -525,6 +606,10 @@ function FormPage() {
 			fox.setSelectValue4QueryApi("#maritalStatus",formData.maritalStatusDict);
 			//设置  人员类型 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#employeeTypeCode",formData.employeeOwnerTypeDict);
+			//设置  学历 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#educationCode",formData.educationData);
+			//设置  政治面貌 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#politicCountenanceCode",formData.politicCountenanceData);
 			//设置  血型 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#bloodType",formData.bloodTypeDict);
 			//设置  员工岗位 设置下拉框勾选
@@ -590,6 +675,10 @@ function FormPage() {
 		data["maritalStatus"]=fox.getSelectedValue("maritalStatus",false);
 		//获取 人员类型 下拉框的值
 		data["employeeTypeCode"]=fox.getSelectedValue("employeeTypeCode",false);
+		//获取 学历 下拉框的值
+		data["educationCode"]=fox.getSelectedValue("educationCode",false);
+		//获取 政治面貌 下拉框的值
+		data["politicCountenanceCode"]=fox.getSelectedValue("politicCountenanceCode",false);
 		//获取 血型 下拉框的值
 		data["bloodType"]=fox.getSelectedValue("bloodType",false);
 		//获取 员工岗位 下拉框的值

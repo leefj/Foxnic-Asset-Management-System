@@ -1,7 +1,7 @@
 /**
  * 工作岗位 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-29 08:27:53
+ * @since 2023-01-02 14:12:25
  */
 
 layui.config({

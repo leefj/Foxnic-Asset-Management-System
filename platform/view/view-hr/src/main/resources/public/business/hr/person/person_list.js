@@ -1,7 +1,7 @@
 /**
  * 人员信息 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-29 15:01:37
+ * @since 2023-01-02 15:21:56
  */
 
 
@@ -86,7 +86,7 @@ function ListPage() {
 					,{ field: 'nativePlaceCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('籍贯') , templet: function (d) { return templet('nativePlaceCode',d.nativePlaceCode,d);}  }
 					,{ field: 'nationCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('民族') , templet: function (d) { return templet('nationCode',d.nationCode,d);}  }
 					,{ field: 'maritalStatus', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('婚姻状况'), templet: function (d) { return templet('maritalStatus' ,fox.joinLabel(d.maritalStatusDict,"label",',','','maritalStatus'),d);}}
-					,{ field: 'employeeStatus', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('员工状态') , templet: function (d) { return templet('employeeStatus',d.employeeStatus,d);}  }
+					,{ field: 'employeeStatus', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('员工状态'), templet:function (d){ return templet('employeeStatus',fox.getEnumText(RADIO_EMPLOYEESTATUS_DATA,d.employeeStatus,'','employeeStatus'),d);}}
 					,{ field: 'employeeTypeCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('人员类型'), templet: function (d) { return templet('employeeTypeCode' ,fox.joinLabel(d.employeeOwnerTypeDict,"label",',','','employeeTypeCode'),d);}}
 					,{ field: 'identityCard', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('身份证') , templet: function (d) { return templet('identityCard',d.identityCard,d);}  }
 					,{ field: 'contactInformation', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('联系方式') , templet: function (d) { return templet('contactInformation',d.contactInformation,d);}  }
@@ -95,7 +95,7 @@ function ListPage() {
 					,{ field: 'emergencyContactNo', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('紧急人电话') , templet: function (d) { return templet('emergencyContactNo',d.emergencyContactNo,d);}  }
 					,{ field: 'homeAddress', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('家庭地址') , templet: function (d) { return templet('homeAddress',d.homeAddress,d);}  }
 					,{ field: 'weixinId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('微信号') , templet: function (d) { return templet('weixinId',d.weixinId,d);}  }
-					,{ field: 'educationCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('学历') , templet: function (d) { return templet('educationCode',d.educationCode,d);}  }
+					,{ field: 'educationCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('学历'), templet: function (d) { return templet('educationCode' ,fox.joinLabel(d.educationData,"label",',','','educationCode'),d);}}
 					,{ field: 'graduationSchool', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('毕业院校') , templet: function (d) { return templet('graduationSchool',d.graduationSchool,d);}  }
 					,{ field: 'major', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('所学专业') , templet: function (d) { return templet('major',d.major,d);}  }
 					,{ field: 'graduationDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('毕业时间') ,templet: function (d) { return templet('graduationDate',fox.dateFormat(d.graduationDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
@@ -103,7 +103,7 @@ function ListPage() {
 					,{ field: 'foreignLanguageLevel', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('外语证书') , templet: function (d) { return templet('foreignLanguageLevel',d.foreignLanguageLevel,d);}  }
 					,{ field: 'computerAbility', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('计算机能力') , templet: function (d) { return templet('computerAbility',d.computerAbility,d);}  }
 					,{ field: 'computerLevel', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('计算机等级') , templet: function (d) { return templet('computerLevel',d.computerLevel,d);}  }
-					,{ field: 'politicCountenanceCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('政治面貌') , templet: function (d) { return templet('politicCountenanceCode',d.politicCountenanceCode,d);}  }
+					,{ field: 'politicCountenanceCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('政治面貌'), templet: function (d) { return templet('politicCountenanceCode' ,fox.joinLabel(d.politicCountenanceData,"label",',','','politicCountenanceCode'),d);}}
 					,{ field: 'joinPartDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('入党时间') ,templet: function (d) { return templet('joinPartDate',fox.dateFormat(d.joinPartDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'bloodType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('血型'), templet: function (d) { return templet('bloodType' ,fox.joinLabel(d.bloodTypeDict,"label",',','','bloodType'),d);}}
 					,{ field: 'bodyHeight', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('身高') , templet: function (d) { return templet('bodyHeight',d.bodyHeight,d);}  }
@@ -121,6 +121,9 @@ function ListPage() {
 					,{ field: 'payrollCardBankCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('工资卡开户行') , templet: function (d) { return templet('payrollCardBankCode',d.payrollCardBankCode,d);}  }
 					,{ field: 'payrollCard', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('工资卡帐号') , templet: function (d) { return templet('payrollCard',d.payrollCard,d);}  }
 					,{ field: 'employeeId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('员工') , templet: function (d) { return templet('employeeId',fox.getProperty(d,["employee","name"],0,'','employeeId'),d);} }
+					,{ field: 'contractDuration', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('合同周期') , templet: function (d) { return templet('contractDuration',d.contractDuration,d);}  }
+					,{ field: 'contractStartDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('合同开始时间') ,templet: function (d) { return templet('contractStartDate',fox.dateFormat(d.contractStartDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'contractFinishDate', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('合同结束时间') ,templet: function (d) { return templet('contractFinishDate',fox.dateFormat(d.contractFinishDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'note', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('note',d.note,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: fox.translate('空白列','','cmp:table'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
@@ -171,10 +174,10 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
-		value.jobNumber={ inputType:"button",value: $("#jobNumber").val()};
+		value.jobNumber={ inputType:"button",value: $("#jobNumber").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
-		value.employeeStatus={ inputType:"button",value: $("#employeeStatus").val()};
-		value.identityCard={ inputType:"button",value: $("#identityCard").val()};
+		value.employeeStatus={ inputType:"radio_box", value: getSelectedValue("#employeeStatus","value"), label:getSelectedValue("#employeeStatus","nameStr") };
+		value.identityCard={ inputType:"button",value: $("#identityCard").val() ,fuzzy: true,splitValue:false,valuePrefix:"",valueSuffix:"" };
 		value.employmentDate={ inputType:"date_input", begin: $("#employmentDate-begin").val(), end: $("#employmentDate-end").val() ,matchType:"auto" };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
@@ -222,6 +225,27 @@ function ListPage() {
 
 		fox.switchSearchRow(1);
 
+		//渲染 employeeStatus 搜索框
+		fox.renderSelectBox({
+			el: "employeeStatus",
+			size: "small",
+			radio: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("employeeStatus",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
 		laydate.render({
 			elem: '#employmentDate-begin',
 			trigger:"click",

@@ -13,6 +13,7 @@ import com.github.foxnic.dao.entity.Entity;
 import java.util.Map;
 import com.dt.platform.domain.hr.meta.ProfessionalLevelVOMeta;
 import com.github.foxnic.commons.lang.DataParser;
+import java.math.BigDecimal;
 import java.util.Date;
 import com.github.foxnic.sql.data.ExprRcd;
 
@@ -22,7 +23,7 @@ import com.github.foxnic.sql.data.ExprRcd;
  * 职业评级VO类型
  * <p>职业评级 , 数据表 hr_professional_level 的通用VO类型</p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-28 19:17:56
+ * @since 2023-01-02 14:12:06
  * @sign 81C85CBC7DA37DAC24AE7055D03395A6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -378,6 +379,7 @@ public class ProfessionalLevelVO extends ProfessionalLevel {
 		com.dt.platform.domain.hr.meta.ProfessionalLevelVOMeta.$$proxy$$ inst = new com.dt.platform.domain.hr.meta.ProfessionalLevelVOMeta.$$proxy$$();
 		inst.setNote(this.getNote());
 		inst.setCode(this.getCode());
+		inst.setBonus(this.getBonus());
 		inst.setUpdateTime(this.getUpdateTime());
 		inst.setSort(this.getSort());
 		inst.setVersion(this.getVersion());
@@ -463,6 +465,7 @@ public class ProfessionalLevelVO extends ProfessionalLevel {
 		if(cast) {
 			this.setNote(DataParser.parse(String.class, map.get(ProfessionalLevelVOMeta.NOTE)));
 			this.setCode(DataParser.parse(String.class, map.get(ProfessionalLevelVOMeta.CODE)));
+			this.setBonus(DataParser.parse(BigDecimal.class, map.get(ProfessionalLevelVOMeta.BONUS)));
 			this.setUpdateTime(DataParser.parse(Date.class, map.get(ProfessionalLevelVOMeta.UPDATE_TIME)));
 			this.setSort(DataParser.parse(Integer.class, map.get(ProfessionalLevelVOMeta.SORT)));
 			this.setVersion(DataParser.parse(Integer.class, map.get(ProfessionalLevelVOMeta.VERSION)));
@@ -490,6 +493,7 @@ public class ProfessionalLevelVO extends ProfessionalLevel {
 			try {
 				this.setNote( (String)map.get(ProfessionalLevelVOMeta.NOTE));
 				this.setCode( (String)map.get(ProfessionalLevelVOMeta.CODE));
+				this.setBonus( (BigDecimal)map.get(ProfessionalLevelVOMeta.BONUS));
 				this.setUpdateTime( (Date)map.get(ProfessionalLevelVOMeta.UPDATE_TIME));
 				this.setSort( (Integer)map.get(ProfessionalLevelVOMeta.SORT));
 				this.setVersion( (Integer)map.get(ProfessionalLevelVOMeta.VERSION));
@@ -530,6 +534,7 @@ public class ProfessionalLevelVO extends ProfessionalLevel {
 		if(cast) {
 			this.setNote(DataParser.parse(String.class, r.getValue(ProfessionalLevelVOMeta.NOTE)));
 			this.setCode(DataParser.parse(String.class, r.getValue(ProfessionalLevelVOMeta.CODE)));
+			this.setBonus(DataParser.parse(BigDecimal.class, r.getValue(ProfessionalLevelVOMeta.BONUS)));
 			this.setUpdateTime(DataParser.parse(Date.class, r.getValue(ProfessionalLevelVOMeta.UPDATE_TIME)));
 			this.setSort(DataParser.parse(Integer.class, r.getValue(ProfessionalLevelVOMeta.SORT)));
 			this.setVersion(DataParser.parse(Integer.class, r.getValue(ProfessionalLevelVOMeta.VERSION)));
@@ -547,6 +552,7 @@ public class ProfessionalLevelVO extends ProfessionalLevel {
 			try {
 				this.setNote( (String)r.getValue(ProfessionalLevelVOMeta.NOTE));
 				this.setCode( (String)r.getValue(ProfessionalLevelVOMeta.CODE));
+				this.setBonus( (BigDecimal)r.getValue(ProfessionalLevelVOMeta.BONUS));
 				this.setUpdateTime( (Date)r.getValue(ProfessionalLevelVOMeta.UPDATE_TIME));
 				this.setSort( (Integer)r.getValue(ProfessionalLevelVOMeta.SORT));
 				this.setVersion( (Integer)r.getValue(ProfessionalLevelVOMeta.VERSION));

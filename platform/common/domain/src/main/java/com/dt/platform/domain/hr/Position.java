@@ -23,7 +23,7 @@ import com.github.foxnic.sql.data.ExprRcd;
  * 工作岗位
  * <p>工作岗位 , 数据表 hr_position 的PO类型</p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-29 08:27:52
+ * @since 2023-01-02 14:12:25
  * @sign 280BECC8E56B4A5DF7AE0B5EEDB5F658
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -40,19 +40,19 @@ public class Position extends Entity {
 	 * 主键：主键
 	*/
 	@Id
-	@ApiModelProperty(required = true,value="主键" , notes = "主键")
+	@ApiModelProperty(required = true,value="主键" , notes = "主键" , example = "660760911509716992")
 	private String id;
 	
 	/**
 	 * 名称：名称
 	*/
-	@ApiModelProperty(required = false,value="名称" , notes = "名称")
+	@ApiModelProperty(required = false,value="名称" , notes = "名称" , example = "系统管理员")
 	private String name;
 	
 	/**
 	 * 类型：类型
 	*/
-	@ApiModelProperty(required = false,value="类型" , notes = "类型")
+	@ApiModelProperty(required = false,value="类型" , notes = "类型" , example = "660564350964072448")
 	private String type;
 	
 	/**
@@ -64,13 +64,13 @@ public class Position extends Entity {
 	/**
 	 * 创建人ID：创建人ID
 	*/
-	@ApiModelProperty(required = false,value="创建人ID" , notes = "创建人ID")
+	@ApiModelProperty(required = false,value="创建人ID" , notes = "创建人ID" , example = "110588348101165911")
 	private String createBy;
 	
 	/**
 	 * 创建时间：创建时间
 	*/
-	@ApiModelProperty(required = false,value="创建时间" , notes = "创建时间")
+	@ApiModelProperty(required = false,value="创建时间" , notes = "创建时间" , example = "2022-12-29 08:27:58")
 	private Date createTime;
 	
 	/**
@@ -88,7 +88,7 @@ public class Position extends Entity {
 	/**
 	 * 是否已删除：是否已删除
 	*/
-	@ApiModelProperty(required = true,value="是否已删除" , notes = "是否已删除")
+	@ApiModelProperty(required = true,value="是否已删除" , notes = "是否已删除" , example = "0")
 	private Integer deleted;
 	@Transient
 	@EnumFor("deleted")
@@ -109,13 +109,13 @@ public class Position extends Entity {
 	/**
 	 * version：version
 	*/
-	@ApiModelProperty(required = true,value="version" , notes = "version")
+	@ApiModelProperty(required = true,value="version" , notes = "version" , example = "1")
 	private Integer version;
 	
 	/**
 	 * 租户：租户
 	*/
-	@ApiModelProperty(required = false,value="租户" , notes = "租户")
+	@ApiModelProperty(required = false,value="租户" , notes = "租户" , example = "T001")
 	private String tenantId;
 	
 	/**

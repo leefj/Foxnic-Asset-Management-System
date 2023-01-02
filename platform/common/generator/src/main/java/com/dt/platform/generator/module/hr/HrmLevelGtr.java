@@ -40,6 +40,7 @@ public class HrmLevelGtr extends BaseCodeGenerator {
                 new Object[] {
                         HrTables.HR_PROFESSIONAL_LEVEL.CODE,
                         HrTables.HR_PROFESSIONAL_LEVEL.NAME,
+                        HrTables.HR_PROFESSIONAL_LEVEL.BONUS,
                         HrTables.HR_PROFESSIONAL_LEVEL.SORT
                 }
         );

@@ -3,6 +3,7 @@ package com.dt.platform.generator.module.hr;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.db.HrTables;
+import com.dt.platform.constants.enums.hr.EmployeeStatusEnum;
 import com.dt.platform.domain.eam.meta.AssetMeta;
 import com.dt.platform.domain.hr.Position;
 import com.dt.platform.domain.hr.PositionType;
@@ -36,8 +37,9 @@ public class HrmPersonGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"sexDict","sexDict","sexDict");
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"maritalStatusDict","maritalStatusDict","maritalStatusDict");
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"employeeOwnerTypeDict","employeeOwnerType","employeeOwnerType");
+        cfg.getPoClassFile().addSimpleProperty(DictItem.class,"educationData","educationData","educationData");
+        cfg.getPoClassFile().addSimpleProperty(DictItem.class,"politicCountenanceData","politicCountenanceData","politicCountenanceData");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"employee","employee","employee");
-
         cfg.view().field(HrTables.HR_PERSON.ID).basic().hidden(true);
         cfg.view().field(HrTables.HR_PERSON.NAME).search().fuzzySearch();
         cfg.view().field(HrTables.HR_PERSON.IDENTITY_CARD).search().fuzzySearch();
@@ -112,6 +114,15 @@ public class HrmPersonGtr extends BaseCodeGenerator {
                 textField(RankMeta.CODE).
                 fillWith(PersonMeta.RANK).muliti(false);
 
+
+        cfg.view().field(HrTables.HR_PERSON.EDUCATION_CODE)
+                .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=hr_education")
+                .paging(false).filter(false).toolbar(false)
+                .valueField(DictItemMeta.CODE).
+                textField(DictItemMeta.LABEL).
+                fillWith(PersonMeta.EDUCATION_DATA).muliti(false);
+
+
         cfg.view().field(HrTables.HR_PERSON.BLOOD_TYPE)
                 .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=hr_blood_type")
                 .paging(false).filter(false).toolbar(false)
@@ -135,11 +146,21 @@ public class HrmPersonGtr extends BaseCodeGenerator {
                 fillWith(PersonMeta.MARITAL_STATUS_DICT).muliti(false);
 
         cfg.view().field(HrTables.HR_PERSON.EMPLOYEE_TYPE_CODE)
-                .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=hr_employee_owner_type")
+                .form().validate().required().form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=hr_employee_owner_type")
                 .paging(false).filter(false).toolbar(false)
                 .valueField(DictItemMeta.CODE).
                 textField(DictItemMeta.LABEL).
                 fillWith(PersonMeta.EMPLOYEE_OWNER_TYPE_DICT).muliti(false);
+
+
+        cfg.view().field(HrTables.HR_PERSON.POLITIC_COUNTENANCE_CODE)
+                .form().validate().required().form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=hr_politic_countenance")
+                .paging(false).filter(false).toolbar(false)
+                .valueField(DictItemMeta.CODE).
+                textField(DictItemMeta.LABEL).
+                fillWith(PersonMeta.POLITIC_COUNTENANCE_DATA).muliti(false);
+
+        cfg.view().field(HrTables.HR_PERSON.EMPLOYEE_STATUS).form().validate().required().form().radioBox().enumType(EmployeeStatusEnum.class).defaultIndex(0);
 
         cfg.view().search().rowsDisplay(1);
         cfg.view().formWindow().width("65%");;
@@ -148,6 +169,7 @@ public class HrmPersonGtr extends BaseCodeGenerator {
                 new Object[] {
                         HrTables.HR_PERSON.NAME,
                         HrTables.HR_PERSON.IDENTITY_CARD,
+                        HrTables.HR_PERSON.EMPLOYEE_STATUS,
                         HrTables.HR_PERSON.JOB_NUMBER,
                         HrTables.HR_PERSON.SEX_CODE,
                         HrTables.HR_PERSON.MARITAL_STATUS,

@@ -16,7 +16,7 @@ import javax.persistence.Transient;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-29 15:01:36
+ * @since 2023-01-02 15:21:55
  * @sign A897D79572BDA58814D64EEDB389EFD6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -594,6 +594,36 @@ public class PersonVOMeta extends PersonMeta {
 	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,java.lang.String> FILE_ID_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,FILE_ID, java.lang.String.class, "附件", "附件", java.lang.String.class, null);
 	
 	/**
+	 * 合同周期 , 类型: java.lang.String
+	*/
+	public static final String CONTRACT_DURATION="contractDuration";
+	
+	/**
+	 * 合同周期 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,java.lang.String> CONTRACT_DURATION_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,CONTRACT_DURATION, java.lang.String.class, "合同周期", "合同周期", java.lang.String.class, null);
+	
+	/**
+	 * 合同开始时间 , 类型: java.util.Date
+	*/
+	public static final String CONTRACT_START_DATE="contractStartDate";
+	
+	/**
+	 * 合同开始时间 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,java.util.Date> CONTRACT_START_DATE_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,CONTRACT_START_DATE, java.util.Date.class, "合同开始时间", "合同开始时间", java.util.Date.class, null);
+	
+	/**
+	 * 合同结束时间 , 类型: java.util.Date
+	*/
+	public static final String CONTRACT_FINISH_DATE="contractFinishDate";
+	
+	/**
+	 * 合同结束时间 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,java.util.Date> CONTRACT_FINISH_DATE_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,CONTRACT_FINISH_DATE, java.util.Date.class, "合同结束时间", "合同结束时间", java.util.Date.class, null);
+	
+	/**
 	 * 备注 , 类型: java.lang.String
 	*/
 	public static final String NOTE="note";
@@ -764,6 +794,26 @@ public class PersonVOMeta extends PersonMeta {
 	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,org.github.foxnic.web.domain.system.DictItem> EMPLOYEE_OWNER_TYPE_DICT_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,EMPLOYEE_OWNER_TYPE_DICT, org.github.foxnic.web.domain.system.DictItem.class, "employeeOwnerType", "employeeOwnerType", org.github.foxnic.web.domain.system.DictItem.class, null);
 	
 	/**
+	 * educationData , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String EDUCATION_DATA="educationData";
+	
+	/**
+	 * educationData , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,org.github.foxnic.web.domain.system.DictItem> EDUCATION_DATA_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,EDUCATION_DATA, org.github.foxnic.web.domain.system.DictItem.class, "educationData", "educationData", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
+	 * politicCountenanceData , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String POLITIC_COUNTENANCE_DATA="politicCountenanceData";
+	
+	/**
+	 * politicCountenanceData , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.hr.PersonVO,org.github.foxnic.web.domain.system.DictItem> POLITIC_COUNTENANCE_DATA_PROP = new BeanProperty(com.dt.platform.domain.hr.PersonVO.class ,POLITIC_COUNTENANCE_DATA, org.github.foxnic.web.domain.system.DictItem.class, "politicCountenanceData", "politicCountenanceData", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
 	 * employee , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
 	public static final String EMPLOYEE="employee";
@@ -776,7 +826,7 @@ public class PersonVOMeta extends PersonMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , DATA_ORIGIN , QUERY_LOGIC , IDS , ID , JOB_NUMBER , NAME , SEX_CODE , BIRTHDAY , NATIVE_PLACE_CODE , NATION_CODE , MARITAL_STATUS , EMPLOYEE_STATUS , EMPLOYEE_TYPE_CODE , IDENTITY_CARD , CONTACT_INFORMATION , EMAIL , EMERGENCY_CONTACT , EMERGENCY_CONTACT_NO , HOME_ADDRESS , WEIXIN_ID , EDUCATION_CODE , GRADUATION_SCHOOL , MAJOR , GRADUATION_DATE , FOREIGN_LANGUAGE , FOREIGN_LANGUAGE_LEVEL , COMPUTER_ABILITY , COMPUTER_LEVEL , POLITIC_COUNTENANCE_CODE , JOIN_PART_DATE , BLOOD_TYPE , BODY_HEIGHT , BODY_WEIGHT , EMPLOYMENT_DATE , EMPLOYMENT_CONFIRM_DATE , FIRST_EMPLOYMENT_DATE , FIRST_WORK_DATE , ORG_ID , POSITION_CODE , EMPLOYEE_TITLE_CODE , RANK_CODE , WORK_KIND_CODE , LEAVE_DATE , LEAVE_RESON , PAYROLL_CARD_BANK_CODE , PAYROLL_CARD , PERSON_PICTURE_ID , EMPLOYEE_ID , FILE_ID , NOTE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , POSITION , RANK , PROFESSIONAL_LEVEL , BLOOD_TYPE_DICT , SEX_DICT , MARITAL_STATUS_DICT , EMPLOYEE_OWNER_TYPE_DICT , EMPLOYEE };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , DATA_ORIGIN , QUERY_LOGIC , IDS , ID , JOB_NUMBER , NAME , SEX_CODE , BIRTHDAY , NATIVE_PLACE_CODE , NATION_CODE , MARITAL_STATUS , EMPLOYEE_STATUS , EMPLOYEE_TYPE_CODE , IDENTITY_CARD , CONTACT_INFORMATION , EMAIL , EMERGENCY_CONTACT , EMERGENCY_CONTACT_NO , HOME_ADDRESS , WEIXIN_ID , EDUCATION_CODE , GRADUATION_SCHOOL , MAJOR , GRADUATION_DATE , FOREIGN_LANGUAGE , FOREIGN_LANGUAGE_LEVEL , COMPUTER_ABILITY , COMPUTER_LEVEL , POLITIC_COUNTENANCE_CODE , JOIN_PART_DATE , BLOOD_TYPE , BODY_HEIGHT , BODY_WEIGHT , EMPLOYMENT_DATE , EMPLOYMENT_CONFIRM_DATE , FIRST_EMPLOYMENT_DATE , FIRST_WORK_DATE , ORG_ID , POSITION_CODE , EMPLOYEE_TITLE_CODE , RANK_CODE , WORK_KIND_CODE , LEAVE_DATE , LEAVE_RESON , PAYROLL_CARD_BANK_CODE , PAYROLL_CARD , PERSON_PICTURE_ID , EMPLOYEE_ID , FILE_ID , CONTRACT_DURATION , CONTRACT_START_DATE , CONTRACT_FINISH_DATE , NOTE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , POSITION , RANK , PROFESSIONAL_LEVEL , BLOOD_TYPE_DICT , SEX_DICT , MARITAL_STATUS_DICT , EMPLOYEE_OWNER_TYPE_DICT , EDUCATION_DATA , POLITIC_COUNTENANCE_DATA , EMPLOYEE };
 	
 	/**
 	 * 代理类
@@ -1414,6 +1464,39 @@ public class PersonVOMeta extends PersonMeta {
 		}
 		
 		/**
+		 * 设置 合同周期
+		 * @param contractDuration 合同周期
+		 * @return 当前对象
+		*/
+		public Person setContractDuration(String contractDuration) {
+			super.change(CONTRACT_DURATION,super.getContractDuration(),contractDuration);
+			super.setContractDuration(contractDuration);
+			return this;
+		}
+		
+		/**
+		 * 设置 合同开始时间
+		 * @param contractStartDate 合同开始时间
+		 * @return 当前对象
+		*/
+		public Person setContractStartDate(Date contractStartDate) {
+			super.change(CONTRACT_START_DATE,super.getContractStartDate(),contractStartDate);
+			super.setContractStartDate(contractStartDate);
+			return this;
+		}
+		
+		/**
+		 * 设置 合同结束时间
+		 * @param contractFinishDate 合同结束时间
+		 * @return 当前对象
+		*/
+		public Person setContractFinishDate(Date contractFinishDate) {
+			super.change(CONTRACT_FINISH_DATE,super.getContractFinishDate(),contractFinishDate);
+			super.setContractFinishDate(contractFinishDate);
+			return this;
+		}
+		
+		/**
 		 * 设置 备注
 		 * @param note 备注
 		 * @return 当前对象
@@ -1601,6 +1684,28 @@ public class PersonVOMeta extends PersonMeta {
 		}
 		
 		/**
+		 * 设置 educationData
+		 * @param educationData educationData
+		 * @return 当前对象
+		*/
+		public Person setEducationData(DictItem educationData) {
+			super.change(EDUCATION_DATA,super.getEducationData(),educationData);
+			super.setEducationData(educationData);
+			return this;
+		}
+		
+		/**
+		 * 设置 politicCountenanceData
+		 * @param politicCountenanceData politicCountenanceData
+		 * @return 当前对象
+		*/
+		public Person setPoliticCountenanceData(DictItem politicCountenanceData) {
+			super.change(POLITIC_COUNTENANCE_DATA,super.getPoliticCountenanceData(),politicCountenanceData);
+			super.setPoliticCountenanceData(politicCountenanceData);
+			return this;
+		}
+		
+		/**
 		 * 设置 employee
 		 * @param employee employee
 		 * @return 当前对象
@@ -1641,6 +1746,7 @@ public class PersonVOMeta extends PersonMeta {
 			inst.setEmergencyContact(this.getEmergencyContact());
 			inst.setGraduationSchool(this.getGraduationSchool());
 			inst.setEmploymentDate(this.getEmploymentDate());
+			inst.setContractStartDate(this.getContractStartDate());
 			inst.setIdentityCard(this.getIdentityCard());
 			inst.setVersion(this.getVersion());
 			inst.setDeleteTime(this.getDeleteTime());
@@ -1653,6 +1759,8 @@ public class PersonVOMeta extends PersonMeta {
 			inst.setFileId(this.getFileId());
 			inst.setBirthday(this.getBirthday());
 			inst.setNote(this.getNote());
+			inst.setContractDuration(this.getContractDuration());
+			inst.setContractFinishDate(this.getContractFinishDate());
 			inst.setBodyHeight(this.getBodyHeight());
 			inst.setPositionCode(this.getPositionCode());
 			inst.setEducationCode(this.getEducationCode());
@@ -1684,11 +1792,13 @@ public class PersonVOMeta extends PersonMeta {
 			inst.setBodyWeight(this.getBodyWeight());
 			if(all) {
 				inst.setSearchField(this.getSearchField());
+				inst.setPoliticCountenanceData(this.getPoliticCountenanceData());
 				inst.setFuzzyField(this.getFuzzyField());
 				inst.setProfessionalLevel(this.getProfessionalLevel());
 				inst.setPageSize(this.getPageSize());
 				inst.setEmployeeOwnerTypeDict(this.getEmployeeOwnerTypeDict());
 				inst.setEmployee(this.getEmployee());
+				inst.setEducationData(this.getEducationData());
 				inst.setBloodTypeDict(this.getBloodTypeDict());
 				inst.setPageIndex(this.getPageIndex());
 				inst.setSortType(this.getSortType());

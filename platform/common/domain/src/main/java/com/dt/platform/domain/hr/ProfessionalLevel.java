@@ -7,6 +7,7 @@ import com.github.foxnic.sql.meta.DBTable;
 import com.dt.platform.constants.db.HrTables.HR_PROFESSIONAL_LEVEL;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Transient;
 import com.github.foxnic.api.swagger.EnumFor;
@@ -23,8 +24,8 @@ import com.github.foxnic.sql.data.ExprRcd;
  * 职业评级
  * <p>职业评级 , 数据表 hr_professional_level 的PO类型</p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-28 19:17:56
- * @sign 782053A0BD37D3C7635EC375C5533340
+ * @since 2023-01-02 14:12:06
+ * @sign 16A72558A5DADF3D910BCB720C14D63D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -40,20 +41,26 @@ public class ProfessionalLevel extends Entity {
 	 * 主键：主键
 	*/
 	@Id
-	@ApiModelProperty(required = true,value="主键" , notes = "主键")
+	@ApiModelProperty(required = true,value="主键" , notes = "主键" , example = "660564927425019904")
 	private String id;
 	
 	/**
 	 * 编码：编码
 	*/
-	@ApiModelProperty(required = false,value="编码" , notes = "编码")
+	@ApiModelProperty(required = false,value="编码" , notes = "编码" , example = "startEngineer1")
 	private String code;
 	
 	/**
 	 * 名称：名称
 	*/
-	@ApiModelProperty(required = false,value="名称" , notes = "名称")
+	@ApiModelProperty(required = false,value="名称" , notes = "名称" , example = "初级工程师1")
 	private String name;
+	
+	/**
+	 * 职级奖金：职级奖金
+	*/
+	@ApiModelProperty(required = false,value="职级奖金" , notes = "职级奖金" , example = "500.00")
+	private BigDecimal bonus;
 	
 	/**
 	 * 备注：备注
@@ -64,37 +71,37 @@ public class ProfessionalLevel extends Entity {
 	/**
 	 * 排序：排序
 	*/
-	@ApiModelProperty(required = false,value="排序" , notes = "排序")
+	@ApiModelProperty(required = false,value="排序" , notes = "排序" , example = "1")
 	private Integer sort;
 	
 	/**
 	 * 创建人ID：创建人ID
 	*/
-	@ApiModelProperty(required = false,value="创建人ID" , notes = "创建人ID")
+	@ApiModelProperty(required = false,value="创建人ID" , notes = "创建人ID" , example = "110588348101165911")
 	private String createBy;
 	
 	/**
 	 * 创建时间：创建时间
 	*/
-	@ApiModelProperty(required = false,value="创建时间" , notes = "创建时间")
+	@ApiModelProperty(required = false,value="创建时间" , notes = "创建时间" , example = "2022-12-28 07:29:11")
 	private Date createTime;
 	
 	/**
 	 * 修改人ID：修改人ID
 	*/
-	@ApiModelProperty(required = false,value="修改人ID" , notes = "修改人ID")
+	@ApiModelProperty(required = false,value="修改人ID" , notes = "修改人ID" , example = "110588348101165911")
 	private String updateBy;
 	
 	/**
 	 * 修改时间：修改时间
 	*/
-	@ApiModelProperty(required = false,value="修改时间" , notes = "修改时间")
+	@ApiModelProperty(required = false,value="修改时间" , notes = "修改时间" , example = "2023-01-02 07:57:41")
 	private Date updateTime;
 	
 	/**
 	 * 是否已删除：是否已删除
 	*/
-	@ApiModelProperty(required = true,value="是否已删除" , notes = "是否已删除")
+	@ApiModelProperty(required = true,value="是否已删除" , notes = "是否已删除" , example = "0")
 	private Integer deleted;
 	@Transient
 	@EnumFor("deleted")
@@ -115,13 +122,13 @@ public class ProfessionalLevel extends Entity {
 	/**
 	 * version：version
 	*/
-	@ApiModelProperty(required = true,value="version" , notes = "version")
+	@ApiModelProperty(required = true,value="version" , notes = "version" , example = "2")
 	private Integer version;
 	
 	/**
 	 * 租户：租户
 	*/
-	@ApiModelProperty(required = false,value="租户" , notes = "租户")
+	@ApiModelProperty(required = false,value="租户" , notes = "租户" , example = "T001")
 	private String tenantId;
 	
 	/**
@@ -178,6 +185,25 @@ public class ProfessionalLevel extends Entity {
 	*/
 	public ProfessionalLevel setName(String name) {
 		this.name=name;
+		return this;
+	}
+	
+	/**
+	 * 获得 职级奖金<br>
+	 * 职级奖金
+	 * @return 职级奖金
+	*/
+	public BigDecimal getBonus() {
+		return bonus;
+	}
+	
+	/**
+	 * 设置 职级奖金
+	 * @param bonus 职级奖金
+	 * @return 当前对象
+	*/
+	public ProfessionalLevel setBonus(BigDecimal bonus) {
+		this.bonus=bonus;
 		return this;
 	}
 	
@@ -467,6 +493,7 @@ public class ProfessionalLevel extends Entity {
 		com.dt.platform.domain.hr.meta.ProfessionalLevelMeta.$$proxy$$ inst = new com.dt.platform.domain.hr.meta.ProfessionalLevelMeta.$$proxy$$();
 		inst.setNote(this.getNote());
 		inst.setCode(this.getCode());
+		inst.setBonus(this.getBonus());
 		inst.setUpdateTime(this.getUpdateTime());
 		inst.setSort(this.getSort());
 		inst.setVersion(this.getVersion());
@@ -539,6 +566,7 @@ public class ProfessionalLevel extends Entity {
 		if(cast) {
 			this.setNote(DataParser.parse(String.class, map.get(ProfessionalLevelMeta.NOTE)));
 			this.setCode(DataParser.parse(String.class, map.get(ProfessionalLevelMeta.CODE)));
+			this.setBonus(DataParser.parse(BigDecimal.class, map.get(ProfessionalLevelMeta.BONUS)));
 			this.setUpdateTime(DataParser.parse(Date.class, map.get(ProfessionalLevelMeta.UPDATE_TIME)));
 			this.setSort(DataParser.parse(Integer.class, map.get(ProfessionalLevelMeta.SORT)));
 			this.setVersion(DataParser.parse(Integer.class, map.get(ProfessionalLevelMeta.VERSION)));
@@ -557,6 +585,7 @@ public class ProfessionalLevel extends Entity {
 			try {
 				this.setNote( (String)map.get(ProfessionalLevelMeta.NOTE));
 				this.setCode( (String)map.get(ProfessionalLevelMeta.CODE));
+				this.setBonus( (BigDecimal)map.get(ProfessionalLevelMeta.BONUS));
 				this.setUpdateTime( (Date)map.get(ProfessionalLevelMeta.UPDATE_TIME));
 				this.setSort( (Integer)map.get(ProfessionalLevelMeta.SORT));
 				this.setVersion( (Integer)map.get(ProfessionalLevelMeta.VERSION));
@@ -588,6 +617,7 @@ public class ProfessionalLevel extends Entity {
 		if(cast) {
 			this.setNote(DataParser.parse(String.class, r.getValue(ProfessionalLevelMeta.NOTE)));
 			this.setCode(DataParser.parse(String.class, r.getValue(ProfessionalLevelMeta.CODE)));
+			this.setBonus(DataParser.parse(BigDecimal.class, r.getValue(ProfessionalLevelMeta.BONUS)));
 			this.setUpdateTime(DataParser.parse(Date.class, r.getValue(ProfessionalLevelMeta.UPDATE_TIME)));
 			this.setSort(DataParser.parse(Integer.class, r.getValue(ProfessionalLevelMeta.SORT)));
 			this.setVersion(DataParser.parse(Integer.class, r.getValue(ProfessionalLevelMeta.VERSION)));
@@ -605,6 +635,7 @@ public class ProfessionalLevel extends Entity {
 			try {
 				this.setNote( (String)r.getValue(ProfessionalLevelMeta.NOTE));
 				this.setCode( (String)r.getValue(ProfessionalLevelMeta.CODE));
+				this.setBonus( (BigDecimal)r.getValue(ProfessionalLevelMeta.BONUS));
 				this.setUpdateTime( (Date)r.getValue(ProfessionalLevelMeta.UPDATE_TIME));
 				this.setSort( (Integer)r.getValue(ProfessionalLevelMeta.SORT));
 				this.setVersion( (Integer)r.getValue(ProfessionalLevelMeta.VERSION));

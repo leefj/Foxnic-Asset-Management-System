@@ -1,7 +1,7 @@
 /**
  * 职业评级 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-28 19:17:57
+ * @since 2023-01-02 14:12:07
  */
 
 
@@ -81,6 +81,7 @@ function ListPage() {
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true  , title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'code', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('编码') , templet: function (d) { return templet('code',d.code,d);}  }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
+					,{ field: 'bonus', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('职级奖金') , templet: function (d) { return templet('bonus',d.bonus,d);}  }
 					,{ field: 'note', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('note',d.note,d);}  }
 					,{ field: 'sort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('排序') , templet: function (d) { return templet('sort',d.sort,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }

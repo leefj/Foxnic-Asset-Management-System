@@ -24,7 +24,7 @@ import java.util.Map;
  * 岗位类型服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-28 19:14:53
+ * @since 2023-01-02 14:12:33
 */
 
 public interface IPositionTypeService extends  ISimpleIdService<PositionType,String> {

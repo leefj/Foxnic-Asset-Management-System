@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 人员信息接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-29 15:01:36
+ * @since 2023-01-02 15:21:55
 */
 
 @InDoc
@@ -66,9 +66,9 @@ public class PersonController extends SuperController {
 	*/
 	@ApiOperation(value = "添加人员信息")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = PersonVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "660858365366239232"),
+		@ApiImplicitParam(name = PersonVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.JOB_NUMBER , value = "工号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PersonVOMeta.NAME , value = "姓名" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = PersonVOMeta.NAME , value = "姓名" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.SEX_CODE , value = "性别" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.BIRTHDAY , value = "出生日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.NATIVE_PLACE_CODE , value = "籍贯" , required = false , dataTypeClass=String.class),
@@ -76,7 +76,7 @@ public class PersonController extends SuperController {
 		@ApiImplicitParam(name = PersonVOMeta.MARITAL_STATUS , value = "婚姻状况" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_STATUS , value = "员工状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_TYPE_CODE , value = "人员类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PersonVOMeta.IDENTITY_CARD , value = "身份证" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = PersonVOMeta.IDENTITY_CARD , value = "身份证" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMAIL , value = "电子邮件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMERGENCY_CONTACT , value = "紧急联系人" , required = false , dataTypeClass=String.class),
@@ -101,9 +101,9 @@ public class PersonController extends SuperController {
 		@ApiImplicitParam(name = PersonVOMeta.FIRST_EMPLOYMENT_DATE , value = "初次日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.FIRST_WORK_DATE , value = "参加工作时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.ORG_ID , value = "员工部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PersonVOMeta.POSITION_CODE , value = "员工岗位" , required = false , dataTypeClass=String.class , example = "660760911509716992"),
-		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_TITLE_CODE , value = "员工职称" , required = false , dataTypeClass=String.class , example = "660565317197496320"),
-		@ApiImplicitParam(name = PersonVOMeta.RANK_CODE , value = "员工职级" , required = false , dataTypeClass=String.class , example = "660564558007500800"),
+		@ApiImplicitParam(name = PersonVOMeta.POSITION_CODE , value = "员工岗位" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_TITLE_CODE , value = "员工职称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PersonVOMeta.RANK_CODE , value = "员工职级" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.WORK_KIND_CODE , value = "员工工种" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.LEAVE_DATE , value = "离职日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.LEAVE_RESON , value = "离职原因" , required = false , dataTypeClass=String.class),
@@ -112,6 +112,9 @@ public class PersonController extends SuperController {
 		@ApiImplicitParam(name = PersonVOMeta.PERSON_PICTURE_ID , value = "照片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_ID , value = "员工" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.FILE_ID , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PersonVOMeta.CONTRACT_DURATION , value = "合同周期" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PersonVOMeta.CONTRACT_START_DATE , value = "合同开始时间" , required = true , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = PersonVOMeta.CONTRACT_FINISH_DATE , value = "合同结束时间" , required = true , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.NOTE , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiParamSupport(ignoreDBTreatyProperties = true, ignoreDefaultVoProperties = true , ignorePrimaryKey = true)
@@ -130,7 +133,7 @@ public class PersonController extends SuperController {
 	*/
 	@ApiOperation(value = "删除人员信息")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = PersonVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "660858365366239232")
+		@ApiImplicitParam(name = PersonVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
 	})
 	@ApiOperationSupport(order=2 , author="金杰 , maillank@qq.com")
 	@SentinelResource(value = PersonServiceProxy.DELETE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -212,9 +215,9 @@ public class PersonController extends SuperController {
 	*/
 	@ApiOperation(value = "更新人员信息")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = PersonVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "660858365366239232"),
+		@ApiImplicitParam(name = PersonVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.JOB_NUMBER , value = "工号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PersonVOMeta.NAME , value = "姓名" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = PersonVOMeta.NAME , value = "姓名" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.SEX_CODE , value = "性别" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.BIRTHDAY , value = "出生日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.NATIVE_PLACE_CODE , value = "籍贯" , required = false , dataTypeClass=String.class),
@@ -222,7 +225,7 @@ public class PersonController extends SuperController {
 		@ApiImplicitParam(name = PersonVOMeta.MARITAL_STATUS , value = "婚姻状况" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_STATUS , value = "员工状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_TYPE_CODE , value = "人员类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PersonVOMeta.IDENTITY_CARD , value = "身份证" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = PersonVOMeta.IDENTITY_CARD , value = "身份证" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMAIL , value = "电子邮件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMERGENCY_CONTACT , value = "紧急联系人" , required = false , dataTypeClass=String.class),
@@ -247,9 +250,9 @@ public class PersonController extends SuperController {
 		@ApiImplicitParam(name = PersonVOMeta.FIRST_EMPLOYMENT_DATE , value = "初次日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.FIRST_WORK_DATE , value = "参加工作时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.ORG_ID , value = "员工部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PersonVOMeta.POSITION_CODE , value = "员工岗位" , required = false , dataTypeClass=String.class , example = "660760911509716992"),
-		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_TITLE_CODE , value = "员工职称" , required = false , dataTypeClass=String.class , example = "660565317197496320"),
-		@ApiImplicitParam(name = PersonVOMeta.RANK_CODE , value = "员工职级" , required = false , dataTypeClass=String.class , example = "660564558007500800"),
+		@ApiImplicitParam(name = PersonVOMeta.POSITION_CODE , value = "员工岗位" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_TITLE_CODE , value = "员工职称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PersonVOMeta.RANK_CODE , value = "员工职级" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.WORK_KIND_CODE , value = "员工工种" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.LEAVE_DATE , value = "离职日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.LEAVE_RESON , value = "离职原因" , required = false , dataTypeClass=String.class),
@@ -258,6 +261,9 @@ public class PersonController extends SuperController {
 		@ApiImplicitParam(name = PersonVOMeta.PERSON_PICTURE_ID , value = "照片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_ID , value = "员工" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.FILE_ID , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PersonVOMeta.CONTRACT_DURATION , value = "合同周期" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PersonVOMeta.CONTRACT_START_DATE , value = "合同开始时间" , required = true , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = PersonVOMeta.CONTRACT_FINISH_DATE , value = "合同结束时间" , required = true , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.NOTE , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiParamSupport(ignoreDBTreatyProperties = true, ignoreDefaultVoProperties = true)
@@ -275,9 +281,9 @@ public class PersonController extends SuperController {
 	*/
 	@ApiOperation(value = "保存人员信息")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = PersonVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "660858365366239232"),
+		@ApiImplicitParam(name = PersonVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.JOB_NUMBER , value = "工号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PersonVOMeta.NAME , value = "姓名" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = PersonVOMeta.NAME , value = "姓名" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.SEX_CODE , value = "性别" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.BIRTHDAY , value = "出生日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.NATIVE_PLACE_CODE , value = "籍贯" , required = false , dataTypeClass=String.class),
@@ -285,7 +291,7 @@ public class PersonController extends SuperController {
 		@ApiImplicitParam(name = PersonVOMeta.MARITAL_STATUS , value = "婚姻状况" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_STATUS , value = "员工状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_TYPE_CODE , value = "人员类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PersonVOMeta.IDENTITY_CARD , value = "身份证" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = PersonVOMeta.IDENTITY_CARD , value = "身份证" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMAIL , value = "电子邮件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMERGENCY_CONTACT , value = "紧急联系人" , required = false , dataTypeClass=String.class),
@@ -310,9 +316,9 @@ public class PersonController extends SuperController {
 		@ApiImplicitParam(name = PersonVOMeta.FIRST_EMPLOYMENT_DATE , value = "初次日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.FIRST_WORK_DATE , value = "参加工作时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.ORG_ID , value = "员工部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PersonVOMeta.POSITION_CODE , value = "员工岗位" , required = false , dataTypeClass=String.class , example = "660760911509716992"),
-		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_TITLE_CODE , value = "员工职称" , required = false , dataTypeClass=String.class , example = "660565317197496320"),
-		@ApiImplicitParam(name = PersonVOMeta.RANK_CODE , value = "员工职级" , required = false , dataTypeClass=String.class , example = "660564558007500800"),
+		@ApiImplicitParam(name = PersonVOMeta.POSITION_CODE , value = "员工岗位" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_TITLE_CODE , value = "员工职称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PersonVOMeta.RANK_CODE , value = "员工职级" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.WORK_KIND_CODE , value = "员工工种" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.LEAVE_DATE , value = "离职日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.LEAVE_RESON , value = "离职原因" , required = false , dataTypeClass=String.class),
@@ -321,6 +327,9 @@ public class PersonController extends SuperController {
 		@ApiImplicitParam(name = PersonVOMeta.PERSON_PICTURE_ID , value = "照片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_ID , value = "员工" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.FILE_ID , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PersonVOMeta.CONTRACT_DURATION , value = "合同周期" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PersonVOMeta.CONTRACT_START_DATE , value = "合同开始时间" , required = true , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = PersonVOMeta.CONTRACT_FINISH_DATE , value = "合同结束时间" , required = true , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.NOTE , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiParamSupport(ignoreDBTreatyProperties = true, ignoreDefaultVoProperties = true)
@@ -352,10 +361,12 @@ public class PersonController extends SuperController {
 			.with(PersonMeta.POSITION)
 			.with(PersonMeta.PROFESSIONAL_LEVEL)
 			.with(PersonMeta.RANK)
+			.with(PersonMeta.EDUCATION_DATA)
 			.with(PersonMeta.BLOOD_TYPE_DICT)
 			.with(PersonMeta.SEX_DICT)
 			.with(PersonMeta.MARITAL_STATUS_DICT)
 			.with(PersonMeta.EMPLOYEE_OWNER_TYPE_DICT)
+			.with(PersonMeta.POLITIC_COUNTENANCE_DATA)
 			.execute();
 		result.success(true).data(person);
 		return result;
@@ -386,9 +397,9 @@ public class PersonController extends SuperController {
 	*/
 	@ApiOperation(value = "查询人员信息")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = PersonVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "660858365366239232"),
+		@ApiImplicitParam(name = PersonVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.JOB_NUMBER , value = "工号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PersonVOMeta.NAME , value = "姓名" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = PersonVOMeta.NAME , value = "姓名" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.SEX_CODE , value = "性别" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.BIRTHDAY , value = "出生日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.NATIVE_PLACE_CODE , value = "籍贯" , required = false , dataTypeClass=String.class),
@@ -396,7 +407,7 @@ public class PersonController extends SuperController {
 		@ApiImplicitParam(name = PersonVOMeta.MARITAL_STATUS , value = "婚姻状况" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_STATUS , value = "员工状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_TYPE_CODE , value = "人员类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PersonVOMeta.IDENTITY_CARD , value = "身份证" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = PersonVOMeta.IDENTITY_CARD , value = "身份证" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMAIL , value = "电子邮件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMERGENCY_CONTACT , value = "紧急联系人" , required = false , dataTypeClass=String.class),
@@ -421,9 +432,9 @@ public class PersonController extends SuperController {
 		@ApiImplicitParam(name = PersonVOMeta.FIRST_EMPLOYMENT_DATE , value = "初次日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.FIRST_WORK_DATE , value = "参加工作时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.ORG_ID , value = "员工部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PersonVOMeta.POSITION_CODE , value = "员工岗位" , required = false , dataTypeClass=String.class , example = "660760911509716992"),
-		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_TITLE_CODE , value = "员工职称" , required = false , dataTypeClass=String.class , example = "660565317197496320"),
-		@ApiImplicitParam(name = PersonVOMeta.RANK_CODE , value = "员工职级" , required = false , dataTypeClass=String.class , example = "660564558007500800"),
+		@ApiImplicitParam(name = PersonVOMeta.POSITION_CODE , value = "员工岗位" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_TITLE_CODE , value = "员工职称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PersonVOMeta.RANK_CODE , value = "员工职级" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.WORK_KIND_CODE , value = "员工工种" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.LEAVE_DATE , value = "离职日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.LEAVE_RESON , value = "离职原因" , required = false , dataTypeClass=String.class),
@@ -432,6 +443,9 @@ public class PersonController extends SuperController {
 		@ApiImplicitParam(name = PersonVOMeta.PERSON_PICTURE_ID , value = "照片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_ID , value = "员工" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.FILE_ID , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PersonVOMeta.CONTRACT_DURATION , value = "合同周期" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PersonVOMeta.CONTRACT_START_DATE , value = "合同开始时间" , required = true , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = PersonVOMeta.CONTRACT_FINISH_DATE , value = "合同结束时间" , required = true , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.NOTE , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 , author="金杰 , maillank@qq.com" ,  ignoreParameters = { PersonVOMeta.PAGE_INDEX , PersonVOMeta.PAGE_SIZE } )
@@ -450,9 +464,9 @@ public class PersonController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询人员信息")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = PersonVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "660858365366239232"),
+		@ApiImplicitParam(name = PersonVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.JOB_NUMBER , value = "工号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PersonVOMeta.NAME , value = "姓名" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = PersonVOMeta.NAME , value = "姓名" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.SEX_CODE , value = "性别" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.BIRTHDAY , value = "出生日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.NATIVE_PLACE_CODE , value = "籍贯" , required = false , dataTypeClass=String.class),
@@ -460,7 +474,7 @@ public class PersonController extends SuperController {
 		@ApiImplicitParam(name = PersonVOMeta.MARITAL_STATUS , value = "婚姻状况" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_STATUS , value = "员工状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_TYPE_CODE , value = "人员类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PersonVOMeta.IDENTITY_CARD , value = "身份证" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = PersonVOMeta.IDENTITY_CARD , value = "身份证" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMAIL , value = "电子邮件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMERGENCY_CONTACT , value = "紧急联系人" , required = false , dataTypeClass=String.class),
@@ -485,9 +499,9 @@ public class PersonController extends SuperController {
 		@ApiImplicitParam(name = PersonVOMeta.FIRST_EMPLOYMENT_DATE , value = "初次日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.FIRST_WORK_DATE , value = "参加工作时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.ORG_ID , value = "员工部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PersonVOMeta.POSITION_CODE , value = "员工岗位" , required = false , dataTypeClass=String.class , example = "660760911509716992"),
-		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_TITLE_CODE , value = "员工职称" , required = false , dataTypeClass=String.class , example = "660565317197496320"),
-		@ApiImplicitParam(name = PersonVOMeta.RANK_CODE , value = "员工职级" , required = false , dataTypeClass=String.class , example = "660564558007500800"),
+		@ApiImplicitParam(name = PersonVOMeta.POSITION_CODE , value = "员工岗位" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_TITLE_CODE , value = "员工职称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PersonVOMeta.RANK_CODE , value = "员工职级" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.WORK_KIND_CODE , value = "员工工种" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.LEAVE_DATE , value = "离职日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.LEAVE_RESON , value = "离职原因" , required = false , dataTypeClass=String.class),
@@ -496,6 +510,9 @@ public class PersonController extends SuperController {
 		@ApiImplicitParam(name = PersonVOMeta.PERSON_PICTURE_ID , value = "照片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.EMPLOYEE_ID , value = "员工" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = PersonVOMeta.FILE_ID , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PersonVOMeta.CONTRACT_DURATION , value = "合同周期" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PersonVOMeta.CONTRACT_START_DATE , value = "合同开始时间" , required = true , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = PersonVOMeta.CONTRACT_FINISH_DATE , value = "合同结束时间" , required = true , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = PersonVOMeta.NOTE , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8 , author="金杰 , maillank@qq.com")
@@ -510,10 +527,12 @@ public class PersonController extends SuperController {
 			.with(PersonMeta.POSITION)
 			.with(PersonMeta.PROFESSIONAL_LEVEL)
 			.with(PersonMeta.RANK)
+			.with(PersonMeta.EDUCATION_DATA)
 			.with(PersonMeta.BLOOD_TYPE_DICT)
 			.with(PersonMeta.SEX_DICT)
 			.with(PersonMeta.MARITAL_STATUS_DICT)
 			.with(PersonMeta.EMPLOYEE_OWNER_TYPE_DICT)
+			.with(PersonMeta.POLITIC_COUNTENANCE_DATA)
 			.execute();
 		result.success(true).data(list);
 		return result;

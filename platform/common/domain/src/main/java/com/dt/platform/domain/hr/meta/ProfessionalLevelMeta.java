@@ -2,6 +2,7 @@ package com.dt.platform.domain.hr.meta;
 
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.hr.ProfessionalLevel;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Transient;
 
@@ -9,8 +10,8 @@ import javax.persistence.Transient;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-28 19:17:56
- * @sign 782053A0BD37D3C7635EC375C5533340
+ * @since 2023-01-02 14:12:06
+ * @sign 16A72558A5DADF3D910BCB720C14D63D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -45,6 +46,16 @@ public class ProfessionalLevelMeta {
 	 * 名称 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.hr.ProfessionalLevel,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.hr.ProfessionalLevel.class ,NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
+	
+	/**
+	 * 职级奖金 , 类型: java.math.BigDecimal
+	*/
+	public static final String BONUS="bonus";
+	
+	/**
+	 * 职级奖金 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.hr.ProfessionalLevel,java.math.BigDecimal> BONUS_PROP = new BeanProperty(com.dt.platform.domain.hr.ProfessionalLevel.class ,BONUS, java.math.BigDecimal.class, "职级奖金", "职级奖金", java.math.BigDecimal.class, null);
 	
 	/**
 	 * 备注 , 类型: java.lang.String
@@ -159,7 +170,7 @@ public class ProfessionalLevelMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CODE , NAME , NOTE , SORT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
+	public static final String[] $PROPS={ ID , CODE , NAME , BONUS , NOTE , SORT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
 	
 	/**
 	 * 代理类
@@ -199,6 +210,17 @@ public class ProfessionalLevelMeta {
 		public ProfessionalLevel setName(String name) {
 			super.change(NAME,super.getName(),name);
 			super.setName(name);
+			return this;
+		}
+		
+		/**
+		 * 设置 职级奖金
+		 * @param bonus 职级奖金
+		 * @return 当前对象
+		*/
+		public ProfessionalLevel setBonus(BigDecimal bonus) {
+			super.change(BONUS,super.getBonus(),bonus);
+			super.setBonus(bonus);
 			return this;
 		}
 		
@@ -340,6 +362,7 @@ public class ProfessionalLevelMeta {
 			$$proxy$$ inst=new $$proxy$$();
 			inst.setNote(this.getNote());
 			inst.setCode(this.getCode());
+			inst.setBonus(this.getBonus());
 			inst.setUpdateTime(this.getUpdateTime());
 			inst.setSort(this.getSort());
 			inst.setVersion(this.getVersion());

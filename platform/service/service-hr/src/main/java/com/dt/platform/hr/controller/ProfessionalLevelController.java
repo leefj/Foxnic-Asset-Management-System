@@ -30,6 +30,7 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.hr.meta.ProfessionalLevelMeta;
+import java.math.BigDecimal;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiImplicitParams;
@@ -44,7 +45,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 职业评级接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-28 19:17:56
+ * @since 2023-01-02 14:12:06
 */
 
 @InDoc
@@ -61,11 +62,12 @@ public class ProfessionalLevelController extends SuperController {
 	*/
 	@ApiOperation(value = "添加职业评级")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "660564927425019904"),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "startEngineer1"),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "初级工程师1"),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.BONUS , value = "职级奖金" , required = false , dataTypeClass=BigDecimal.class , example = "500.00"),
 		@ApiImplicitParam(name = ProfessionalLevelVOMeta.NOTE , value = "备注" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "1"),
 	})
 	@ApiParamSupport(ignoreDBTreatyProperties = true, ignoreDefaultVoProperties = true , ignorePrimaryKey = true)
 	@ApiOperationSupport(order=1 , author="金杰 , maillank@qq.com")
@@ -83,7 +85,7 @@ public class ProfessionalLevelController extends SuperController {
 	*/
 	@ApiOperation(value = "删除职业评级")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "660564927425019904")
 	})
 	@ApiOperationSupport(order=2 , author="金杰 , maillank@qq.com")
 	@SentinelResource(value = ProfessionalLevelServiceProxy.DELETE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -165,11 +167,12 @@ public class ProfessionalLevelController extends SuperController {
 	*/
 	@ApiOperation(value = "更新职业评级")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "660564927425019904"),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "startEngineer1"),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "初级工程师1"),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.BONUS , value = "职级奖金" , required = false , dataTypeClass=BigDecimal.class , example = "500.00"),
 		@ApiImplicitParam(name = ProfessionalLevelVOMeta.NOTE , value = "备注" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "1"),
 	})
 	@ApiParamSupport(ignoreDBTreatyProperties = true, ignoreDefaultVoProperties = true)
 	@ApiOperationSupport( order=4 , author="金杰 , maillank@qq.com" ,  ignoreParameters = { ProfessionalLevelVOMeta.PAGE_INDEX , ProfessionalLevelVOMeta.PAGE_SIZE , ProfessionalLevelVOMeta.SEARCH_FIELD , ProfessionalLevelVOMeta.FUZZY_FIELD , ProfessionalLevelVOMeta.SEARCH_VALUE , ProfessionalLevelVOMeta.DIRTY_FIELDS , ProfessionalLevelVOMeta.SORT_FIELD , ProfessionalLevelVOMeta.SORT_TYPE , ProfessionalLevelVOMeta.DATA_ORIGIN , ProfessionalLevelVOMeta.QUERY_LOGIC , ProfessionalLevelVOMeta.IDS } )
@@ -186,11 +189,12 @@ public class ProfessionalLevelController extends SuperController {
 	*/
 	@ApiOperation(value = "保存职业评级")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "660564927425019904"),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "startEngineer1"),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "初级工程师1"),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.BONUS , value = "职级奖金" , required = false , dataTypeClass=BigDecimal.class , example = "500.00"),
 		@ApiImplicitParam(name = ProfessionalLevelVOMeta.NOTE , value = "备注" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "1"),
 	})
 	@ApiParamSupport(ignoreDBTreatyProperties = true, ignoreDefaultVoProperties = true)
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { ProfessionalLevelVOMeta.PAGE_INDEX , ProfessionalLevelVOMeta.PAGE_SIZE , ProfessionalLevelVOMeta.SEARCH_FIELD , ProfessionalLevelVOMeta.FUZZY_FIELD , ProfessionalLevelVOMeta.SEARCH_VALUE , ProfessionalLevelVOMeta.DIRTY_FIELDS , ProfessionalLevelVOMeta.SORT_FIELD , ProfessionalLevelVOMeta.SORT_TYPE , ProfessionalLevelVOMeta.DATA_ORIGIN , ProfessionalLevelVOMeta.QUERY_LOGIC , ProfessionalLevelVOMeta.IDS } )
@@ -244,11 +248,12 @@ public class ProfessionalLevelController extends SuperController {
 	*/
 	@ApiOperation(value = "查询职业评级")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "660564927425019904"),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "startEngineer1"),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "初级工程师1"),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.BONUS , value = "职级奖金" , required = false , dataTypeClass=BigDecimal.class , example = "500.00"),
 		@ApiImplicitParam(name = ProfessionalLevelVOMeta.NOTE , value = "备注" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "1"),
 	})
 	@ApiOperationSupport(order=5 , author="金杰 , maillank@qq.com" ,  ignoreParameters = { ProfessionalLevelVOMeta.PAGE_INDEX , ProfessionalLevelVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = ProfessionalLevelServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -266,11 +271,12 @@ public class ProfessionalLevelController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询职业评级")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "660564927425019904"),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "startEngineer1"),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "初级工程师1"),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.BONUS , value = "职级奖金" , required = false , dataTypeClass=BigDecimal.class , example = "500.00"),
 		@ApiImplicitParam(name = ProfessionalLevelVOMeta.NOTE , value = "备注" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ProfessionalLevelVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = ProfessionalLevelVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "1"),
 	})
 	@ApiOperationSupport(order=8 , author="金杰 , maillank@qq.com")
 	@SentinelResource(value = ProfessionalLevelServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

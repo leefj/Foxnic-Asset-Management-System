@@ -1,7 +1,7 @@
 /**
  * 职级序列 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-29 14:24:23
+ * @since 2023-01-02 14:12:45
  */
 
 layui.config({

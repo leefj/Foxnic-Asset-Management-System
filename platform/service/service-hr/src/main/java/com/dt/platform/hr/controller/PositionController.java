@@ -45,7 +45,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 工作岗位接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-29 08:27:52
+ * @since 2023-01-02 14:12:25
 */
 
 @InDoc
@@ -62,9 +62,9 @@ public class PositionController extends SuperController {
 	*/
 	@ApiOperation(value = "添加工作岗位")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = PositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PositionVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "660760911509716992"),
+		@ApiImplicitParam(name = PositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "系统管理员"),
+		@ApiImplicitParam(name = PositionVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class , example = "660564350964072448"),
 		@ApiImplicitParam(name = PositionVOMeta.NOTE , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiParamSupport(ignoreDBTreatyProperties = true, ignoreDefaultVoProperties = true , ignorePrimaryKey = true)
@@ -83,7 +83,7 @@ public class PositionController extends SuperController {
 	*/
 	@ApiOperation(value = "删除工作岗位")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = PositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = PositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "660760911509716992")
 	})
 	@ApiOperationSupport(order=2 , author="金杰 , maillank@qq.com")
 	@SentinelResource(value = PositionServiceProxy.DELETE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -165,9 +165,9 @@ public class PositionController extends SuperController {
 	*/
 	@ApiOperation(value = "更新工作岗位")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = PositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PositionVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "660760911509716992"),
+		@ApiImplicitParam(name = PositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "系统管理员"),
+		@ApiImplicitParam(name = PositionVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class , example = "660564350964072448"),
 		@ApiImplicitParam(name = PositionVOMeta.NOTE , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiParamSupport(ignoreDBTreatyProperties = true, ignoreDefaultVoProperties = true)
@@ -185,9 +185,9 @@ public class PositionController extends SuperController {
 	*/
 	@ApiOperation(value = "保存工作岗位")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = PositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PositionVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "660760911509716992"),
+		@ApiImplicitParam(name = PositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "系统管理员"),
+		@ApiImplicitParam(name = PositionVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class , example = "660564350964072448"),
 		@ApiImplicitParam(name = PositionVOMeta.NOTE , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiParamSupport(ignoreDBTreatyProperties = true, ignoreDefaultVoProperties = true)
@@ -246,9 +246,9 @@ public class PositionController extends SuperController {
 	*/
 	@ApiOperation(value = "查询工作岗位")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = PositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PositionVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "660760911509716992"),
+		@ApiImplicitParam(name = PositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "系统管理员"),
+		@ApiImplicitParam(name = PositionVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class , example = "660564350964072448"),
 		@ApiImplicitParam(name = PositionVOMeta.NOTE , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 , author="金杰 , maillank@qq.com" ,  ignoreParameters = { PositionVOMeta.PAGE_INDEX , PositionVOMeta.PAGE_SIZE } )
@@ -267,9 +267,9 @@ public class PositionController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询工作岗位")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = PositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = PositionVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = PositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "660760911509716992"),
+		@ApiImplicitParam(name = PositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "系统管理员"),
+		@ApiImplicitParam(name = PositionVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class , example = "660564350964072448"),
 		@ApiImplicitParam(name = PositionVOMeta.NOTE , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8 , author="金杰 , maillank@qq.com")

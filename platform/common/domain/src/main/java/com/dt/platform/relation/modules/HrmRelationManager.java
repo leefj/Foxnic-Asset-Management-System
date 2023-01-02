@@ -52,9 +52,20 @@ public class HrmRelationManager extends RelationManager {
 
 	private void setupPersonContract() {
 
-		this.property(PersonContractMeta.CONTRACT_DURATION_DICT_PROP)
-				.using(HrTables.HR_PERSON_CONTRACT.CONTRACT_DURATION).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
-				.condition("dict_code='hr_contract_duration'");
+		this.property(PersonContractMeta.CONTRACT_YEAR_DATA_PROP)
+				.using(HrTables.HR_PERSON_CONTRACT.CONTRACT_YEAR).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+				.condition("dict_code='hr_contract_year'");
+
+		this.property(PersonContractMeta.CONTRACT_TYPE_DATA_PROP)
+				.using(HrTables.HR_PERSON_CONTRACT.TYPE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+				.condition("dict_code='hr_contract_type'");
+
+
+		this.property(PersonContractMeta.PERSON_PROP)
+				.using(HrTables.HR_PERSON_CONTRACT.EMPLOYEE_ID).join(HrTables.HR_PERSON.EMPLOYEE_ID);
+
+		this.property(PersonContractMeta.EMPLOYEE_PROP)
+				.using(HrTables.HR_PERSON_CONTRACT.EMPLOYEE_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
 
 
 	}
@@ -86,6 +97,13 @@ public class HrmRelationManager extends RelationManager {
 				.using(HrTables.HR_PERSON.EMPLOYEE_TYPE_CODE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
 				.condition("dict_code='hr_employee_owner_type'");
 
+		this.property(PersonMeta.EDUCATION_DATA_PROP)
+				.using(HrTables.HR_PERSON.EDUCATION_CODE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+				.condition("dict_code='hr_education'");
+
+		this.property(PersonMeta.POLITIC_COUNTENANCE_DATA_PROP)
+				.using(HrTables.HR_PERSON.POLITIC_COUNTENANCE_CODE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+				.condition("dict_code='hr_politic_countenance'");
 
 		this.property(PersonMeta.EMPLOYEE_PROP)
 				.using(HrTables.HR_PERSON.EMPLOYEE_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);

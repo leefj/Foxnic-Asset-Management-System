@@ -2,7 +2,7 @@
 /**
  * 人员信息 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-29 15:01:37
+ * @since 2023-01-02 15:21:57
  */
  -->
  <!DOCTYPE html>
@@ -36,11 +36,11 @@
 
          <!--开始：group 循环-->
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-3058-fieldset">
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-4370-fieldset">
             <legend>基本信息</legend>
         </fieldset>
 
-        <div class="layui-row form-row" id="random-3058-content">
+        <div class="layui-row form-row" id="random-4370-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -59,6 +59,14 @@
                     <div class="layui-form-label "><div th:text="${lang.translate('身份证')}">身份证</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block ">
                         <input lay-filter="identityCard" id="identityCard" name="identityCard" th:placeholder="${ lang.translate('请输入'+'身份证') }" type="text" class="layui-input"    lay-verify="|required"  />
+                    </div>
+                </div>
+            
+                <!-- radio_box : 员工状态 ,  employeeStatus  -->
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('员工状态')}">员工状态</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input input-type="radio" type="radio" name="employeeStatus" lay-filter="employeeStatus" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.hr.EmployeeStatusEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==0)}">
                     </div>
                 </div>
             
@@ -93,7 +101,7 @@
 
                 <!-- select_box : 人员类型 ,  employeeTypeCode  -->
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('人员类型')}">人员类型</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('人员类型')}">人员类型</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block ">
                         <div id="employeeTypeCode" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=hr_employee_owner_type'}" extraParam="{}"></div>
                     </div>
@@ -137,11 +145,11 @@
         </div>
          <!--开始：group 循环-->
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-0217-fieldset">
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-7588-fieldset">
             <legend>个人情况</legend>
         </fieldset>
 
-        <div class="layui-row form-row" id="random-0217-content">
+        <div class="layui-row form-row" id="random-7588-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -171,11 +179,11 @@
                     </div>
                 </div>
             
-                <!-- text_input : 学历 ,  educationCode -->
+                <!-- select_box : 学历 ,  educationCode  -->
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('学历')}">学历</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="educationCode" id="educationCode" name="educationCode" th:placeholder="${ lang.translate('请输入'+'学历') }" type="text" class="layui-input"  />
+                        <div id="educationCode" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=hr_education'}" extraParam="{}"></div>
                     </div>
                 </div>
             
@@ -195,11 +203,11 @@
                     </div>
                 </div>
             
-                <!-- text_input : 政治面貌 ,  politicCountenanceCode -->
+                <!-- select_box : 政治面貌 ,  politicCountenanceCode  -->
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('政治面貌')}">政治面貌</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('政治面貌')}">政治面貌</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="politicCountenanceCode" id="politicCountenanceCode" name="politicCountenanceCode" th:placeholder="${ lang.translate('请输入'+'政治面貌') }" type="text" class="layui-input"  />
+                        <div id="politicCountenanceCode" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=hr_politic_countenance'}" extraParam="{}"></div>
                     </div>
                 </div>
             
@@ -293,11 +301,11 @@
         </div>
          <!--开始：group 循环-->
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-2674-fieldset">
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-2738-fieldset">
             <legend>工作信息</legend>
         </fieldset>
 
-        <div class="layui-row form-row" id="random-2674-content">
+        <div class="layui-row form-row" id="random-2738-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -378,7 +386,7 @@
          <!--开始：group 循环-->
 
 
-        <div class="layui-row form-row" id="random-3061-content">
+        <div class="layui-row form-row" id="random-9127-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -397,11 +405,11 @@
         </div>
          <!--开始：group 循环-->
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-7009-fieldset">
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-8647-fieldset">
             <legend>工资信息</legend>
         </fieldset>
 
-        <div class="layui-row form-row" id="random-7009-content">
+        <div class="layui-row form-row" id="random-8647-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -433,11 +441,11 @@
         </div>
          <!--开始：group 循环-->
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-8456-fieldset">
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-4506-fieldset">
             <legend>其他信息</legend>
         </fieldset>
 
-        <div class="layui-row form-row" id="random-8456-content">
+        <div class="layui-row form-row" id="random-4506-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -493,7 +501,8 @@
 <script type="text/javascript" src="/assets/libs/toast/js/toast.js" th:src="'/assets/libs/toast/js/toast.js?'+${cacheKey}"></script>
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var VALIDATE_CONFIG={"birthday":{"date":true,"labelInForm":"出生日期","inputType":"date_input"},"employmentConfirmDate":{"date":true,"labelInForm":"转正日期","inputType":"date_input"},"firstWorkDate":{"date":true,"labelInForm":"参加工作时间","inputType":"date_input"},"employmentDate":{"date":true,"labelInForm":"入职日期","inputType":"date_input"},"name":{"labelInForm":"姓名","inputType":"text_input","required":true},"leaveDate":{"date":true,"labelInForm":"离职日期","inputType":"date_input"},"firstEmploymentDate":{"date":true,"labelInForm":"初次日期","inputType":"date_input"},"identityCard":{"labelInForm":"身份证","inputType":"text_input","required":true},"joinPartDate":{"date":true,"labelInForm":"入党时间","inputType":"date_input"}};
+    var RADIO_EMPLOYEESTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.hr.EmployeeStatusEnum')}]];
+    var VALIDATE_CONFIG={"birthday":{"date":true,"labelInForm":"出生日期","inputType":"date_input"},"firstWorkDate":{"date":true,"labelInForm":"参加工作时间","inputType":"date_input"},"contractDuration":{"labelInForm":"合同周期","inputType":"text_input","required":true},"employmentDate":{"date":true,"labelInForm":"入职日期","inputType":"date_input"},"contractStartDate":{"labelInForm":"合同开始时间","inputType":"date_input","required":true},"contractFinishDate":{"labelInForm":"合同结束时间","inputType":"date_input","required":true},"identityCard":{"labelInForm":"身份证","inputType":"text_input","required":true},"employeeStatus":{"labelInForm":"员工状态","inputType":"radio_box","required":true},"joinPartDate":{"date":true,"labelInForm":"入党时间","inputType":"date_input"},"employmentConfirmDate":{"date":true,"labelInForm":"转正日期","inputType":"date_input"},"employeeTypeCode":{"labelInForm":"人员类型","inputType":"select_box","required":true},"name":{"labelInForm":"姓名","inputType":"text_input","required":true},"leaveDate":{"date":true,"labelInForm":"离职日期","inputType":"date_input"},"politicCountenanceCode":{"labelInForm":"政治面貌","inputType":"select_box","required":true},"firstEmploymentDate":{"date":true,"labelInForm":"初次日期","inputType":"date_input"}};
     var AUTH_PREFIX="hr_person";
 
 

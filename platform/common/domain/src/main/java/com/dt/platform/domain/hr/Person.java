@@ -25,8 +25,8 @@ import com.github.foxnic.sql.data.ExprRcd;
  * 人员信息
  * <p>人员信息 , 数据表 hr_person 的PO类型</p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-29 15:01:36
- * @sign 066E1222AF86221EBF502F2AEE28778D
+ * @since 2023-01-02 15:21:55
+ * @sign EDCB9A77A399D4D4A61B5FFD46C9BBF7
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -42,7 +42,7 @@ public class Person extends Entity {
 	 * 主键：主键
 	*/
 	@Id
-	@ApiModelProperty(required = true,value="主键" , notes = "主键" , example = "660858365366239232")
+	@ApiModelProperty(required = true,value="主键" , notes = "主键")
 	private String id;
 	
 	/**
@@ -54,7 +54,7 @@ public class Person extends Entity {
 	/**
 	 * 姓名：姓名
 	*/
-	@ApiModelProperty(required = false,value="姓名" , notes = "姓名" , example = "1212")
+	@ApiModelProperty(required = false,value="姓名" , notes = "姓名")
 	private String name;
 	
 	/**
@@ -102,7 +102,7 @@ public class Person extends Entity {
 	/**
 	 * 身份证：身份证
 	*/
-	@ApiModelProperty(required = false,value="身份证" , notes = "身份证" , example = "1212")
+	@ApiModelProperty(required = false,value="身份证" , notes = "身份证")
 	private String identityCard;
 	
 	/**
@@ -252,19 +252,19 @@ public class Person extends Entity {
 	/**
 	 * 员工岗位：员工岗位
 	*/
-	@ApiModelProperty(required = false,value="员工岗位" , notes = "员工岗位" , example = "660760911509716992")
+	@ApiModelProperty(required = false,value="员工岗位" , notes = "员工岗位")
 	private String positionCode;
 	
 	/**
 	 * 员工职称：员工职称
 	*/
-	@ApiModelProperty(required = false,value="员工职称" , notes = "员工职称" , example = "660565317197496320")
+	@ApiModelProperty(required = false,value="员工职称" , notes = "员工职称")
 	private String employeeTitleCode;
 	
 	/**
 	 * 员工职级：员工职级
 	*/
-	@ApiModelProperty(required = false,value="员工职级" , notes = "员工职级" , example = "660564558007500800")
+	@ApiModelProperty(required = false,value="员工职级" , notes = "员工职级")
 	private String rankCode;
 	
 	/**
@@ -316,6 +316,24 @@ public class Person extends Entity {
 	private String fileId;
 	
 	/**
+	 * 合同周期：合同周期
+	*/
+	@ApiModelProperty(required = true,value="合同周期" , notes = "合同周期")
+	private String contractDuration;
+	
+	/**
+	 * 合同开始时间：合同开始时间
+	*/
+	@ApiModelProperty(required = true,value="合同开始时间" , notes = "合同开始时间")
+	private Date contractStartDate;
+	
+	/**
+	 * 合同结束时间：合同结束时间
+	*/
+	@ApiModelProperty(required = true,value="合同结束时间" , notes = "合同结束时间")
+	private Date contractFinishDate;
+	
+	/**
 	 * 备注：备注
 	*/
 	@ApiModelProperty(required = false,value="备注" , notes = "备注")
@@ -324,13 +342,13 @@ public class Person extends Entity {
 	/**
 	 * 创建人ID：创建人ID
 	*/
-	@ApiModelProperty(required = false,value="创建人ID" , notes = "创建人ID" , example = "110588348101165911")
+	@ApiModelProperty(required = false,value="创建人ID" , notes = "创建人ID")
 	private String createBy;
 	
 	/**
 	 * 创建时间：创建时间
 	*/
-	@ApiModelProperty(required = false,value="创建时间" , notes = "创建时间" , example = "2022-12-29 02:55:12")
+	@ApiModelProperty(required = false,value="创建时间" , notes = "创建时间")
 	private Date createTime;
 	
 	/**
@@ -348,7 +366,7 @@ public class Person extends Entity {
 	/**
 	 * 是否已删除：是否已删除
 	*/
-	@ApiModelProperty(required = true,value="是否已删除" , notes = "是否已删除" , example = "0")
+	@ApiModelProperty(required = true,value="是否已删除" , notes = "是否已删除")
 	private Integer deleted;
 	@Transient
 	@EnumFor("deleted")
@@ -369,13 +387,13 @@ public class Person extends Entity {
 	/**
 	 * version：version
 	*/
-	@ApiModelProperty(required = true,value="version" , notes = "version" , example = "1")
+	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
 	
 	/**
 	 * 租户：租户
 	*/
-	@ApiModelProperty(required = false,value="租户" , notes = "租户" , example = "T001")
+	@ApiModelProperty(required = false,value="租户" , notes = "租户")
 	private String tenantId;
 	
 	/**
@@ -419,6 +437,18 @@ public class Person extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="employeeOwnerType" , notes = "employeeOwnerType")
 	private DictItem employeeOwnerTypeDict;
+	
+	/**
+	 * educationData：educationData
+	*/
+	@ApiModelProperty(required = false,value="educationData" , notes = "educationData")
+	private DictItem educationData;
+	
+	/**
+	 * politicCountenanceData：politicCountenanceData
+	*/
+	@ApiModelProperty(required = false,value="politicCountenanceData" , notes = "politicCountenanceData")
+	private DictItem politicCountenanceData;
 	
 	/**
 	 * employee：employee
@@ -1301,6 +1331,63 @@ public class Person extends Entity {
 	}
 	
 	/**
+	 * 获得 合同周期<br>
+	 * 合同周期
+	 * @return 合同周期
+	*/
+	public String getContractDuration() {
+		return contractDuration;
+	}
+	
+	/**
+	 * 设置 合同周期
+	 * @param contractDuration 合同周期
+	 * @return 当前对象
+	*/
+	public Person setContractDuration(String contractDuration) {
+		this.contractDuration=contractDuration;
+		return this;
+	}
+	
+	/**
+	 * 获得 合同开始时间<br>
+	 * 合同开始时间
+	 * @return 合同开始时间
+	*/
+	public Date getContractStartDate() {
+		return contractStartDate;
+	}
+	
+	/**
+	 * 设置 合同开始时间
+	 * @param contractStartDate 合同开始时间
+	 * @return 当前对象
+	*/
+	public Person setContractStartDate(Date contractStartDate) {
+		this.contractStartDate=contractStartDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 合同结束时间<br>
+	 * 合同结束时间
+	 * @return 合同结束时间
+	*/
+	public Date getContractFinishDate() {
+		return contractFinishDate;
+	}
+	
+	/**
+	 * 设置 合同结束时间
+	 * @param contractFinishDate 合同结束时间
+	 * @return 当前对象
+	*/
+	public Person setContractFinishDate(Date contractFinishDate) {
+		this.contractFinishDate=contractFinishDate;
+		return this;
+	}
+	
+	/**
 	 * 获得 备注<br>
 	 * 备注
 	 * @return 备注
@@ -1655,6 +1742,44 @@ public class Person extends Entity {
 	}
 	
 	/**
+	 * 获得 educationData<br>
+	 * educationData
+	 * @return educationData
+	*/
+	public DictItem getEducationData() {
+		return educationData;
+	}
+	
+	/**
+	 * 设置 educationData
+	 * @param educationData educationData
+	 * @return 当前对象
+	*/
+	public Person setEducationData(DictItem educationData) {
+		this.educationData=educationData;
+		return this;
+	}
+	
+	/**
+	 * 获得 politicCountenanceData<br>
+	 * politicCountenanceData
+	 * @return politicCountenanceData
+	*/
+	public DictItem getPoliticCountenanceData() {
+		return politicCountenanceData;
+	}
+	
+	/**
+	 * 设置 politicCountenanceData
+	 * @param politicCountenanceData politicCountenanceData
+	 * @return 当前对象
+	*/
+	public Person setPoliticCountenanceData(DictItem politicCountenanceData) {
+		this.politicCountenanceData=politicCountenanceData;
+		return this;
+	}
+	
+	/**
 	 * 获得 employee<br>
 	 * employee
 	 * @return employee
@@ -1732,6 +1857,7 @@ public class Person extends Entity {
 		inst.setEmergencyContact(this.getEmergencyContact());
 		inst.setGraduationSchool(this.getGraduationSchool());
 		inst.setEmploymentDate(this.getEmploymentDate());
+		inst.setContractStartDate(this.getContractStartDate());
 		inst.setIdentityCard(this.getIdentityCard());
 		inst.setVersion(this.getVersion());
 		inst.setDeleteTime(this.getDeleteTime());
@@ -1744,6 +1870,8 @@ public class Person extends Entity {
 		inst.setFileId(this.getFileId());
 		inst.setBirthday(this.getBirthday());
 		inst.setNote(this.getNote());
+		inst.setContractDuration(this.getContractDuration());
+		inst.setContractFinishDate(this.getContractFinishDate());
 		inst.setBodyHeight(this.getBodyHeight());
 		inst.setPositionCode(this.getPositionCode());
 		inst.setEducationCode(this.getEducationCode());
@@ -1775,12 +1903,14 @@ public class Person extends Entity {
 		inst.setBodyWeight(this.getBodyWeight());
 		if(all) {
 			inst.setBloodTypeDict(this.getBloodTypeDict());
+			inst.setPoliticCountenanceData(this.getPoliticCountenanceData());
 			inst.setProfessionalLevel(this.getProfessionalLevel());
 			inst.setRank(this.getRank());
 			inst.setEmployeeOwnerTypeDict(this.getEmployeeOwnerTypeDict());
 			inst.setPosition(this.getPosition());
 			inst.setEmployee(this.getEmployee());
 			inst.setSexDict(this.getSexDict());
+			inst.setEducationData(this.getEducationData());
 			inst.setMaritalStatusDict(this.getMaritalStatusDict());
 		}
 		inst.clearModifies();
@@ -1856,6 +1986,7 @@ public class Person extends Entity {
 			this.setEmergencyContact(DataParser.parse(String.class, map.get(PersonMeta.EMERGENCY_CONTACT)));
 			this.setGraduationSchool(DataParser.parse(String.class, map.get(PersonMeta.GRADUATION_SCHOOL)));
 			this.setEmploymentDate(DataParser.parse(Date.class, map.get(PersonMeta.EMPLOYMENT_DATE)));
+			this.setContractStartDate(DataParser.parse(Date.class, map.get(PersonMeta.CONTRACT_START_DATE)));
 			this.setIdentityCard(DataParser.parse(String.class, map.get(PersonMeta.IDENTITY_CARD)));
 			this.setVersion(DataParser.parse(Integer.class, map.get(PersonMeta.VERSION)));
 			this.setDeleteTime(DataParser.parse(Date.class, map.get(PersonMeta.DELETE_TIME)));
@@ -1868,6 +1999,8 @@ public class Person extends Entity {
 			this.setFileId(DataParser.parse(String.class, map.get(PersonMeta.FILE_ID)));
 			this.setBirthday(DataParser.parse(Date.class, map.get(PersonMeta.BIRTHDAY)));
 			this.setNote(DataParser.parse(String.class, map.get(PersonMeta.NOTE)));
+			this.setContractDuration(DataParser.parse(String.class, map.get(PersonMeta.CONTRACT_DURATION)));
+			this.setContractFinishDate(DataParser.parse(Date.class, map.get(PersonMeta.CONTRACT_FINISH_DATE)));
 			this.setBodyHeight(DataParser.parse(Integer.class, map.get(PersonMeta.BODY_HEIGHT)));
 			this.setPositionCode(DataParser.parse(String.class, map.get(PersonMeta.POSITION_CODE)));
 			this.setEducationCode(DataParser.parse(String.class, map.get(PersonMeta.EDUCATION_CODE)));
@@ -1899,12 +2032,14 @@ public class Person extends Entity {
 			this.setBodyWeight(DataParser.parse(Integer.class, map.get(PersonMeta.BODY_WEIGHT)));
 			// others
 			this.setBloodTypeDict(DataParser.parse(DictItem.class, map.get(PersonMeta.BLOOD_TYPE_DICT)));
+			this.setPoliticCountenanceData(DataParser.parse(DictItem.class, map.get(PersonMeta.POLITIC_COUNTENANCE_DATA)));
 			this.setProfessionalLevel(DataParser.parse(ProfessionalLevel.class, map.get(PersonMeta.PROFESSIONAL_LEVEL)));
 			this.setRank(DataParser.parse(Rank.class, map.get(PersonMeta.RANK)));
 			this.setEmployeeOwnerTypeDict(DataParser.parse(DictItem.class, map.get(PersonMeta.EMPLOYEE_OWNER_TYPE_DICT)));
 			this.setPosition(DataParser.parse(Position.class, map.get(PersonMeta.POSITION)));
 			this.setEmployee(DataParser.parse(Employee.class, map.get(PersonMeta.EMPLOYEE)));
 			this.setSexDict(DataParser.parse(DictItem.class, map.get(PersonMeta.SEX_DICT)));
+			this.setEducationData(DataParser.parse(DictItem.class, map.get(PersonMeta.EDUCATION_DATA)));
 			this.setMaritalStatusDict(DataParser.parse(DictItem.class, map.get(PersonMeta.MARITAL_STATUS_DICT)));
 			return true;
 		} else {
@@ -1924,6 +2059,7 @@ public class Person extends Entity {
 				this.setEmergencyContact( (String)map.get(PersonMeta.EMERGENCY_CONTACT));
 				this.setGraduationSchool( (String)map.get(PersonMeta.GRADUATION_SCHOOL));
 				this.setEmploymentDate( (Date)map.get(PersonMeta.EMPLOYMENT_DATE));
+				this.setContractStartDate( (Date)map.get(PersonMeta.CONTRACT_START_DATE));
 				this.setIdentityCard( (String)map.get(PersonMeta.IDENTITY_CARD));
 				this.setVersion( (Integer)map.get(PersonMeta.VERSION));
 				this.setDeleteTime( (Date)map.get(PersonMeta.DELETE_TIME));
@@ -1936,6 +2072,8 @@ public class Person extends Entity {
 				this.setFileId( (String)map.get(PersonMeta.FILE_ID));
 				this.setBirthday( (Date)map.get(PersonMeta.BIRTHDAY));
 				this.setNote( (String)map.get(PersonMeta.NOTE));
+				this.setContractDuration( (String)map.get(PersonMeta.CONTRACT_DURATION));
+				this.setContractFinishDate( (Date)map.get(PersonMeta.CONTRACT_FINISH_DATE));
 				this.setBodyHeight( (Integer)map.get(PersonMeta.BODY_HEIGHT));
 				this.setPositionCode( (String)map.get(PersonMeta.POSITION_CODE));
 				this.setEducationCode( (String)map.get(PersonMeta.EDUCATION_CODE));
@@ -1967,12 +2105,14 @@ public class Person extends Entity {
 				this.setBodyWeight( (Integer)map.get(PersonMeta.BODY_WEIGHT));
 				// others
 				this.setBloodTypeDict( (DictItem)map.get(PersonMeta.BLOOD_TYPE_DICT));
+				this.setPoliticCountenanceData( (DictItem)map.get(PersonMeta.POLITIC_COUNTENANCE_DATA));
 				this.setProfessionalLevel( (ProfessionalLevel)map.get(PersonMeta.PROFESSIONAL_LEVEL));
 				this.setRank( (Rank)map.get(PersonMeta.RANK));
 				this.setEmployeeOwnerTypeDict( (DictItem)map.get(PersonMeta.EMPLOYEE_OWNER_TYPE_DICT));
 				this.setPosition( (Position)map.get(PersonMeta.POSITION));
 				this.setEmployee( (Employee)map.get(PersonMeta.EMPLOYEE));
 				this.setSexDict( (DictItem)map.get(PersonMeta.SEX_DICT));
+				this.setEducationData( (DictItem)map.get(PersonMeta.EDUCATION_DATA));
 				this.setMaritalStatusDict( (DictItem)map.get(PersonMeta.MARITAL_STATUS_DICT));
 				return true;
 			} catch (Exception e) {
@@ -2005,6 +2145,7 @@ public class Person extends Entity {
 			this.setEmergencyContact(DataParser.parse(String.class, r.getValue(PersonMeta.EMERGENCY_CONTACT)));
 			this.setGraduationSchool(DataParser.parse(String.class, r.getValue(PersonMeta.GRADUATION_SCHOOL)));
 			this.setEmploymentDate(DataParser.parse(Date.class, r.getValue(PersonMeta.EMPLOYMENT_DATE)));
+			this.setContractStartDate(DataParser.parse(Date.class, r.getValue(PersonMeta.CONTRACT_START_DATE)));
 			this.setIdentityCard(DataParser.parse(String.class, r.getValue(PersonMeta.IDENTITY_CARD)));
 			this.setVersion(DataParser.parse(Integer.class, r.getValue(PersonMeta.VERSION)));
 			this.setDeleteTime(DataParser.parse(Date.class, r.getValue(PersonMeta.DELETE_TIME)));
@@ -2017,6 +2158,8 @@ public class Person extends Entity {
 			this.setFileId(DataParser.parse(String.class, r.getValue(PersonMeta.FILE_ID)));
 			this.setBirthday(DataParser.parse(Date.class, r.getValue(PersonMeta.BIRTHDAY)));
 			this.setNote(DataParser.parse(String.class, r.getValue(PersonMeta.NOTE)));
+			this.setContractDuration(DataParser.parse(String.class, r.getValue(PersonMeta.CONTRACT_DURATION)));
+			this.setContractFinishDate(DataParser.parse(Date.class, r.getValue(PersonMeta.CONTRACT_FINISH_DATE)));
 			this.setBodyHeight(DataParser.parse(Integer.class, r.getValue(PersonMeta.BODY_HEIGHT)));
 			this.setPositionCode(DataParser.parse(String.class, r.getValue(PersonMeta.POSITION_CODE)));
 			this.setEducationCode(DataParser.parse(String.class, r.getValue(PersonMeta.EDUCATION_CODE)));
@@ -2064,6 +2207,7 @@ public class Person extends Entity {
 				this.setEmergencyContact( (String)r.getValue(PersonMeta.EMERGENCY_CONTACT));
 				this.setGraduationSchool( (String)r.getValue(PersonMeta.GRADUATION_SCHOOL));
 				this.setEmploymentDate( (Date)r.getValue(PersonMeta.EMPLOYMENT_DATE));
+				this.setContractStartDate( (Date)r.getValue(PersonMeta.CONTRACT_START_DATE));
 				this.setIdentityCard( (String)r.getValue(PersonMeta.IDENTITY_CARD));
 				this.setVersion( (Integer)r.getValue(PersonMeta.VERSION));
 				this.setDeleteTime( (Date)r.getValue(PersonMeta.DELETE_TIME));
@@ -2076,6 +2220,8 @@ public class Person extends Entity {
 				this.setFileId( (String)r.getValue(PersonMeta.FILE_ID));
 				this.setBirthday( (Date)r.getValue(PersonMeta.BIRTHDAY));
 				this.setNote( (String)r.getValue(PersonMeta.NOTE));
+				this.setContractDuration( (String)r.getValue(PersonMeta.CONTRACT_DURATION));
+				this.setContractFinishDate( (Date)r.getValue(PersonMeta.CONTRACT_FINISH_DATE));
 				this.setBodyHeight( (Integer)r.getValue(PersonMeta.BODY_HEIGHT));
 				this.setPositionCode( (String)r.getValue(PersonMeta.POSITION_CODE));
 				this.setEducationCode( (String)r.getValue(PersonMeta.EDUCATION_CODE));

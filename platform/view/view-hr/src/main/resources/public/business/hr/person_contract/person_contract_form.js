@@ -1,7 +1,7 @@
 /**
  * 人员合同 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-29 15:52:05
+ * @since 2023-01-02 14:12:04
  */
 
 function FormPage() {
@@ -110,16 +110,16 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
-		//渲染 contractDuration 下拉字段
+		//渲染 type 下拉字段
 		fox.renderSelectBox({
-			el: "contractDuration",
+			el: "type",
 			radio: true,
 			filterable: false,
 			layVerify: 'required',
 			layVerType: 'msg',
 			on: function(data){
 				setTimeout(function () {
-					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("contractDuration",data.arr,data.change,data.isAdd);
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("type",data.arr,data.change,data.isAdd);
 				},1);
 			},
 			//转换数据
@@ -137,6 +137,57 @@ function FormPage() {
 					opts.push({data:data[i],name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
+			}
+		});
+		form.on('radio(status)', function(data){
+			var checked=[];
+			$('input[type=radio][lay-filter=status]:checked').each(function() {
+				checked.push($(this).val());
+			});
+			window.pageExt.form.onRadioBoxChanged && window.pageExt.form.onRadioBoxChanged("status",data,checked);
+		});
+		//渲染 contractYear 下拉字段
+		fox.renderSelectBox({
+			el: "contractYear",
+			radio: true,
+			filterable: false,
+			layVerify: 'required',
+			layVerType: 'msg',
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("contractYear",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		form.on('radio(transferToRegular)', function(data){
+			var checked=[];
+			$('input[type=radio][lay-filter=transferToRegular]:checked').each(function() {
+				checked.push($(this).val());
+			});
+			window.pageExt.form.onRadioBoxChanged && window.pageExt.form.onRadioBoxChanged("transferToRegular",data,checked);
+		});
+		laydate.render({
+			elem: '#probationStartDate',
+			format:"yyyy-MM-dd HH:mm:ss",
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("probationStartDate",value, date, endDate);
 			}
 		});
 		laydate.render({
@@ -228,7 +279,7 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
-			//设置 合同 显示附件
+			//设置 合同附件 显示附件
 		    if($("#fileId").val()) {
 				foxup.fill("fileId",$("#fileId").val());
 		    } else {
@@ -237,18 +288,24 @@ function FormPage() {
 
 
 
-			//设置 合同开始时间 显示复选框勾选
+			//设置 试用期生效时间 显示复选框勾选
+			if(formData["probationStartDate"]) {
+				$("#probationStartDate").val(fox.dateFormat(formData["probationStartDate"],"yyyy-MM-dd HH:mm:ss"));
+			}
+			//设置 生效时间 显示复选框勾选
 			if(formData["contractStartDate"]) {
 				$("#contractStartDate").val(fox.dateFormat(formData["contractStartDate"],"yyyy-MM-dd"));
 			}
-			//设置 合同结束时间 显示复选框勾选
+			//设置 到期时间 显示复选框勾选
 			if(formData["contractFinishDate"]) {
 				$("#contractFinishDate").val(fox.dateFormat(formData["contractFinishDate"],"yyyy-MM-dd"));
 			}
 
 
-			//设置  合同周期 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#contractDuration",formData.contractDurationDict);
+			//设置  合同类型 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#type",formData.contractTypeData);
+			//设置  合同年份 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#contractYear",formData.contractYearData);
 
 			//处理fillBy
 
@@ -300,8 +357,10 @@ function FormPage() {
 
 
 
-		//获取 合同周期 下拉框的值
-		data["contractDuration"]=fox.getSelectedValue("contractDuration",false);
+		//获取 合同类型 下拉框的值
+		data["type"]=fox.getSelectedValue("type",false);
+		//获取 合同年份 下拉框的值
+		data["contractYear"]=fox.getSelectedValue("contractYear",false);
 
 		return data;
 	}

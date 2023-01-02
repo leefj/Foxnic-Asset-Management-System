@@ -7,10 +7,12 @@ import com.github.foxnic.sql.meta.DBTable;
 import com.dt.platform.constants.db.HrTables.HR_PERSON_CONTRACT;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Transient;
 import com.github.foxnic.api.swagger.EnumFor;
 import org.github.foxnic.web.domain.system.DictItem;
+import org.github.foxnic.web.domain.hrm.Employee;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.foxnic.commons.lang.DataParser;
 import java.util.Map;
@@ -24,8 +26,8 @@ import com.github.foxnic.sql.data.ExprRcd;
  * 人员合同
  * <p>人员合同 , 数据表 hr_person_contract 的PO类型</p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-29 15:52:03
- * @sign 69106E93419AB85D5AEC800FB78E5E93
+ * @since 2023-01-02 14:12:02
+ * @sign 78520C27FE87601F67F16F4042D9CC38
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -48,7 +50,19 @@ public class PersonContract extends Entity {
 	 * 人员：人员
 	*/
 	@ApiModelProperty(required = false,value="人员" , notes = "人员")
-	private String personId;
+	private String employeeId;
+	
+	/**
+	 * 合同编号：合同编号
+	*/
+	@ApiModelProperty(required = false,value="合同编号" , notes = "合同编号")
+	private String businessCode;
+	
+	/**
+	 * 合同类型：合同类型
+	*/
+	@ApiModelProperty(required = false,value="合同类型" , notes = "合同类型")
+	private String type;
 	
 	/**
 	 * 状态：状态
@@ -57,34 +71,76 @@ public class PersonContract extends Entity {
 	private String status;
 	
 	/**
-	 * 合同周期：合同周期
+	 * 合同期限：月
 	*/
-	@ApiModelProperty(required = true,value="合同周期" , notes = "合同周期")
-	private String contractDuration;
+	@ApiModelProperty(required = false,value="合同期限" , notes = "月")
+	private BigDecimal contractDuration;
 	
 	/**
-	 * 合同开始时间：合同开始时间
+	 * 合同年份：合同年份
 	*/
-	@ApiModelProperty(required = true,value="合同开始时间" , notes = "合同开始时间")
+	@ApiModelProperty(required = false,value="合同年份" , notes = "合同年份")
+	private String contractYear;
+	
+	/**
+	 * 是否转正：是否转正
+	*/
+	@ApiModelProperty(required = false,value="是否转正" , notes = "是否转正")
+	private String transferToRegular;
+	
+	/**
+	 * 试用期工资：试用期工资
+	*/
+	@ApiModelProperty(required = false,value="试用期工资" , notes = "试用期工资")
+	private BigDecimal probationSalary;
+	
+	/**
+	 * 试用期生效时间：试用期生效时间
+	*/
+	@ApiModelProperty(required = false,value="试用期生效时间" , notes = "试用期生效时间")
+	private Date probationStartDate;
+	
+	/**
+	 * 试用期到期时间：试用期到期时间
+	*/
+	@ApiModelProperty(required = false,value="试用期到期时间" , notes = "试用期到期时间")
+	private String probationFinishDate;
+	
+	/**
+	 * 生效时间：生效时间
+	*/
+	@ApiModelProperty(required = false,value="生效时间" , notes = "生效时间")
 	private Date contractStartDate;
 	
 	/**
-	 * 合同结束时间：合同结束时间
+	 * 到期时间：到期时间
 	*/
-	@ApiModelProperty(required = true,value="合同结束时间" , notes = "合同结束时间")
+	@ApiModelProperty(required = false,value="到期时间" , notes = "到期时间")
 	private Date contractFinishDate;
 	
 	/**
-	 * 合同：合同
+	 * 工资：工资
 	*/
-	@ApiModelProperty(required = true,value="合同" , notes = "合同")
-	private String fileId;
+	@ApiModelProperty(required = false,value="工资" , notes = "工资")
+	private BigDecimal salary;
+	
+	/**
+	 * 合同内容：合同内容
+	*/
+	@ApiModelProperty(required = false,value="合同内容" , notes = "合同内容")
+	private String content;
 	
 	/**
 	 * 备注：备注
 	*/
-	@ApiModelProperty(required = true,value="备注" , notes = "备注")
+	@ApiModelProperty(required = false,value="备注" , notes = "备注")
 	private String notes;
+	
+	/**
+	 * 合同附件：合同附件
+	*/
+	@ApiModelProperty(required = false,value="合同附件" , notes = "合同附件")
+	private String fileId;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -138,10 +194,40 @@ public class PersonContract extends Entity {
 	private Integer version;
 	
 	/**
-	 * contractDurationDict：contractDurationDict
+	 * 租户：租户
 	*/
-	@ApiModelProperty(required = false,value="contractDurationDict" , notes = "contractDurationDict")
-	private DictItem contractDurationDict;
+	@ApiModelProperty(required = false,value="租户" , notes = "租户")
+	private String tenantId;
+	
+	/**
+	 * contractTypeData：contractTypeData
+	*/
+	@ApiModelProperty(required = false,value="contractTypeData" , notes = "contractTypeData")
+	private DictItem contractTypeData;
+	
+	/**
+	 * contractYearData：contractYearData
+	*/
+	@ApiModelProperty(required = false,value="contractYearData" , notes = "contractYearData")
+	private DictItem contractYearData;
+	
+	/**
+	 * employee：employee
+	*/
+	@ApiModelProperty(required = false,value="employee" , notes = "employee")
+	private Employee employee;
+	
+	/**
+	 * person：person
+	*/
+	@ApiModelProperty(required = false,value="person" , notes = "person")
+	private Person person;
+	
+	/**
+	 * employeeName：employeeName
+	*/
+	@ApiModelProperty(required = false,value="employeeName" , notes = "employeeName")
+	private String employeeName;
 	
 	/**
 	 * 获得 主键<br>
@@ -167,17 +253,55 @@ public class PersonContract extends Entity {
 	 * 人员
 	 * @return 人员
 	*/
-	public String getPersonId() {
-		return personId;
+	public String getEmployeeId() {
+		return employeeId;
 	}
 	
 	/**
 	 * 设置 人员
-	 * @param personId 人员
+	 * @param employeeId 人员
 	 * @return 当前对象
 	*/
-	public PersonContract setPersonId(String personId) {
-		this.personId=personId;
+	public PersonContract setEmployeeId(String employeeId) {
+		this.employeeId=employeeId;
+		return this;
+	}
+	
+	/**
+	 * 获得 合同编号<br>
+	 * 合同编号
+	 * @return 合同编号
+	*/
+	public String getBusinessCode() {
+		return businessCode;
+	}
+	
+	/**
+	 * 设置 合同编号
+	 * @param businessCode 合同编号
+	 * @return 当前对象
+	*/
+	public PersonContract setBusinessCode(String businessCode) {
+		this.businessCode=businessCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 合同类型<br>
+	 * 合同类型
+	 * @return 合同类型
+	*/
+	public String getType() {
+		return type;
+	}
+	
+	/**
+	 * 设置 合同类型
+	 * @param type 合同类型
+	 * @return 当前对象
+	*/
+	public PersonContract setType(String type) {
+		this.type=type;
 		return this;
 	}
 	
@@ -201,36 +325,131 @@ public class PersonContract extends Entity {
 	}
 	
 	/**
-	 * 获得 合同周期<br>
-	 * 合同周期
-	 * @return 合同周期
+	 * 获得 合同期限<br>
+	 * 月
+	 * @return 合同期限
 	*/
-	public String getContractDuration() {
+	public BigDecimal getContractDuration() {
 		return contractDuration;
 	}
 	
 	/**
-	 * 设置 合同周期
-	 * @param contractDuration 合同周期
+	 * 设置 合同期限
+	 * @param contractDuration 合同期限
 	 * @return 当前对象
 	*/
-	public PersonContract setContractDuration(String contractDuration) {
+	public PersonContract setContractDuration(BigDecimal contractDuration) {
 		this.contractDuration=contractDuration;
 		return this;
 	}
 	
 	/**
-	 * 获得 合同开始时间<br>
-	 * 合同开始时间
-	 * @return 合同开始时间
+	 * 获得 合同年份<br>
+	 * 合同年份
+	 * @return 合同年份
+	*/
+	public String getContractYear() {
+		return contractYear;
+	}
+	
+	/**
+	 * 设置 合同年份
+	 * @param contractYear 合同年份
+	 * @return 当前对象
+	*/
+	public PersonContract setContractYear(String contractYear) {
+		this.contractYear=contractYear;
+		return this;
+	}
+	
+	/**
+	 * 获得 是否转正<br>
+	 * 是否转正
+	 * @return 是否转正
+	*/
+	public String getTransferToRegular() {
+		return transferToRegular;
+	}
+	
+	/**
+	 * 设置 是否转正
+	 * @param transferToRegular 是否转正
+	 * @return 当前对象
+	*/
+	public PersonContract setTransferToRegular(String transferToRegular) {
+		this.transferToRegular=transferToRegular;
+		return this;
+	}
+	
+	/**
+	 * 获得 试用期工资<br>
+	 * 试用期工资
+	 * @return 试用期工资
+	*/
+	public BigDecimal getProbationSalary() {
+		return probationSalary;
+	}
+	
+	/**
+	 * 设置 试用期工资
+	 * @param probationSalary 试用期工资
+	 * @return 当前对象
+	*/
+	public PersonContract setProbationSalary(BigDecimal probationSalary) {
+		this.probationSalary=probationSalary;
+		return this;
+	}
+	
+	/**
+	 * 获得 试用期生效时间<br>
+	 * 试用期生效时间
+	 * @return 试用期生效时间
+	*/
+	public Date getProbationStartDate() {
+		return probationStartDate;
+	}
+	
+	/**
+	 * 设置 试用期生效时间
+	 * @param probationStartDate 试用期生效时间
+	 * @return 当前对象
+	*/
+	public PersonContract setProbationStartDate(Date probationStartDate) {
+		this.probationStartDate=probationStartDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 试用期到期时间<br>
+	 * 试用期到期时间
+	 * @return 试用期到期时间
+	*/
+	public String getProbationFinishDate() {
+		return probationFinishDate;
+	}
+	
+	/**
+	 * 设置 试用期到期时间
+	 * @param probationFinishDate 试用期到期时间
+	 * @return 当前对象
+	*/
+	public PersonContract setProbationFinishDate(String probationFinishDate) {
+		this.probationFinishDate=probationFinishDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 生效时间<br>
+	 * 生效时间
+	 * @return 生效时间
 	*/
 	public Date getContractStartDate() {
 		return contractStartDate;
 	}
 	
 	/**
-	 * 设置 合同开始时间
-	 * @param contractStartDate 合同开始时间
+	 * 设置 生效时间
+	 * @param contractStartDate 生效时间
 	 * @return 当前对象
 	*/
 	public PersonContract setContractStartDate(Date contractStartDate) {
@@ -239,17 +458,17 @@ public class PersonContract extends Entity {
 	}
 	
 	/**
-	 * 获得 合同结束时间<br>
-	 * 合同结束时间
-	 * @return 合同结束时间
+	 * 获得 到期时间<br>
+	 * 到期时间
+	 * @return 到期时间
 	*/
 	public Date getContractFinishDate() {
 		return contractFinishDate;
 	}
 	
 	/**
-	 * 设置 合同结束时间
-	 * @param contractFinishDate 合同结束时间
+	 * 设置 到期时间
+	 * @param contractFinishDate 到期时间
 	 * @return 当前对象
 	*/
 	public PersonContract setContractFinishDate(Date contractFinishDate) {
@@ -258,21 +477,40 @@ public class PersonContract extends Entity {
 	}
 	
 	/**
-	 * 获得 合同<br>
-	 * 合同
-	 * @return 合同
+	 * 获得 工资<br>
+	 * 工资
+	 * @return 工资
 	*/
-	public String getFileId() {
-		return fileId;
+	public BigDecimal getSalary() {
+		return salary;
 	}
 	
 	/**
-	 * 设置 合同
-	 * @param fileId 合同
+	 * 设置 工资
+	 * @param salary 工资
 	 * @return 当前对象
 	*/
-	public PersonContract setFileId(String fileId) {
-		this.fileId=fileId;
+	public PersonContract setSalary(BigDecimal salary) {
+		this.salary=salary;
+		return this;
+	}
+	
+	/**
+	 * 获得 合同内容<br>
+	 * 合同内容
+	 * @return 合同内容
+	*/
+	public String getContent() {
+		return content;
+	}
+	
+	/**
+	 * 设置 合同内容
+	 * @param content 合同内容
+	 * @return 当前对象
+	*/
+	public PersonContract setContent(String content) {
+		this.content=content;
 		return this;
 	}
 	
@@ -292,6 +530,25 @@ public class PersonContract extends Entity {
 	*/
 	public PersonContract setNotes(String notes) {
 		this.notes=notes;
+		return this;
+	}
+	
+	/**
+	 * 获得 合同附件<br>
+	 * 合同附件
+	 * @return 合同附件
+	*/
+	public String getFileId() {
+		return fileId;
+	}
+	
+	/**
+	 * 设置 合同附件
+	 * @param fileId 合同附件
+	 * @return 当前对象
+	*/
+	public PersonContract setFileId(String fileId) {
+		this.fileId=fileId;
 		return this;
 	}
 	
@@ -479,21 +736,116 @@ public class PersonContract extends Entity {
 	}
 	
 	/**
-	 * 获得 contractDurationDict<br>
-	 * contractDurationDict
-	 * @return contractDurationDict
+	 * 获得 租户<br>
+	 * 租户
+	 * @return 租户
 	*/
-	public DictItem getContractDurationDict() {
-		return contractDurationDict;
+	public String getTenantId() {
+		return tenantId;
 	}
 	
 	/**
-	 * 设置 contractDurationDict
-	 * @param contractDurationDict contractDurationDict
+	 * 设置 租户
+	 * @param tenantId 租户
 	 * @return 当前对象
 	*/
-	public PersonContract setContractDurationDict(DictItem contractDurationDict) {
-		this.contractDurationDict=contractDurationDict;
+	public PersonContract setTenantId(String tenantId) {
+		this.tenantId=tenantId;
+		return this;
+	}
+	
+	/**
+	 * 获得 contractTypeData<br>
+	 * contractTypeData
+	 * @return contractTypeData
+	*/
+	public DictItem getContractTypeData() {
+		return contractTypeData;
+	}
+	
+	/**
+	 * 设置 contractTypeData
+	 * @param contractTypeData contractTypeData
+	 * @return 当前对象
+	*/
+	public PersonContract setContractTypeData(DictItem contractTypeData) {
+		this.contractTypeData=contractTypeData;
+		return this;
+	}
+	
+	/**
+	 * 获得 contractYearData<br>
+	 * contractYearData
+	 * @return contractYearData
+	*/
+	public DictItem getContractYearData() {
+		return contractYearData;
+	}
+	
+	/**
+	 * 设置 contractYearData
+	 * @param contractYearData contractYearData
+	 * @return 当前对象
+	*/
+	public PersonContract setContractYearData(DictItem contractYearData) {
+		this.contractYearData=contractYearData;
+		return this;
+	}
+	
+	/**
+	 * 获得 employee<br>
+	 * employee
+	 * @return employee
+	*/
+	public Employee getEmployee() {
+		return employee;
+	}
+	
+	/**
+	 * 设置 employee
+	 * @param employee employee
+	 * @return 当前对象
+	*/
+	public PersonContract setEmployee(Employee employee) {
+		this.employee=employee;
+		return this;
+	}
+	
+	/**
+	 * 获得 person<br>
+	 * person
+	 * @return person
+	*/
+	public Person getPerson() {
+		return person;
+	}
+	
+	/**
+	 * 设置 person
+	 * @param person person
+	 * @return 当前对象
+	*/
+	public PersonContract setPerson(Person person) {
+		this.person=person;
+		return this;
+	}
+	
+	/**
+	 * 获得 employeeName<br>
+	 * employeeName
+	 * @return employeeName
+	*/
+	public String getEmployeeName() {
+		return employeeName;
+	}
+	
+	/**
+	 * 设置 employeeName
+	 * @param employeeName employeeName
+	 * @return 当前对象
+	*/
+	public PersonContract setEmployeeName(String employeeName) {
+		this.employeeName=employeeName;
 		return this;
 	}
 
@@ -541,24 +893,38 @@ public class PersonContract extends Entity {
 	@Transient
 	public PersonContract duplicate(boolean all) {
 		com.dt.platform.domain.hr.meta.PersonContractMeta.$$proxy$$ inst = new com.dt.platform.domain.hr.meta.PersonContractMeta.$$proxy$$();
+		inst.setContractYear(this.getContractYear());
 		inst.setNotes(this.getNotes());
 		inst.setContractDuration(this.getContractDuration());
-		inst.setContractStartDate(this.getContractStartDate());
 		inst.setContractFinishDate(this.getContractFinishDate());
+		inst.setType(this.getType());
+		inst.setSalary(this.getSalary());
+		inst.setContent(this.getContent());
+		inst.setBusinessCode(this.getBusinessCode());
+		inst.setUpdateBy(this.getUpdateBy());
+		inst.setProbationFinishDate(this.getProbationFinishDate());
+		inst.setId(this.getId());
+		inst.setProbationStartDate(this.getProbationStartDate());
+		inst.setProbationSalary(this.getProbationSalary());
+		inst.setContractStartDate(this.getContractStartDate());
+		inst.setEmployeeId(this.getEmployeeId());
 		inst.setUpdateTime(this.getUpdateTime());
 		inst.setVersion(this.getVersion());
 		inst.setCreateBy(this.getCreateBy());
 		inst.setDeleted(this.getDeleted());
 		inst.setCreateTime(this.getCreateTime());
-		inst.setUpdateBy(this.getUpdateBy());
 		inst.setDeleteTime(this.getDeleteTime());
+		inst.setTransferToRegular(this.getTransferToRegular());
+		inst.setTenantId(this.getTenantId());
 		inst.setDeleteBy(this.getDeleteBy());
-		inst.setPersonId(this.getPersonId());
-		inst.setId(this.getId());
 		inst.setStatus(this.getStatus());
 		inst.setFileId(this.getFileId());
 		if(all) {
-			inst.setContractDurationDict(this.getContractDurationDict());
+			inst.setContractTypeData(this.getContractTypeData());
+			inst.setEmployeeName(this.getEmployeeName());
+			inst.setPerson(this.getPerson());
+			inst.setContractYearData(this.getContractYearData());
+			inst.setEmployee(this.getEmployee());
 		}
 		inst.clearModifies();
 		return inst;
@@ -618,45 +984,73 @@ public class PersonContract extends Entity {
 	public boolean read(Map<String, Object> map,boolean cast) {
 		if(map==null) return false;
 		if(cast) {
+			this.setContractYear(DataParser.parse(String.class, map.get(PersonContractMeta.CONTRACT_YEAR)));
 			this.setNotes(DataParser.parse(String.class, map.get(PersonContractMeta.NOTES)));
-			this.setContractDuration(DataParser.parse(String.class, map.get(PersonContractMeta.CONTRACT_DURATION)));
-			this.setContractStartDate(DataParser.parse(Date.class, map.get(PersonContractMeta.CONTRACT_START_DATE)));
+			this.setContractDuration(DataParser.parse(BigDecimal.class, map.get(PersonContractMeta.CONTRACT_DURATION)));
 			this.setContractFinishDate(DataParser.parse(Date.class, map.get(PersonContractMeta.CONTRACT_FINISH_DATE)));
+			this.setType(DataParser.parse(String.class, map.get(PersonContractMeta.TYPE)));
+			this.setSalary(DataParser.parse(BigDecimal.class, map.get(PersonContractMeta.SALARY)));
+			this.setContent(DataParser.parse(String.class, map.get(PersonContractMeta.CONTENT)));
+			this.setBusinessCode(DataParser.parse(String.class, map.get(PersonContractMeta.BUSINESS_CODE)));
+			this.setUpdateBy(DataParser.parse(String.class, map.get(PersonContractMeta.UPDATE_BY)));
+			this.setProbationFinishDate(DataParser.parse(String.class, map.get(PersonContractMeta.PROBATION_FINISH_DATE)));
+			this.setId(DataParser.parse(String.class, map.get(PersonContractMeta.ID)));
+			this.setProbationStartDate(DataParser.parse(Date.class, map.get(PersonContractMeta.PROBATION_START_DATE)));
+			this.setProbationSalary(DataParser.parse(BigDecimal.class, map.get(PersonContractMeta.PROBATION_SALARY)));
+			this.setContractStartDate(DataParser.parse(Date.class, map.get(PersonContractMeta.CONTRACT_START_DATE)));
+			this.setEmployeeId(DataParser.parse(String.class, map.get(PersonContractMeta.EMPLOYEE_ID)));
 			this.setUpdateTime(DataParser.parse(Date.class, map.get(PersonContractMeta.UPDATE_TIME)));
 			this.setVersion(DataParser.parse(Integer.class, map.get(PersonContractMeta.VERSION)));
 			this.setCreateBy(DataParser.parse(String.class, map.get(PersonContractMeta.CREATE_BY)));
 			this.setDeleted(DataParser.parse(Integer.class, map.get(PersonContractMeta.DELETED)));
 			this.setCreateTime(DataParser.parse(Date.class, map.get(PersonContractMeta.CREATE_TIME)));
-			this.setUpdateBy(DataParser.parse(String.class, map.get(PersonContractMeta.UPDATE_BY)));
 			this.setDeleteTime(DataParser.parse(Date.class, map.get(PersonContractMeta.DELETE_TIME)));
+			this.setTransferToRegular(DataParser.parse(String.class, map.get(PersonContractMeta.TRANSFER_TO_REGULAR)));
+			this.setTenantId(DataParser.parse(String.class, map.get(PersonContractMeta.TENANT_ID)));
 			this.setDeleteBy(DataParser.parse(String.class, map.get(PersonContractMeta.DELETE_BY)));
-			this.setPersonId(DataParser.parse(String.class, map.get(PersonContractMeta.PERSON_ID)));
-			this.setId(DataParser.parse(String.class, map.get(PersonContractMeta.ID)));
 			this.setStatus(DataParser.parse(String.class, map.get(PersonContractMeta.STATUS)));
 			this.setFileId(DataParser.parse(String.class, map.get(PersonContractMeta.FILE_ID)));
 			// others
-			this.setContractDurationDict(DataParser.parse(DictItem.class, map.get(PersonContractMeta.CONTRACT_DURATION_DICT)));
+			this.setContractTypeData(DataParser.parse(DictItem.class, map.get(PersonContractMeta.CONTRACT_TYPE_DATA)));
+			this.setEmployeeName(DataParser.parse(String.class, map.get(PersonContractMeta.EMPLOYEE_NAME)));
+			this.setPerson(DataParser.parse(Person.class, map.get(PersonContractMeta.PERSON)));
+			this.setContractYearData(DataParser.parse(DictItem.class, map.get(PersonContractMeta.CONTRACT_YEAR_DATA)));
+			this.setEmployee(DataParser.parse(Employee.class, map.get(PersonContractMeta.EMPLOYEE)));
 			return true;
 		} else {
 			try {
+				this.setContractYear( (String)map.get(PersonContractMeta.CONTRACT_YEAR));
 				this.setNotes( (String)map.get(PersonContractMeta.NOTES));
-				this.setContractDuration( (String)map.get(PersonContractMeta.CONTRACT_DURATION));
-				this.setContractStartDate( (Date)map.get(PersonContractMeta.CONTRACT_START_DATE));
+				this.setContractDuration( (BigDecimal)map.get(PersonContractMeta.CONTRACT_DURATION));
 				this.setContractFinishDate( (Date)map.get(PersonContractMeta.CONTRACT_FINISH_DATE));
+				this.setType( (String)map.get(PersonContractMeta.TYPE));
+				this.setSalary( (BigDecimal)map.get(PersonContractMeta.SALARY));
+				this.setContent( (String)map.get(PersonContractMeta.CONTENT));
+				this.setBusinessCode( (String)map.get(PersonContractMeta.BUSINESS_CODE));
+				this.setUpdateBy( (String)map.get(PersonContractMeta.UPDATE_BY));
+				this.setProbationFinishDate( (String)map.get(PersonContractMeta.PROBATION_FINISH_DATE));
+				this.setId( (String)map.get(PersonContractMeta.ID));
+				this.setProbationStartDate( (Date)map.get(PersonContractMeta.PROBATION_START_DATE));
+				this.setProbationSalary( (BigDecimal)map.get(PersonContractMeta.PROBATION_SALARY));
+				this.setContractStartDate( (Date)map.get(PersonContractMeta.CONTRACT_START_DATE));
+				this.setEmployeeId( (String)map.get(PersonContractMeta.EMPLOYEE_ID));
 				this.setUpdateTime( (Date)map.get(PersonContractMeta.UPDATE_TIME));
 				this.setVersion( (Integer)map.get(PersonContractMeta.VERSION));
 				this.setCreateBy( (String)map.get(PersonContractMeta.CREATE_BY));
 				this.setDeleted( (Integer)map.get(PersonContractMeta.DELETED));
 				this.setCreateTime( (Date)map.get(PersonContractMeta.CREATE_TIME));
-				this.setUpdateBy( (String)map.get(PersonContractMeta.UPDATE_BY));
 				this.setDeleteTime( (Date)map.get(PersonContractMeta.DELETE_TIME));
+				this.setTransferToRegular( (String)map.get(PersonContractMeta.TRANSFER_TO_REGULAR));
+				this.setTenantId( (String)map.get(PersonContractMeta.TENANT_ID));
 				this.setDeleteBy( (String)map.get(PersonContractMeta.DELETE_BY));
-				this.setPersonId( (String)map.get(PersonContractMeta.PERSON_ID));
-				this.setId( (String)map.get(PersonContractMeta.ID));
 				this.setStatus( (String)map.get(PersonContractMeta.STATUS));
 				this.setFileId( (String)map.get(PersonContractMeta.FILE_ID));
 				// others
-				this.setContractDurationDict( (DictItem)map.get(PersonContractMeta.CONTRACT_DURATION_DICT));
+				this.setContractTypeData( (DictItem)map.get(PersonContractMeta.CONTRACT_TYPE_DATA));
+				this.setEmployeeName( (String)map.get(PersonContractMeta.EMPLOYEE_NAME));
+				this.setPerson( (Person)map.get(PersonContractMeta.PERSON));
+				this.setContractYearData( (DictItem)map.get(PersonContractMeta.CONTRACT_YEAR_DATA));
+				this.setEmployee( (Employee)map.get(PersonContractMeta.EMPLOYEE));
 				return true;
 			} catch (Exception e) {
 				return false;
@@ -673,39 +1067,59 @@ public class PersonContract extends Entity {
 	public boolean read(ExprRcd r,boolean cast) {
 		if(r==null) return false;
 		if(cast) {
+			this.setContractYear(DataParser.parse(String.class, r.getValue(PersonContractMeta.CONTRACT_YEAR)));
 			this.setNotes(DataParser.parse(String.class, r.getValue(PersonContractMeta.NOTES)));
-			this.setContractDuration(DataParser.parse(String.class, r.getValue(PersonContractMeta.CONTRACT_DURATION)));
-			this.setContractStartDate(DataParser.parse(Date.class, r.getValue(PersonContractMeta.CONTRACT_START_DATE)));
+			this.setContractDuration(DataParser.parse(BigDecimal.class, r.getValue(PersonContractMeta.CONTRACT_DURATION)));
 			this.setContractFinishDate(DataParser.parse(Date.class, r.getValue(PersonContractMeta.CONTRACT_FINISH_DATE)));
+			this.setType(DataParser.parse(String.class, r.getValue(PersonContractMeta.TYPE)));
+			this.setSalary(DataParser.parse(BigDecimal.class, r.getValue(PersonContractMeta.SALARY)));
+			this.setContent(DataParser.parse(String.class, r.getValue(PersonContractMeta.CONTENT)));
+			this.setBusinessCode(DataParser.parse(String.class, r.getValue(PersonContractMeta.BUSINESS_CODE)));
+			this.setUpdateBy(DataParser.parse(String.class, r.getValue(PersonContractMeta.UPDATE_BY)));
+			this.setProbationFinishDate(DataParser.parse(String.class, r.getValue(PersonContractMeta.PROBATION_FINISH_DATE)));
+			this.setId(DataParser.parse(String.class, r.getValue(PersonContractMeta.ID)));
+			this.setProbationStartDate(DataParser.parse(Date.class, r.getValue(PersonContractMeta.PROBATION_START_DATE)));
+			this.setProbationSalary(DataParser.parse(BigDecimal.class, r.getValue(PersonContractMeta.PROBATION_SALARY)));
+			this.setContractStartDate(DataParser.parse(Date.class, r.getValue(PersonContractMeta.CONTRACT_START_DATE)));
+			this.setEmployeeId(DataParser.parse(String.class, r.getValue(PersonContractMeta.EMPLOYEE_ID)));
 			this.setUpdateTime(DataParser.parse(Date.class, r.getValue(PersonContractMeta.UPDATE_TIME)));
 			this.setVersion(DataParser.parse(Integer.class, r.getValue(PersonContractMeta.VERSION)));
 			this.setCreateBy(DataParser.parse(String.class, r.getValue(PersonContractMeta.CREATE_BY)));
 			this.setDeleted(DataParser.parse(Integer.class, r.getValue(PersonContractMeta.DELETED)));
 			this.setCreateTime(DataParser.parse(Date.class, r.getValue(PersonContractMeta.CREATE_TIME)));
-			this.setUpdateBy(DataParser.parse(String.class, r.getValue(PersonContractMeta.UPDATE_BY)));
 			this.setDeleteTime(DataParser.parse(Date.class, r.getValue(PersonContractMeta.DELETE_TIME)));
+			this.setTransferToRegular(DataParser.parse(String.class, r.getValue(PersonContractMeta.TRANSFER_TO_REGULAR)));
+			this.setTenantId(DataParser.parse(String.class, r.getValue(PersonContractMeta.TENANT_ID)));
 			this.setDeleteBy(DataParser.parse(String.class, r.getValue(PersonContractMeta.DELETE_BY)));
-			this.setPersonId(DataParser.parse(String.class, r.getValue(PersonContractMeta.PERSON_ID)));
-			this.setId(DataParser.parse(String.class, r.getValue(PersonContractMeta.ID)));
 			this.setStatus(DataParser.parse(String.class, r.getValue(PersonContractMeta.STATUS)));
 			this.setFileId(DataParser.parse(String.class, r.getValue(PersonContractMeta.FILE_ID)));
 			return true;
 		} else {
 			try {
+				this.setContractYear( (String)r.getValue(PersonContractMeta.CONTRACT_YEAR));
 				this.setNotes( (String)r.getValue(PersonContractMeta.NOTES));
-				this.setContractDuration( (String)r.getValue(PersonContractMeta.CONTRACT_DURATION));
-				this.setContractStartDate( (Date)r.getValue(PersonContractMeta.CONTRACT_START_DATE));
+				this.setContractDuration( (BigDecimal)r.getValue(PersonContractMeta.CONTRACT_DURATION));
 				this.setContractFinishDate( (Date)r.getValue(PersonContractMeta.CONTRACT_FINISH_DATE));
+				this.setType( (String)r.getValue(PersonContractMeta.TYPE));
+				this.setSalary( (BigDecimal)r.getValue(PersonContractMeta.SALARY));
+				this.setContent( (String)r.getValue(PersonContractMeta.CONTENT));
+				this.setBusinessCode( (String)r.getValue(PersonContractMeta.BUSINESS_CODE));
+				this.setUpdateBy( (String)r.getValue(PersonContractMeta.UPDATE_BY));
+				this.setProbationFinishDate( (String)r.getValue(PersonContractMeta.PROBATION_FINISH_DATE));
+				this.setId( (String)r.getValue(PersonContractMeta.ID));
+				this.setProbationStartDate( (Date)r.getValue(PersonContractMeta.PROBATION_START_DATE));
+				this.setProbationSalary( (BigDecimal)r.getValue(PersonContractMeta.PROBATION_SALARY));
+				this.setContractStartDate( (Date)r.getValue(PersonContractMeta.CONTRACT_START_DATE));
+				this.setEmployeeId( (String)r.getValue(PersonContractMeta.EMPLOYEE_ID));
 				this.setUpdateTime( (Date)r.getValue(PersonContractMeta.UPDATE_TIME));
 				this.setVersion( (Integer)r.getValue(PersonContractMeta.VERSION));
 				this.setCreateBy( (String)r.getValue(PersonContractMeta.CREATE_BY));
 				this.setDeleted( (Integer)r.getValue(PersonContractMeta.DELETED));
 				this.setCreateTime( (Date)r.getValue(PersonContractMeta.CREATE_TIME));
-				this.setUpdateBy( (String)r.getValue(PersonContractMeta.UPDATE_BY));
 				this.setDeleteTime( (Date)r.getValue(PersonContractMeta.DELETE_TIME));
+				this.setTransferToRegular( (String)r.getValue(PersonContractMeta.TRANSFER_TO_REGULAR));
+				this.setTenantId( (String)r.getValue(PersonContractMeta.TENANT_ID));
 				this.setDeleteBy( (String)r.getValue(PersonContractMeta.DELETE_BY));
-				this.setPersonId( (String)r.getValue(PersonContractMeta.PERSON_ID));
-				this.setId( (String)r.getValue(PersonContractMeta.ID));
 				this.setStatus( (String)r.getValue(PersonContractMeta.STATUS));
 				this.setFileId( (String)r.getValue(PersonContractMeta.FILE_ID));
 				return true;

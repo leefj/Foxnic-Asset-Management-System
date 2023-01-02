@@ -24,7 +24,7 @@ import java.util.Map;
  * 职业评级服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-28 19:17:56
+ * @since 2023-01-02 14:12:06
 */
 
 public interface IProfessionalLevelService extends  ISimpleIdService<ProfessionalLevel,String> {

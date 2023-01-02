@@ -22,7 +22,7 @@ import com.github.foxnic.sql.data.ExprRcd;
  * 岗位类型VO类型
  * <p>岗位类型 , 数据表 hr_position_type 的通用VO类型</p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-28 19:14:53
+ * @since 2023-01-02 14:12:33
  * @sign C56F0A015A7E698961269304FF51E534
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
