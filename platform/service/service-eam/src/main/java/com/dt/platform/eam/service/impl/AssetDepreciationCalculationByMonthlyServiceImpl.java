@@ -282,6 +282,7 @@ public class AssetDepreciationCalculationByMonthlyServiceImpl implements IAssetD
                     }
                     //getAssetUsedServiceLife>=getAssetFinanceServiceLife
                     if(asset.getAssetUsedServiceLife().compareTo(detail.getAssetFinanceServiceLife())>-1){
+                        Logger.info("已折旧修改状态:"+detail.getAssetCode());
                         detail.setResult(AssetDetailDepreciationResultEnum.DEPRECIATION_FINISHED.code());
                     }
                 }
@@ -359,6 +360,7 @@ public class AssetDepreciationCalculationByMonthlyServiceImpl implements IAssetD
         }else{
             return ErrorDesc.failureMessage("没有资产数据需要折旧");
         }
+
         if(detailList.size()>0){
             groupList.add(detailList);
         }
@@ -382,7 +384,6 @@ public class AssetDepreciationCalculationByMonthlyServiceImpl implements IAssetD
         ups.setId(billId);
         ups.setStatus(AssetDepreciationStatusEnum.ACTING.code());
         assetDepreciationOperService.save(ups, SaveMode.NOT_NULL_FIELDS,true);
-
 
         //折旧排除
         String sql="update eam_asset_depreciation_detail a set result='"+AssetDetailDepreciationResultEnum.NOT_CALCULATE.code()+"',result_detail='折旧排除' where (oper_id,asset_id) in (\n" +
