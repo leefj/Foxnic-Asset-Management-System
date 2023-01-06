@@ -281,6 +281,9 @@ public class AssetDepreciationCalculationByMonthlyServiceImpl implements IAssetD
                         return ErrorDesc.failureMessage("资产已使用周期为空,资产编号:"+detail.getAssetCode());
                     }
                     //getAssetUsedServiceLife>=getAssetFinanceServiceLife
+                    //getAssetUsedServiceLife>getAssetFinanceServiceLife   1
+                    //getAssetUsedServiceLife=getAssetFinanceServiceLife   0
+                    //getAssetUsedServiceLifeMgetAssetFinanceServiceLife   -1
                     if(asset.getAssetUsedServiceLife().compareTo(detail.getAssetFinanceServiceLife())>-1){
                         Logger.info("已折旧修改状态:"+detail.getAssetCode());
                         detail.setResult(AssetDetailDepreciationResultEnum.DEPRECIATION_FINISHED.code());
