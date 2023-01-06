@@ -282,6 +282,7 @@ public class AssetDepreciationCalculationByMonthlyServiceImpl implements IAssetD
                     }
                     //getAssetUsedServiceLife>=getAssetFinanceServiceLife
                     if(asset.getAssetUsedServiceLife().compareTo(detail.getAssetFinanceServiceLife())>-1){
+
                         detail.setResult(AssetDetailDepreciationResultEnum.DEPRECIATION_FINISHED.code());
                     }
                 }
