@@ -17,7 +17,6 @@ public enum AssetDetailDepreciationResultEnum implements CodeTextEnum {
 	DEPRECIATION_IDLE("depreciation_idle" , "不在折旧"),
 	DEPRECIATION_FINISH("depreciation_finish" , "已折旧完"),
 	DEPRECIATION_FIRST("depreciation_first" , "首次折旧");
-	;
 	private String code;
 	private String text;
 	private AssetDetailDepreciationResultEnum(String code, String text)  {
