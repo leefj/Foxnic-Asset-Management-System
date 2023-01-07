@@ -140,22 +140,13 @@ public class AssetDepreciationUtilService {
     /*
      * 执行规则集
      * */
-    public Result calRules(AssetDepreciationDetail assetDepreciationDetail,String actionCode){
-        Logger.info("calRules,actionCode:"+actionCode);
-        List<AssetDepreciationCalRule> ruleList=assetDepreciationDetail.getCalRuleList();
-        List<AssetDepreciationCalRule> ruleList2=ruleList.stream().sorted(Comparator.comparing(AssetDepreciationCalRule::getRuleNumber)).collect(Collectors.toList());
-        for(AssetDepreciationCalRule rule:ruleList2){
+    public Result calRules(AssetDepreciationDetail assetDepreciationDetail,List<AssetDepreciationCalRule> ruleList){
+        Logger.info("calRules,actionCode:"+assetDepreciationDetail.getActionCode());
+        for(AssetDepreciationCalRule rule:ruleList){
             //先设置成功
             assetDepreciationDetail.setResultStatus(AssetDetailDepreciationResultStatusEnum.SUCCESS.code());
             // 规则是否启用
             String partMsg="动作:"+rule.getActionCode()+",规则编号:"+rule.getRuleNumber()+",单据:"+assetDepreciationDetail.getOperId()+",资产编号:"+assetDepreciationDetail.getAssetCode();
-            if(!actionCode.equals(rule.getActionCode())){
-                continue;
-            }
-            if(!StatusEnableEnum.ENABLE.code().equals(rule.getStatus())) {
-                Logger.info(partMsg+",本规则当前状态为停用");
-                continue;
-            }
             // 执行规则
             Result calRuleResult=calRuleContent(assetDepreciationDetail,rule);
             assetDepreciationDetail.setResultDetail(calRuleResult.getMessage());
@@ -183,7 +174,6 @@ public class AssetDepreciationUtilService {
         String ruleContent=rule.getMethodContent();
         String partMsg="动作:"+rule.getActionCode()+",规则编号:"+rule.getRuleNumber()+",单据:"+assetDepreciationDetail.getOperId()+",列名:"+rule.getColumnName();
         Logger.info(partMsg+",动作:本规则计算开始,资产编号:"+assetDepreciationDetail.getAssetCode()+",列值:"+rule.getColumnValue()+",信息:"+rule.getMethodContentInfo());
-
          //上一起折旧数据
         AssetDepreciationDetail lastAssetDepreciationDetail=null;
         if(assetDepreciationDetail.getLastAssetDepreciationDetail()!=null){
@@ -191,7 +181,6 @@ public class AssetDepreciationUtilService {
         }
         //资产原始数据
         Asset assetOriginalData=assetDepreciationDetail.getAsset();
-
         if(AssetDepreciationCalculationMethodTypeEnum.JEXL_EXPRESSION.code().equals(calType)){
             //JEXL_EXPRESSION 表达式计算
             Map<String, Object> map = new HashMap<String, Object>();
@@ -199,6 +188,7 @@ public class AssetDepreciationUtilService {
             map.put("last", lastAssetDepreciationDetail);
             map.put("assetOriginalData", assetOriginalData);
             Logger.info(partMsg+",字段:"+rule.getColumnValue() +",表达式:"+ruleContent);
+
             if(StringUtil.isBlank(ruleContent)){
                 return ErrorDesc.failureMessage(partMsg+",计算表达式为空");
             }
@@ -239,7 +229,7 @@ public class AssetDepreciationUtilService {
             Logger.info(partMsg+",本规则未实现");
             return ErrorDesc.failureMessage("本规则计算类型没有实现,Rule:"+rule.getRuleNumber());
         }else{
-            Logger.info(partMsg+",计算规则配置有误");
+            Logger.info(partMsg+",计算规则配置未正确配置");
             return ErrorDesc.failureMessage("本规则计算类型设置有误,Rule:"+rule.getRuleNumber());
         }
         return ErrorDesc.success();

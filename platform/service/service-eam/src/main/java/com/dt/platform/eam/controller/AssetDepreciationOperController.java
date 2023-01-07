@@ -381,7 +381,7 @@ public class AssetDepreciationOperController extends SuperController {
             AssetDepreciationDetail assetDepreciationDetail=assetDepreciationDetailService.getById(id);
             //更新资产折旧单据中的资产数据
             Update ups=new Update("eam_asset_depreciation_detail");
-            ups.set("result",AssetDetailDepreciationResultEnum.NOT_CALCULATE.code());
+            ups.set("result",AssetDetailDepreciationResultEnum.DEPRECIATION_IDLE.code());
             ups.set("result_detail",mark==null?"":mark);
             ups.where().and("id=?",id);
             assetDepreciationOperService.dao().execute(ups);
