@@ -594,7 +594,7 @@ public class AssetDepreciationCalculationByMonthlyServiceImpl implements IAssetD
 
         /*********************************执行规则-不折旧规则***********************************/
         if(AssetDetailDepreciationResultEnum.DEPRECIATION_IDLE.code().equals(assetDepreciationDetail.getResult())){
-            Result depreciationIdleResult=assetDepreciationUtilService.calRules(assetDepreciationDetail,    map.getOrDefault(AssetDepreciationRuleActionCodeEnum.DEPRECIATION_IDLE.code(),new ArrayList<AssetDepreciationCalRule>()));
+            Result depreciationIdleResult=assetDepreciationUtilService.calRules(assetDepreciationDetail,map.getOrDefault(AssetDepreciationRuleActionCodeEnum.DEPRECIATION_IDLE.code(),new ArrayList<AssetDepreciationCalRule>()));
             if(depreciationIdleResult.isSuccess()){
                 return depreciationIdleResult;
             }else{
@@ -606,7 +606,18 @@ public class AssetDepreciationCalculationByMonthlyServiceImpl implements IAssetD
 
         /*********************************执行规则-已完成折旧规则***********************************/
         if(AssetDetailDepreciationResultEnum.DEPRECIATION_FINISH.code().equals(assetDepreciationDetail.getResult())){
-            Result depreciationFinishResult=assetDepreciationUtilService.calRules(assetDepreciationDetail,    map.getOrDefault(AssetDepreciationRuleActionCodeEnum.DEPRECIATION_FINISH.code(),new ArrayList<AssetDepreciationCalRule>()));
+            Result depreciationFinishResult=assetDepreciationUtilService.calRules(assetDepreciationDetail,map.getOrDefault(AssetDepreciationRuleActionCodeEnum.DEPRECIATION_FINISH.code(),new ArrayList<AssetDepreciationCalRule>()));
+            if(depreciationFinishResult.isSuccess()){
+                return depreciationFinishResult;
+            }else{
+                assetDepreciationDetail.setResultStatus(AssetDetailDepreciationResultStatusEnum.FAILED.code());
+                assetDepreciationDetail.setResult(depreciationFinishResult.getMessage());
+                return depreciationFinishResult;
+            }
+        }
+        /*********************************执行规则-最后折旧规则***********************************/
+        if(AssetDetailDepreciationResultEnum.DEPRECIATION_LAST.code().equals(assetDepreciationDetail.getResult())){
+            Result depreciationFinishResult=assetDepreciationUtilService.calRules(assetDepreciationDetail,map.getOrDefault(AssetDepreciationRuleActionCodeEnum.DEPRECIATION_LAST.code(),new ArrayList<AssetDepreciationCalRule>()));
             if(depreciationFinishResult.isSuccess()){
                 return depreciationFinishResult;
             }else{
@@ -618,7 +629,7 @@ public class AssetDepreciationCalculationByMonthlyServiceImpl implements IAssetD
 
         /*********************************执行规则-首次折旧***********************************/
         if(AssetDetailDepreciationResultEnum.DEPRECIATION_FIRST.code().equals(assetDepreciationDetail.getResult())){
-            Result depreciationFinishResult=assetDepreciationUtilService.calRules(assetDepreciationDetail,    map.getOrDefault(AssetDepreciationRuleActionCodeEnum.DEPRECIATION_FIRST.code(),new ArrayList<AssetDepreciationCalRule>()));
+            Result depreciationFinishResult=assetDepreciationUtilService.calRules(assetDepreciationDetail,map.getOrDefault(AssetDepreciationRuleActionCodeEnum.DEPRECIATION_FIRST.code(),new ArrayList<AssetDepreciationCalRule>()));
             if(depreciationFinishResult.isSuccess()){
                 return depreciationFinishResult;
             }else{
@@ -630,7 +641,7 @@ public class AssetDepreciationCalculationByMonthlyServiceImpl implements IAssetD
 
         /*********************************以下是开始正常折旧**********************************/
         if(AssetDetailDepreciationResultEnum.DEPRECIATION_NORMAL.code().equals(assetDepreciationDetail.getResult())){
-            Result depreciationFinishResult=assetDepreciationUtilService.calRules(assetDepreciationDetail,    map.getOrDefault(AssetDepreciationRuleActionCodeEnum.DEPRECIATION_NORMAL.code(),new ArrayList<AssetDepreciationCalRule>()));
+            Result depreciationFinishResult=assetDepreciationUtilService.calRules(assetDepreciationDetail,map.getOrDefault(AssetDepreciationRuleActionCodeEnum.DEPRECIATION_NORMAL.code(),new ArrayList<AssetDepreciationCalRule>()));
             if(depreciationFinishResult.isSuccess()){
                 return depreciationFinishResult;
             }else{

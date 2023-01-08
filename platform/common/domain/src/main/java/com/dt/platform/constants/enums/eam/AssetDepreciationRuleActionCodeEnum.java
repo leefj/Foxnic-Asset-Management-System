@@ -16,6 +16,7 @@ public enum AssetDepreciationRuleActionCodeEnum implements CodeTextEnum {
 	DEPRECIATION_FINISH("depreciation_finish" , "已折旧完"),
 	DEPRECIATION_NORMAL("depreciation_normal" , "正常折旧"),
 	DEPRECIATION_FIRST("depreciation_first" , "首次折旧"),
+	DEPRECIATION_LAST("depreciation_last" , "最后折旧"),
 	DEPRECIATION_IDLE("depreciation_idle" , "不在折旧");
 
 	private String code;
