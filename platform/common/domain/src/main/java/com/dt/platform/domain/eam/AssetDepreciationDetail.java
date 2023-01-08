@@ -30,7 +30,7 @@ import com.github.foxnic.sql.data.ExprRcd;
  * 折旧明细
  * <p>折旧明细 , 数据表 eam_asset_depreciation_detail 的PO类型</p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-10 14:40:48
+ * @since 2023-01-08 11:31:29
  * @sign 68AE6EB92174B775D3971C2CC734A3CB
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -47,7 +47,7 @@ public class AssetDepreciationDetail extends Entity {
 	 * 主键：主键
 	*/
 	@Id
-	@ApiModelProperty(required = true,value="主键" , notes = "主键" , example = "648956390479495168")
+	@ApiModelProperty(required = true,value="主键" , notes = "主键" , example = "664427663485566976")
 	private String id;
 	
 	/**
@@ -59,7 +59,7 @@ public class AssetDepreciationDetail extends Entity {
 	/**
 	 * 折旧操作：折旧操作
 	*/
-	@ApiModelProperty(required = false,value="折旧操作" , notes = "折旧操作")
+	@ApiModelProperty(required = false,value="折旧操作" , notes = "折旧操作" , example = "664111029461975040")
 	private String operId;
 	
 	/**
@@ -71,7 +71,7 @@ public class AssetDepreciationDetail extends Entity {
 	/**
 	 * 首次折旧方式：首次折旧方式
 	*/
-	@ApiModelProperty(required = false,value="首次折旧方式" , notes = "首次折旧方式" , example = "purchase_next_month")
+	@ApiModelProperty(required = false,value="首次折旧方式" , notes = "首次折旧方式" , example = "register_next_month")
 	private String firstDepreciationMethod;
 	
 	/**
@@ -83,31 +83,31 @@ public class AssetDepreciationDetail extends Entity {
 	/**
 	 * 业务日期：业务日期
 	*/
-	@ApiModelProperty(required = false,value="业务日期" , notes = "业务日期" , example = "2022-11-25 12:00:00")
+	@ApiModelProperty(required = false,value="业务日期" , notes = "业务日期" , example = "2023-01-07 12:00:00")
 	private Date businessDate;
 	
 	/**
 	 * 折旧规则：折旧规则
 	*/
-	@ApiModelProperty(required = false,value="折旧规则" , notes = "折旧规则" , example = "wait_calculate")
+	@ApiModelProperty(required = false,value="折旧规则" , notes = "折旧规则" , example = "depreciation_first")
 	private String result;
 	
 	/**
 	 * 折旧结果：折旧结果
 	*/
-	@ApiModelProperty(required = false,value="折旧结果" , notes = "折旧结果")
+	@ApiModelProperty(required = false,value="折旧结果" , notes = "折旧结果" , example = "success")
 	private String resultStatus;
 	
 	/**
 	 * 结果明细：结果明细
 	*/
-	@ApiModelProperty(required = false,value="结果明细" , notes = "结果明细")
+	@ApiModelProperty(required = false,value="结果明细" , notes = "结果明细" , example = "操作成功")
 	private String resultDetail;
 	
 	/**
 	 * 资产：资产
 	*/
-	@ApiModelProperty(required = false,value="资产" , notes = "资产" , example = "648874943362105344")
+	@ApiModelProperty(required = false,value="资产" , notes = "资产" , example = "664110928148561920")
 	private String assetId;
 	
 	/**
@@ -125,25 +125,25 @@ public class AssetDepreciationDetail extends Entity {
 	/**
 	 * 财务分类：财务分类
 	*/
-	@ApiModelProperty(required = false,value="财务分类" , notes = "财务分类")
+	@ApiModelProperty(required = false,value="财务分类" , notes = "财务分类" , example = "649152215159668736")
 	private String assetFinanceCategoryId;
 	
 	/**
 	 * 财务分类：财务分类
 	*/
-	@ApiModelProperty(required = false,value="财务分类" , notes = "财务分类")
+	@ApiModelProperty(required = false,value="财务分类" , notes = "财务分类" , example = "电子设备")
 	private String assetFinanceCategoryName;
 	
 	/**
 	 * 资产编码：资产编码
 	*/
-	@ApiModelProperty(required = false,value="资产编码" , notes = "资产编码" , example = "AS2022112609345")
+	@ApiModelProperty(required = false,value="资产编码" , notes = "资产编码" , example = "AS16209")
 	private String assetCode;
 	
 	/**
 	 * 资产名称：资产名称
 	*/
-	@ApiModelProperty(required = false,value="资产名称" , notes = "资产名称" , example = "001")
+	@ApiModelProperty(required = false,value="资产名称" , notes = "资产名称" , example = "1212")
 	private String assetName;
 	
 	/**
@@ -155,25 +155,25 @@ public class AssetDepreciationDetail extends Entity {
 	/**
 	 * 资产状态：资产状态
 	*/
-	@ApiModelProperty(required = false,value="资产状态" , notes = "资产状态" , example = "idle")
+	@ApiModelProperty(required = false,value="资产状态" , notes = "资产状态" , example = "闲置")
 	private String assetStatusName;
 	
 	/**
 	 * 采购日期：采购日期
 	*/
-	@ApiModelProperty(required = false,value="采购日期" , notes = "采购日期")
+	@ApiModelProperty(required = false,value="采购日期" , notes = "采购日期" , example = "2023-01-05 12:00:00")
 	private Date assetPurchaseDate;
 	
 	/**
 	 * 入账日期：入账日期
 	*/
-	@ApiModelProperty(required = false,value="入账日期" , notes = "入账日期" , example = "2022-11-25 12:00:00")
+	@ApiModelProperty(required = false,value="入账日期" , notes = "入账日期" , example = "2023-01-07 12:00:00")
 	private Date assetRegisterDate;
 	
 	/**
 	 * 资产原值：资产原值
 	*/
-	@ApiModelProperty(required = false,value="资产原值" , notes = "资产原值" , example = "7682.00")
+	@ApiModelProperty(required = false,value="资产原值" , notes = "资产原值" , example = "1211.00")
 	private BigDecimal assetOriginalUnitPrice;
 	
 	/**
@@ -191,7 +191,7 @@ public class AssetDepreciationDetail extends Entity {
 	/**
 	 * 税额：税额
 	*/
-	@ApiModelProperty(required = false,value="税额" , notes = "税额" , example = "2.00")
+	@ApiModelProperty(required = false,value="税额" , notes = "税额")
 	private BigDecimal assetTaxAmountRate;
 	
 	/**
@@ -203,7 +203,7 @@ public class AssetDepreciationDetail extends Entity {
 	/**
 	 * 可使用期限(财务)：月
 	*/
-	@ApiModelProperty(required = false,value="可使用期限(财务)" , notes = "月")
+	@ApiModelProperty(required = false,value="可使用期限(财务)" , notes = "月" , example = "36.00")
 	private BigDecimal assetFinanceServiceLife;
 	
 	/**
@@ -215,31 +215,31 @@ public class AssetDepreciationDetail extends Entity {
 	/**
 	 * 本期残值：本期残值
 	*/
-	@ApiModelProperty(required = false,value="本期残值" , notes = "本期残值" , example = "0.00")
+	@ApiModelProperty(required = false,value="本期残值" , notes = "本期残值" , example = "60.55")
 	private BigDecimal assetResidualsPrice;
 	
 	/**
 	 * (期初)期初原值：(期初)期初原值
 	*/
-	@ApiModelProperty(required = false,value="(期初)期初原值" , notes = "(期初)期初原值")
+	@ApiModelProperty(required = false,value="(期初)期初原值" , notes = "(期初)期初原值" , example = "0.00")
 	private BigDecimal sOriginalPrice;
 	
 	/**
 	 * (期初)期初累计折旧：(期初)期初累计折旧
 	*/
-	@ApiModelProperty(required = false,value="(期初)期初累计折旧" , notes = "(期初)期初累计折旧")
+	@ApiModelProperty(required = false,value="(期初)期初累计折旧" , notes = "(期初)期初累计折旧" , example = "0.00")
 	private BigDecimal sDepreciationAmount;
 	
 	/**
 	 * (期初)期初净值：(期初)期初净值
 	*/
-	@ApiModelProperty(required = false,value="(期初)期初净值" , notes = "(期初)期初净值")
+	@ApiModelProperty(required = false,value="(期初)期初净值" , notes = "(期初)期初净值" , example = "0.00")
 	private BigDecimal sNavAmount;
 	
 	/**
 	 * (期初)期初可回收净额：(期初)期初可回收净额
 	*/
-	@ApiModelProperty(required = false,value="(期初)期初可回收净额" , notes = "(期初)期初可回收净额")
+	@ApiModelProperty(required = false,value="(期初)期初可回收净额" , notes = "(期初)期初可回收净额" , example = "0.00")
 	private BigDecimal sRecoverableAmount;
 	
 	/**
@@ -251,55 +251,55 @@ public class AssetDepreciationDetail extends Entity {
 	/**
 	 * (本期发生)原值增加：(本期发生)原值增加
 	*/
-	@ApiModelProperty(required = false,value="(本期发生)原值增加" , notes = "(本期发生)原值增加")
+	@ApiModelProperty(required = false,value="(本期发生)原值增加" , notes = "(本期发生)原值增加" , example = "1211.00")
 	private BigDecimal cOriginalPriceIncrease;
 	
 	/**
 	 * (本期发生)本期折旧额：(本期发生)本期折旧额
 	*/
-	@ApiModelProperty(required = false,value="(本期发生)本期折旧额" , notes = "(本期发生)本期折旧额")
+	@ApiModelProperty(required = false,value="(本期发生)本期折旧额" , notes = "(本期发生)本期折旧额" , example = "0.00")
 	private BigDecimal cDepreciationAmount;
 	
 	/**
 	 * (本期发生)本年累计折旧额：(本期发生)本年累计折旧额
 	*/
-	@ApiModelProperty(required = false,value="(本期发生)本年累计折旧额" , notes = "(本期发生)本年累计折旧额")
+	@ApiModelProperty(required = false,value="(本期发生)本年累计折旧额" , notes = "(本期发生)本年累计折旧额" , example = "0.00")
 	private BigDecimal cYearDepreciationAmount;
 	
 	/**
 	 * (期末)期末原值：(期末)期末原值
 	*/
-	@ApiModelProperty(required = false,value="(期末)期末原值" , notes = "(期末)期末原值")
+	@ApiModelProperty(required = false,value="(期末)期末原值" , notes = "(期末)期末原值" , example = "1211.00")
 	private BigDecimal eOriginalPrice;
 	
 	/**
 	 * (期末)期末累计折旧：(期末)期末累计折旧
 	*/
-	@ApiModelProperty(required = false,value="(期末)期末累计折旧" , notes = "(期末)期末累计折旧")
+	@ApiModelProperty(required = false,value="(期末)期末累计折旧" , notes = "(期末)期末累计折旧" , example = "0.00")
 	private BigDecimal eDepreciationAmount;
 	
 	/**
 	 * (期末)期末净值：(期末)期末净值
 	*/
-	@ApiModelProperty(required = false,value="(期末)期末净值" , notes = "(期末)期末净值")
+	@ApiModelProperty(required = false,value="(期末)期末净值" , notes = "(期末)期末净值" , example = "1211.00")
 	private BigDecimal eNavAmount;
 	
 	/**
 	 * (期末)期末可回收金额：(期末)期末可回收金额
 	*/
-	@ApiModelProperty(required = false,value="(期末)期末可回收金额" , notes = "(期末)期末可回收金额")
+	@ApiModelProperty(required = false,value="(期末)期末可回收金额" , notes = "(期末)期末可回收金额" , example = "1211.00")
 	private BigDecimal eRecoverableAmount;
 	
 	/**
 	 * 会计期间已使用期限：月
 	*/
-	@ApiModelProperty(required = false,value="会计期间已使用期限" , notes = "月")
+	@ApiModelProperty(required = false,value="会计期间已使用期限" , notes = "月" , example = "0.00")
 	private BigDecimal accountingServiceLife;
 	
 	/**
 	 * 首次折旧：0否,1是
 	*/
-	@ApiModelProperty(required = false,value="首次折旧" , notes = "0否,1是")
+	@ApiModelProperty(required = false,value="首次折旧" , notes = "0否,1是" , example = "1")
 	private String firstDepreciation;
 	
 	/**
@@ -371,7 +371,7 @@ public class AssetDepreciationDetail extends Entity {
 	/**
 	 * 源资产：源资产
 	*/
-	@ApiModelProperty(required = false,value="源资产" , notes = "源资产" , example = "648956390253002752")
+	@ApiModelProperty(required = false,value="源资产" , notes = "源资产" , example = "664110928148561920")
 	private String detailIdSource;
 	
 	/**
@@ -401,13 +401,13 @@ public class AssetDepreciationDetail extends Entity {
 	/**
 	 * 创建人ID：创建人ID
 	*/
-	@ApiModelProperty(required = true,value="创建人ID" , notes = "创建人ID" , example = "110588348101165911")
+	@ApiModelProperty(required = true,value="创建人ID" , notes = "创建人ID" , example = "E001")
 	private String createBy;
 	
 	/**
 	 * 创建时间：创建时间
 	*/
-	@ApiModelProperty(required = false,value="创建时间" , notes = "创建时间" , example = "2022-11-26 06:41:01")
+	@ApiModelProperty(required = false,value="创建时间" , notes = "创建时间" , example = "2023-01-08 11:18:19")
 	private Date createTime;
 	
 	/**
@@ -419,7 +419,7 @@ public class AssetDepreciationDetail extends Entity {
 	/**
 	 * 修改时间：修改时间
 	*/
-	@ApiModelProperty(required = false,value="修改时间" , notes = "修改时间")
+	@ApiModelProperty(required = false,value="修改时间" , notes = "修改时间" , example = "2023-01-08 11:18:20")
 	private Date updateTime;
 	
 	/**

@@ -1,7 +1,7 @@
 /**
  * 折旧明细 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-10 14:40:50
+ * @since 2023-01-08 11:31:31
  */
 
 
@@ -121,6 +121,7 @@ function ListPage() {
 					,{ field: 'financialOptionName', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('财务选项',null,languageContext) , templet: function (d) { return templet('financialOptionName',d.financialOptionName,d);}  }
 					,{ field: 'expenseItemName', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('费用项目',null,languageContext) , templet: function (d) { return templet('expenseItemName',d.expenseItemName,d);}  }
 					,{ field: 'customerInfo', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('客户情况',null,languageContext) , templet: function (d) { return templet('customerInfo',d.customerInfo,d);}  }
+					,{ field: 'lastOperTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('上次折旧时间',null,languageContext) ,templet: function (d) { return templet('lastOperTime',fox.dateFormat(d.lastOperTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'label', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签',null,languageContext) , templet: function (d) { return templet('label',d.label,d);}  }
 					,{ field: fox.translate('空白列','','cmp:table'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作','','cmp:table'), width: 160 }

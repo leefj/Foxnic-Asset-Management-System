@@ -24,7 +24,7 @@ import java.util.Map;
  * 折旧明细服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-12-10 14:40:48
+ * @since 2023-01-08 11:31:29
 */
 
 public interface IAssetDepreciationDetailService extends  ISimpleIdService<AssetDepreciationDetail,String> {

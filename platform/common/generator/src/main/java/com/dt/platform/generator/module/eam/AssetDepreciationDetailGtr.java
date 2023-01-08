@@ -221,7 +221,7 @@ public class AssetDepreciationDetailGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.MANAGER_ID).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.USE_USER_ID).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.LAST_OPER_ID).table().disable(true);
-        cfg.view().field(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.LAST_OPER_TIME).table().disable(true);
+
         cfg.view().field(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.ASSET_CATEGORY_ID).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.ASSET_FINANCE_CATEGORY_ID).table().disable(true);
 //        cfg.view().field(EAMTables.EAM_ASSET_DEPRECIATION_DETAIL.CUR_PRICE).table().disable(true);
