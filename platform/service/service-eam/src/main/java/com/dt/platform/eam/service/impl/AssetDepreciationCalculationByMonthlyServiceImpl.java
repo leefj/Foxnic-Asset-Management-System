@@ -525,7 +525,7 @@ public class AssetDepreciationCalculationByMonthlyServiceImpl implements IAssetD
         }
 
 
-        //DEPRECIATION_FINISH
+        //DEPRECIATION_FIRST
         AssetDepreciationCalRuleVO calRuleVO5=new AssetDepreciationCalRuleVO();
         calRuleVO5.setStatus(StatusEnableEnum.ENABLE.code());
         calRuleVO5.setActionCode(AssetDepreciationRuleActionCodeEnum.DEPRECIATION_FIRST.code());
@@ -533,6 +533,16 @@ public class AssetDepreciationCalculationByMonthlyServiceImpl implements IAssetD
         if(firstList!=null){
             List<AssetDepreciationCalRule> ruleList=firstList.stream().sorted(Comparator.comparing(AssetDepreciationCalRule::getRuleNumber)).collect(Collectors.toList());
             map.put(AssetDepreciationRuleActionCodeEnum.DEPRECIATION_FIRST.code(),ruleList);
+        }
+
+        //DEPRECIATION_LAST
+        AssetDepreciationCalRuleVO calRuleVO6=new AssetDepreciationCalRuleVO();
+        calRuleVO6.setStatus(StatusEnableEnum.ENABLE.code());
+        calRuleVO6.setActionCode(AssetDepreciationRuleActionCodeEnum.DEPRECIATION_LAST.code());
+        List<AssetDepreciationCalRule> lastList=assetDepreciationCalRuleService.queryList(calRuleVO6);
+        if(lastList!=null){
+            List<AssetDepreciationCalRule> ruleList=lastList.stream().sorted(Comparator.comparing(AssetDepreciationCalRule::getRuleNumber)).collect(Collectors.toList());
+            map.put(AssetDepreciationRuleActionCodeEnum.DEPRECIATION_LAST.code(),ruleList);
         }
 
 
