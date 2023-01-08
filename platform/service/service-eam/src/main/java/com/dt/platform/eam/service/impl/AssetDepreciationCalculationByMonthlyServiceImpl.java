@@ -264,10 +264,13 @@ public class AssetDepreciationCalculationByMonthlyServiceImpl implements IAssetD
                 //已使用期限,如果没设置，则为0
                 if(asset.getAssetUsedServiceLife()==null){
                     detail.setCUsedServiceLife(new BigDecimal("0"));
+                }else if(asset.getAssetUsedServiceLife().compareTo(new BigDecimal("0"))==0){
+                    detail.setCUsedServiceLife(new BigDecimal("0"));
                 }else{
                     //上次使用周期+1
                     detail.setCUsedServiceLife(asset.getAssetUsedServiceLife().add(new BigDecimal("1")));
                 }
+
                 //如果设置资产的使用期限，以财务期限为准，否则使用资产本身的
                 if("asset".equals(assetServiceLifeValueSource)){
                     if(detail.getCUsedServiceLife()==null){
@@ -298,9 +301,9 @@ public class AssetDepreciationCalculationByMonthlyServiceImpl implements IAssetD
                     if(detail.getCUsedServiceLife()==null){
                         return ErrorDesc.failureMessage("资产已使用周期为空,资产编号:"+detail.getAssetCode());
                     }
-                    //getAssetUsedServiceLife>getAssetFinanceServiceLife   1
-                    //getAssetUsedServiceLife=getAssetFinanceServiceLife   0
-                    //getAssetUsedServiceLife<etAssetFinanceServiceLife   -1
+                    //getCUsedServiceLife>getAssetFinanceServiceLife   1
+                    //getCUsedServiceLife=getAssetFinanceServiceLife   0
+                    //getCUsedServiceLife<getAssetFinanceServiceLife   -1
                     //0<36
                     if(detail.getCUsedServiceLife().compareTo(detail.getAssetFinanceServiceLife())==1){
                         detail.setResult(AssetDetailDepreciationResultEnum.DEPRECIATION_FINISH.code());
