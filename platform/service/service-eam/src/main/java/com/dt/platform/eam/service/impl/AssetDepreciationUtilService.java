@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 @Service("AssetDepreciationUtilService")
 public class AssetDepreciationUtilService {
 
+
     /**
      * 月份是否一样
      * @param date1 日期1 2022-01
@@ -41,6 +42,24 @@ public class AssetDepreciationUtilService {
         }else{
             return "0";
         }
+    }
+
+    public BigDecimal roundHalfUp(Object value, int scale){
+        Logger.info("class type:"+value.getClass());
+        if(value.getClass().equals(BigDecimal.class)){
+            return ((BigDecimal) value).setScale(scale,BigDecimal.ROUND_HALF_UP);
+        }else if(value.getClass().equals(Integer.class)){
+            return new BigDecimal((Integer) value);
+        }else if(value.getClass().equals(Double.class)){
+            return new BigDecimal((Double) value).setScale(scale,BigDecimal.ROUND_HALF_UP);
+        }else if(value.getClass().equals(Float.class)){
+            return new BigDecimal((Float) value).setScale(scale,BigDecimal.ROUND_HALF_UP);
+        }else if(value.getClass().equals(String.class)){
+            return new BigDecimal((String) value).setScale(scale,BigDecimal.ROUND_HALF_UP);
+        }else{
+            Logger.error("roundHalfUp error,current class type is "+value.getClass()+",please modify code.");
+        }
+        return null;
     }
 
     /**
@@ -63,9 +82,43 @@ public class AssetDepreciationUtilService {
     }
 
     public static void main(String[] args) {
+        Map<String, Object> map =new HashMap<>();
+        map.put("a", new BigDecimal("1"));
+        map.put("b", new BigDecimal("6"));
+        map.put("c", new BigDecimal("100.01"));
 
-        String result="3.454";
-        BigDecimal bResult = new BigDecimal(result).setScale(2,BigDecimal.ROUND_HALF_UP);
+        JexlBuilder jexlBuilder = new JexlBuilder();
+        Map<String, Object> funcs =new HashMap<>();
+        funcs.put("commonFunction",new AssetDepreciationUtilService());
+        jexlBuilder.namespaces(funcs);
+
+        JexlEngine jexlEngine = jexlBuilder.create();
+        String expr="commonFunction:roundHalfUp(a+b,2)+1";
+        JexlContext jexlContext = new MapContext();
+        jexlContext.set("a",  new BigDecimal("1.2"));
+        Double b=2.0;
+        jexlContext.set("b",  b);
+        JexlExpression  expression = jexlEngine.createExpression(expr);
+        Object r=expression.evaluate(jexlContext);
+
+        System.out.println(r);
+        // 初始化Jexl构造器
+//        JexlBuilder jexlBuilder = new JexlBuilder();
+//        // 创建Jexl表达式引擎
+//        JexlEngine jexlEngine = jexlBuilder.create();
+//        // 创建Jexl表达式解析器
+//        JexlScript jexlScript = jexlEngine.createScript("if(item.eRecoverableAmount>=25){grade=1;gradeName='有灾害';}else{grade=0;gradeName='无灾害';}");
+//        // 创建Jexl表达式变量上下文
+//        JexlContext jexlContext = new MapContext();
+//
+//
+//        AssetDepreciationDetail d=new AssetDepreciationDetail();
+//        d.setERecoverableAmount(new BigDecimal("1.01"));
+//        jexlContext.set("item", d);
+//        // 执行Jexl表达式，得到结果
+//        jexlScript.execute(jexlContext);
+//        System.out.println(jexlContext.get("grade"));
+//        System.out.println(jexlContext.get("gradeName"));
 
 //        AssetDepreciationUtilService a=new AssetDepreciationUtilService();
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -79,6 +132,30 @@ public class AssetDepreciationUtilService {
 //            e.printStackTrace();
 //        }
     }
+
+    /**
+     *  支持条件表达式计算
+     * @param eval 表达式不能有汉字（支持条件语句的表达式）
+     * @param map
+     * @param clazz
+     * @Description: 根据表达式和参数集合进行计算
+     * @Author: chenhf
+     * @Date: 2021/6/22 16:12
+     * @return: java.lang.Object
+     */
+    private static Object exeScriptExpression(String eval, Map<String, Object> map,Class<?>... clazz) {
+        JexlEngine engine = new JexlBuilder().create();
+        JexlScript script = engine.createScript(eval);
+        JexlContext context = new MapContext();
+        Arrays.asList(clazz).forEach(cal -> {
+            context.set(cal.getSimpleName(),cal);
+        });
+        if (Objects.nonNull(map)) {
+            map.forEach(context::set);
+        }
+        return script.execute(context);
+    }
+
     /**
      * 月份是否一样
      * @param  registerDate 入账日期 2022-01
@@ -227,6 +304,7 @@ public class AssetDepreciationUtilService {
         } else if(AssetDepreciationCalculationMethodTypeEnum.SCRIPT.code().equals(calType)){
             //SCRIPT 脚本，暂时未实现
             Logger.info(partMsg+",本规则未实现");
+
             return ErrorDesc.failureMessage("本规则计算类型没有实现,Rule:"+rule.getRuleNumber());
         }else{
             Logger.info(partMsg+",计算规则配置未正确配置");
