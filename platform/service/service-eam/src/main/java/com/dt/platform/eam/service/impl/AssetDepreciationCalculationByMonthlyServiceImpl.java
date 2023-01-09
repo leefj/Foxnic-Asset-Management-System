@@ -265,7 +265,13 @@ public class AssetDepreciationCalculationByMonthlyServiceImpl implements IAssetD
                 if(asset.getAssetUsedServiceLife()==null){
                     detail.setCUsedServiceLife(new BigDecimal("0"));
                 }else if(asset.getAssetUsedServiceLife().compareTo(new BigDecimal("0"))==0){
-                    detail.setCUsedServiceLife(new BigDecimal("0"));
+                    String ifThisMonth=assetDepreciationUtilService.equalMonth(detail.getBusinessDate(),detail.getAssetPurchaseDate());
+                    if("1".equals(ifThisMonth)){
+                        //首次折旧
+                        detail.setCUsedServiceLife(new BigDecimal("0"));
+                    }else{
+                        detail.setCUsedServiceLife(new BigDecimal("0").add(new BigDecimal("1")));
+                    }
                 }else{
                     //上次使用周期+1
                     detail.setCUsedServiceLife(asset.getAssetUsedServiceLife().add(new BigDecimal("1")));
@@ -613,13 +619,14 @@ public class AssetDepreciationCalculationByMonthlyServiceImpl implements IAssetD
 
         //前置条件-日期是否符合逻辑
         // 入账日期大于启用日期assetDepreciationDetail.getBusinessDate()>=assetDepreciationDetail.getAssetPurchaseDate()
-        //返回0，和1 是ok的，-1 不满足要求
+        //返回0，和1 是ok的，
+        // -1 不满足要求
         if("-1".equals(assetDepreciationUtilService.compareDate(assetDepreciationDetail.getBusinessDate(),assetDepreciationDetail.getAssetPurchaseDate()))){
             assetDepreciationDetail.setResultStatus(AssetDetailDepreciationResultStatusEnum.FAILED.code());
-            assetDepreciationDetail.setResultDetail("启用日期需要大于等于验收日期");
-            return ErrorDesc.failureMessage("启用日期需要大于等于验收日期");
+            assetDepreciationDetail.setResultDetail("折旧日期必须大于等于验收日期");
+            return ErrorDesc.failureMessage("折旧日期必须大于等于验收日期");
         }else{
-            Logger.info("正常折旧内部定义的前置条件-启用日期需要大于等于验收日期,符合要求");
+            Logger.info("正常折旧内部定义的前置条件-折旧日期必须大于等于验收日期,符合要求");
         }
 
 

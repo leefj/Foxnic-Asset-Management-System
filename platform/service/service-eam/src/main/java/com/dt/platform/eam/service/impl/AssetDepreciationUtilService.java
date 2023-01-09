@@ -62,6 +62,112 @@ public class AssetDepreciationUtilService {
         return null;
     }
 
+
+    /**
+     * 月份是否一样
+     * @param  registerDate 入账日期 2022-01
+     * @param  businessDate 入账日期 2022-01
+     * @return 1
+     * */
+    public int usedLifeByAccountingPeriod(Date registerDate,Date businessDate){
+        //按照计算规则，registerDate 不会和businessDate 相等，businessDate大于registerDate 至少一个月
+        SimpleDateFormat sdfy = new SimpleDateFormat("yyyy");
+        String d1y = sdfy.format(registerDate);
+        String d2y = sdfy.format(businessDate);
+        if(d2y.equals(d1y)){
+            //资产入账日期，在本年度发生折旧
+            Calendar cal1 = Calendar.getInstance();
+            cal1.setTime(registerDate);
+            int month1 = cal1.get(Calendar.MONTH) + 1;
+            Calendar cal2 = Calendar.getInstance();
+            cal2.setTime(businessDate);
+            int month2 = cal2.get(Calendar.MONTH) + 1;
+            return (month2-month1);
+        }else{
+            //超过了入账日期所在年，只需要计算获得当前月份
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(businessDate);
+            int month = cal.get(Calendar.MONTH) + 1;
+            return month;
+        }
+    }
+
+
+    /**
+     * date1-date2
+     * @param businessDate 日期1 2022-01
+     * @param startDate 日期2 2022-01
+     * @return 返回相减的月份
+     * */
+    public int usedLifeByAccountingPeriodForLast(Date startDate,Date businessDate){
+        int value= usedLifeByAccountingPeriod(startDate,businessDate);
+        if(value-1<0){
+            return 0;
+        }else{
+            return value-1;
+        }
+    }
+
+
+    /**
+     * date1-date2
+     * @param businessDate 日期1 2022-01
+     * @param startDate 日期2 2022-01
+     * @param life 1
+     * @return 返回相减的月份
+     * */
+    public int usedLifeByAccountingPeriodForFinish(Date startDate,Date businessDate,int life){
+        SimpleDateFormat sdfy = new SimpleDateFormat("yyyy");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(startDate);
+        calendar.add(Calendar.MONTH,life);
+        Date lastDate = calendar.getTime();
+        String lastYear = sdfy.format(lastDate);
+        String businessYear = sdfy.format(businessDate);
+        String startYear = sdfy.format(startDate);
+        int hd=0;
+        if(businessYear.equals(startYear)){
+            //计算月份-验收月份
+            Calendar cal1 = Calendar.getInstance();
+            cal1.setTime(startDate);
+            int month1 = cal1.get(Calendar.MONTH) + 1;
+            Calendar cal2 = Calendar.getInstance();
+            cal2.setTime(businessDate);
+            int month2 = cal2.get(Calendar.MONTH) + 1;
+            hd= (month2-month1);
+        }else {
+            if(Integer.parseInt(businessYear) <= Integer.parseInt(lastYear) ) {
+                Calendar cal2 = Calendar.getInstance();
+                cal2.setTime(businessDate);
+                hd = cal2.get(Calendar.MONTH) + 1;
+            }else{
+               hd=0;
+            }
+        }
+        if(hd-1<0){
+            return 0;
+        }else{
+            return hd-1;
+        }
+    }
+
+    public int usedLifeByAccountingPeriodForFinish2(Date startDate,Date businessDate,int life){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(startDate);
+        calendar.add(Calendar.MONTH,life);
+        Date lastDate = calendar.getTime();
+
+        SimpleDateFormat sdfy = new SimpleDateFormat("yyyy");
+        String d1y = sdfy.format(lastDate);
+        String d2y = sdfy.format(businessDate);
+        if(d1y.equals(d2y)){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+
     /**
      * date1-date2
      * @param date1 日期1 2022-01
@@ -81,7 +187,15 @@ public class AssetDepreciationUtilService {
         return (year1-year2)*12+(month1-month2)+"";
     }
 
+
     public static void main(String[] args) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.MONTH,2);
+        Date lastDate = calendar.getTime();
+
+        System.out.println(lastDate);
+
         Map<String, Object> map =new HashMap<>();
         map.put("a", new BigDecimal("1"));
         map.put("b", new BigDecimal("6"));
@@ -93,15 +207,23 @@ public class AssetDepreciationUtilService {
         jexlBuilder.namespaces(funcs);
 
         JexlEngine jexlEngine = jexlBuilder.create();
-        String expr="commonFunction:roundHalfUp(a+b,2)+1";
+        boolean bb=true;
+
+        Date d1=new Date();
+        Date d2=new Date();
+        String expr="d1>d2";
+
         JexlContext jexlContext = new MapContext();
-        jexlContext.set("a",  new BigDecimal("1.2"));
-        Double b=2.0;
-        jexlContext.set("b",  b);
+        jexlContext.set("bb",  bb);
+        jexlContext.set("d1",  d1);
+        jexlContext.set("d2",  d2);
+        jexlContext.set("a",  new BigDecimal("1"));
+        jexlContext.set("b",  new BigDecimal("1.0"));
+
         JexlExpression  expression = jexlEngine.createExpression(expr);
         Object r=expression.evaluate(jexlContext);
 
-        System.out.println(r);
+        System.out.println(r.getClass()+","+r);
         // 初始化Jexl构造器
 //        JexlBuilder jexlBuilder = new JexlBuilder();
 //        // 创建Jexl表达式引擎
@@ -156,34 +278,6 @@ public class AssetDepreciationUtilService {
         return script.execute(context);
     }
 
-    /**
-     * 月份是否一样
-     * @param  registerDate 入账日期 2022-01
-     * @param  businessDate 入账日期 2022-01
-     * @return 1
-     * */
-    public String usedLifeByAccountingPeriod(Date registerDate,Date businessDate){
-        //按照计算规则，registerDate 不会和businessDate 相等，businessDate大于registerDate 至少一个月
-        SimpleDateFormat sdfy = new SimpleDateFormat("yyyy");
-        String d1y = sdfy.format(registerDate);
-        String d2y = sdfy.format(businessDate);
-        if(d2y.equals(d1y)){
-            //资产入账日期，在本年度发生折旧
-            Calendar cal1 = Calendar.getInstance();
-            cal1.setTime(registerDate);
-            int month1 = cal1.get(Calendar.MONTH) + 1;
-            Calendar cal2 = Calendar.getInstance();
-            cal2.setTime(businessDate);
-            int month2 = cal2.get(Calendar.MONTH) + 1;
-            return (month2-month1)+"";
-        }else{
-            //超过了入账日期所在年，只需要计算获得当前月份
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(businessDate);
-            int month = cal.get(Calendar.MONTH) + 1;
-            return month+"";
-        }
-    }
 
     /**
      * 日期是否一样
@@ -194,7 +288,6 @@ public class AssetDepreciationUtilService {
      *        -1 date1<date2
      * */
     public String compareDate(Date date1, Date date2) {
-
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String d1 = sdf.format(date1);
         String d2 = sdf.format(date2);
@@ -270,9 +363,9 @@ public class AssetDepreciationUtilService {
                 return ErrorDesc.failureMessage(partMsg+",计算表达式为空");
             }
             Logger.info(partMsg+",rule:"+ruleContent);
-            String result = calculationValue(ruleContent,map);
+            Object result = calculationValue(ruleContent,map);
             Logger.info(partMsg+",计算结果:"+result);
-            if(StringUtil.isBlank(result)||result.startsWith("err")){
+            if(StringUtil.isBlank(result)||result.toString().startsWith("err")){
                 return ErrorDesc.failureMessage(partMsg+",计算结果:"+result);
             }
             //返回
@@ -280,13 +373,20 @@ public class AssetDepreciationUtilService {
                 //double 类型
                 //BigDecimal.ROUND_DOWN 截取
                 //BigDecimal.ROUND_HALF_UP 进行四舍五入
-                BigDecimal bResult = new BigDecimal(result).setScale(2,BigDecimal.ROUND_HALF_UP);
+                BigDecimal bResult = new BigDecimal(result.toString()).setScale(2,BigDecimal.ROUND_HALF_UP);
                 BeanUtil.setFieldValue(assetDepreciationDetail,colValue,bResult);
                 Logger.info(partMsg+",设置值:"+BeanUtil.getFieldValue(assetDepreciationDetail,colValue,BigDecimal.class).toString());
             }else if(AssetDepreciationCalculationReturnTypeEnum.TYPE_STRING.code().equals(rule.getReturnType())){
                 //string 类型
-                BeanUtil.setFieldValue(assetDepreciationDetail,colValue,result);
+                BeanUtil.setFieldValue(assetDepreciationDetail,colValue,result.toString());
                 Logger.info(partMsg+",设置值:"+BeanUtil.getFieldValue(assetDepreciationDetail,colValue,String.class));
+            }else if(AssetDepreciationCalculationReturnTypeEnum.TYPE_BOOLEAN.code().equals(rule.getReturnType())){
+                //string 类型
+               if(result.getClass().equals(Double.class)){
+
+               }else{
+                   return ErrorDesc.failureMessage(partMsg+",当前计算表达式范围类型错误，返回类型为:"+result.getClass()+",正常应返回为:Boolean");
+               }
             }
         }
         else if(AssetDepreciationCalculationMethodTypeEnum.NOT_NULL.code().equals(calType)){
