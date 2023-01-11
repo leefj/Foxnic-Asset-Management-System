@@ -1,7 +1,7 @@
 /**
  * 数据库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-11-29 22:07:27
+ * @since 2023-01-11 11:52:08
  */
 
 
@@ -98,10 +98,12 @@ function ListPage() {
 					,{ field: 'toolStrategy', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('工具备份策略') , templet: function (d) { return templet('toolStrategy',d.toolStrategy,d);}  }
 					,{ field: 'disasterRecoveryStrategy', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('灾备策略') , templet: function (d) { return templet('disasterRecoveryStrategy',d.disasterRecoveryStrategy,d);}  }
 					,{ field: 'clearStrategy', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('清理策略') , templet: function (d) { return templet('clearStrategy',d.clearStrategy,d);}  }
+					,{ field: 'backupInfo', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备份备注') , templet: function (d) { return templet('backupInfo',d.backupInfo,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'resHostIp', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('IP') , templet: function (d) { return templet('resHostIp',fox.getProperty(d,["host","hostIp"],0,'','resHostIp'),d);} }
 					,{ field: 'labelIds', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('标签'), templet: function (d) { return templet('labelIds' ,fox.joinLabel(d.labelList,"label",',','','labelIds'),d);}}
+					,{ field: 'dataLocIds', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('数据存放'), templet: function (d) { return templet('dataLocIds' ,fox.joinLabel(d.dataLocData,"label",',','','dataLocIds'),d);}}
 					,{ field: fox.translate('空白列','','cmp:table'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作','','cmp:table'), width: 160 }
 				]],

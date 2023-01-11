@@ -28,8 +28,8 @@ import com.github.foxnic.sql.data.ExprRcd;
  * 数据库
  * <p>数据库 , 数据表 ops_db_info 的PO类型</p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-11-29 22:07:25
- * @sign 94D9438D9E565B04A38147E9B681ADA0
+ * @since 2023-01-11 11:52:07
+ * @sign EC64322FC2D4F02C96E47B055F62F6B2
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -139,6 +139,12 @@ public class DbInfo extends Entity {
 	private String dbPort;
 	
 	/**
+	 * 数据存放：数据存放
+	*/
+	@ApiModelProperty(required = false,value="数据存放" , notes = "数据存放")
+	private String dataLoc;
+	
+	/**
 	 * 本地备份策略：本地备份策略
 	*/
 	@ApiModelProperty(required = false,value="本地备份策略" , notes = "本地备份策略" , example = "无")
@@ -161,6 +167,12 @@ public class DbInfo extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="清理策略" , notes = "清理策略")
 	private String clearStrategy;
+	
+	/**
+	 * 备份备注：备份备注
+	*/
+	@ApiModelProperty(required = false,value="备份备注" , notes = "备份备注")
+	private String backupInfo;
 	
 	/**
 	 * 备注：备注
@@ -266,6 +278,18 @@ public class DbInfo extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="labelIds" , notes = "labelIds")
 	private List<String> labelIds;
+	
+	/**
+	 * dataLocData：dataLocData
+	*/
+	@ApiModelProperty(required = false,value="dataLocData" , notes = "dataLocData")
+	private List<DictItem> dataLocData;
+	
+	/**
+	 * dataLocIds：dataLocIds
+	*/
+	@ApiModelProperty(required = false,value="dataLocIds" , notes = "dataLocIds")
+	private List<String> dataLocIds;
 	
 	/**
 	 * 获得 主键<br>
@@ -572,6 +596,25 @@ public class DbInfo extends Entity {
 	}
 	
 	/**
+	 * 获得 数据存放<br>
+	 * 数据存放
+	 * @return 数据存放
+	*/
+	public String getDataLoc() {
+		return dataLoc;
+	}
+	
+	/**
+	 * 设置 数据存放
+	 * @param dataLoc 数据存放
+	 * @return 当前对象
+	*/
+	public DbInfo setDataLoc(String dataLoc) {
+		this.dataLoc=dataLoc;
+		return this;
+	}
+	
+	/**
 	 * 获得 本地备份策略<br>
 	 * 本地备份策略
 	 * @return 本地备份策略
@@ -644,6 +687,25 @@ public class DbInfo extends Entity {
 	*/
 	public DbInfo setClearStrategy(String clearStrategy) {
 		this.clearStrategy=clearStrategy;
+		return this;
+	}
+	
+	/**
+	 * 获得 备份备注<br>
+	 * 备份备注
+	 * @return 备份备注
+	*/
+	public String getBackupInfo() {
+		return backupInfo;
+	}
+	
+	/**
+	 * 设置 备份备注
+	 * @param backupInfo 备份备注
+	 * @return 当前对象
+	*/
+	public DbInfo setBackupInfo(String backupInfo) {
+		this.backupInfo=backupInfo;
 		return this;
 	}
 	
@@ -1044,6 +1106,66 @@ public class DbInfo extends Entity {
 		this.labelIds.addAll(Arrays.asList(labelId));
 		return this;
 	}
+	
+	/**
+	 * 获得 dataLocData<br>
+	 * dataLocData
+	 * @return dataLocData
+	*/
+	public List<DictItem> getDataLocData() {
+		return dataLocData;
+	}
+	
+	/**
+	 * 设置 dataLocData
+	 * @param dataLocData dataLocData
+	 * @return 当前对象
+	*/
+	public DbInfo setDataLocData(List<DictItem> dataLocData) {
+		this.dataLocData=dataLocData;
+		return this;
+	}
+	
+	/**
+	 * 添加 dataLocData
+	 * @param entity dataLocData
+	 * @return 当前对象
+	*/
+	public DbInfo addDataLocData(DictItem... entity) {
+		if(this.dataLocData==null) dataLocData=new ArrayList<>();
+		this.dataLocData.addAll(Arrays.asList(entity));
+		return this;
+	}
+	
+	/**
+	 * 获得 dataLocIds<br>
+	 * dataLocIds
+	 * @return dataLocIds
+	*/
+	public List<String> getDataLocIds() {
+		return dataLocIds;
+	}
+	
+	/**
+	 * 设置 dataLocIds
+	 * @param dataLocIds dataLocIds
+	 * @return 当前对象
+	*/
+	public DbInfo setDataLocIds(List<String> dataLocIds) {
+		this.dataLocIds=dataLocIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 dataLocIds
+	 * @param dataLocId dataLocIds
+	 * @return 当前对象
+	*/
+	public DbInfo addDataLocId(String... dataLocId) {
+		if(this.dataLocIds==null) dataLocIds=new ArrayList<>();
+		this.dataLocIds.addAll(Arrays.asList(dataLocId));
+		return this;
+	}
 
 	/**
 	 * 将自己转换成指定类型的PO
@@ -1098,6 +1220,7 @@ public class DbInfo extends Entity {
 		inst.setVoucherStr(this.getVoucherStr());
 		inst.setId(this.getId());
 		inst.setAdminUserList(this.getAdminUserList());
+		inst.setBackupInfo(this.getBackupInfo());
 		inst.setUserUseInfo(this.getUserUseInfo());
 		inst.setDisasterRecoveryStrategy(this.getDisasterRecoveryStrategy());
 		inst.setToolStrategy(this.getToolStrategy());
@@ -1112,6 +1235,7 @@ public class DbInfo extends Entity {
 		inst.setClearStrategy(this.getClearStrategy());
 		inst.setDbPort(this.getDbPort());
 		inst.setCreateBy(this.getCreateBy());
+		inst.setDataLoc(this.getDataLoc());
 		inst.setDeleted(this.getDeleted());
 		inst.setCreateTime(this.getCreateTime());
 		inst.setDeleteTime(this.getDeleteTime());
@@ -1122,11 +1246,13 @@ public class DbInfo extends Entity {
 		if(all) {
 			inst.setLabelList(this.getLabelList());
 			inst.setLabelIds(this.getLabelIds());
+			inst.setDataLocData(this.getDataLocData());
 			inst.setBackupInfoList(this.getBackupInfoList());
 			inst.setHost(this.getHost());
 			inst.setBackupInfoIds(this.getBackupInfoIds());
 			inst.setDeployModeDict(this.getDeployModeDict());
 			inst.setType(this.getType());
+			inst.setDataLocIds(this.getDataLocIds());
 		}
 		inst.clearModifies();
 		return inst;
@@ -1195,6 +1321,7 @@ public class DbInfo extends Entity {
 			this.setVoucherStr(DataParser.parse(String.class, map.get(DbInfoMeta.VOUCHER_STR)));
 			this.setId(DataParser.parse(String.class, map.get(DbInfoMeta.ID)));
 			this.setAdminUserList(DataParser.parse(String.class, map.get(DbInfoMeta.ADMIN_USER_LIST)));
+			this.setBackupInfo(DataParser.parse(String.class, map.get(DbInfoMeta.BACKUP_INFO)));
 			this.setUserUseInfo(DataParser.parse(String.class, map.get(DbInfoMeta.USER_USE_INFO)));
 			this.setDisasterRecoveryStrategy(DataParser.parse(String.class, map.get(DbInfoMeta.DISASTER_RECOVERY_STRATEGY)));
 			this.setToolStrategy(DataParser.parse(String.class, map.get(DbInfoMeta.TOOL_STRATEGY)));
@@ -1209,6 +1336,7 @@ public class DbInfo extends Entity {
 			this.setClearStrategy(DataParser.parse(String.class, map.get(DbInfoMeta.CLEAR_STRATEGY)));
 			this.setDbPort(DataParser.parse(String.class, map.get(DbInfoMeta.DB_PORT)));
 			this.setCreateBy(DataParser.parse(String.class, map.get(DbInfoMeta.CREATE_BY)));
+			this.setDataLoc(DataParser.parse(String.class, map.get(DbInfoMeta.DATA_LOC)));
 			this.setDeleted(DataParser.parse(Integer.class, map.get(DbInfoMeta.DELETED)));
 			this.setCreateTime(DataParser.parse(Date.class, map.get(DbInfoMeta.CREATE_TIME)));
 			this.setDeleteTime(DataParser.parse(Date.class, map.get(DbInfoMeta.DELETE_TIME)));
@@ -1232,6 +1360,7 @@ public class DbInfo extends Entity {
 				this.setVoucherStr( (String)map.get(DbInfoMeta.VOUCHER_STR));
 				this.setId( (String)map.get(DbInfoMeta.ID));
 				this.setAdminUserList( (String)map.get(DbInfoMeta.ADMIN_USER_LIST));
+				this.setBackupInfo( (String)map.get(DbInfoMeta.BACKUP_INFO));
 				this.setUserUseInfo( (String)map.get(DbInfoMeta.USER_USE_INFO));
 				this.setDisasterRecoveryStrategy( (String)map.get(DbInfoMeta.DISASTER_RECOVERY_STRATEGY));
 				this.setToolStrategy( (String)map.get(DbInfoMeta.TOOL_STRATEGY));
@@ -1246,6 +1375,7 @@ public class DbInfo extends Entity {
 				this.setClearStrategy( (String)map.get(DbInfoMeta.CLEAR_STRATEGY));
 				this.setDbPort( (String)map.get(DbInfoMeta.DB_PORT));
 				this.setCreateBy( (String)map.get(DbInfoMeta.CREATE_BY));
+				this.setDataLoc( (String)map.get(DbInfoMeta.DATA_LOC));
 				this.setDeleted( (Integer)map.get(DbInfoMeta.DELETED));
 				this.setCreateTime( (Date)map.get(DbInfoMeta.CREATE_TIME));
 				this.setDeleteTime( (Date)map.get(DbInfoMeta.DELETE_TIME));
@@ -1282,6 +1412,7 @@ public class DbInfo extends Entity {
 			this.setVoucherStr(DataParser.parse(String.class, r.getValue(DbInfoMeta.VOUCHER_STR)));
 			this.setId(DataParser.parse(String.class, r.getValue(DbInfoMeta.ID)));
 			this.setAdminUserList(DataParser.parse(String.class, r.getValue(DbInfoMeta.ADMIN_USER_LIST)));
+			this.setBackupInfo(DataParser.parse(String.class, r.getValue(DbInfoMeta.BACKUP_INFO)));
 			this.setUserUseInfo(DataParser.parse(String.class, r.getValue(DbInfoMeta.USER_USE_INFO)));
 			this.setDisasterRecoveryStrategy(DataParser.parse(String.class, r.getValue(DbInfoMeta.DISASTER_RECOVERY_STRATEGY)));
 			this.setToolStrategy(DataParser.parse(String.class, r.getValue(DbInfoMeta.TOOL_STRATEGY)));
@@ -1296,6 +1427,7 @@ public class DbInfo extends Entity {
 			this.setClearStrategy(DataParser.parse(String.class, r.getValue(DbInfoMeta.CLEAR_STRATEGY)));
 			this.setDbPort(DataParser.parse(String.class, r.getValue(DbInfoMeta.DB_PORT)));
 			this.setCreateBy(DataParser.parse(String.class, r.getValue(DbInfoMeta.CREATE_BY)));
+			this.setDataLoc(DataParser.parse(String.class, r.getValue(DbInfoMeta.DATA_LOC)));
 			this.setDeleted(DataParser.parse(Integer.class, r.getValue(DbInfoMeta.DELETED)));
 			this.setCreateTime(DataParser.parse(Date.class, r.getValue(DbInfoMeta.CREATE_TIME)));
 			this.setDeleteTime(DataParser.parse(Date.class, r.getValue(DbInfoMeta.DELETE_TIME)));
@@ -1315,6 +1447,7 @@ public class DbInfo extends Entity {
 				this.setVoucherStr( (String)r.getValue(DbInfoMeta.VOUCHER_STR));
 				this.setId( (String)r.getValue(DbInfoMeta.ID));
 				this.setAdminUserList( (String)r.getValue(DbInfoMeta.ADMIN_USER_LIST));
+				this.setBackupInfo( (String)r.getValue(DbInfoMeta.BACKUP_INFO));
 				this.setUserUseInfo( (String)r.getValue(DbInfoMeta.USER_USE_INFO));
 				this.setDisasterRecoveryStrategy( (String)r.getValue(DbInfoMeta.DISASTER_RECOVERY_STRATEGY));
 				this.setToolStrategy( (String)r.getValue(DbInfoMeta.TOOL_STRATEGY));
@@ -1329,6 +1462,7 @@ public class DbInfo extends Entity {
 				this.setClearStrategy( (String)r.getValue(DbInfoMeta.CLEAR_STRATEGY));
 				this.setDbPort( (String)r.getValue(DbInfoMeta.DB_PORT));
 				this.setCreateBy( (String)r.getValue(DbInfoMeta.CREATE_BY));
+				this.setDataLoc( (String)r.getValue(DbInfoMeta.DATA_LOC));
 				this.setDeleted( (Integer)r.getValue(DbInfoMeta.DELETED));
 				this.setCreateTime( (Date)r.getValue(DbInfoMeta.CREATE_TIME));
 				this.setDeleteTime( (Date)r.getValue(DbInfoMeta.DELETE_TIME));

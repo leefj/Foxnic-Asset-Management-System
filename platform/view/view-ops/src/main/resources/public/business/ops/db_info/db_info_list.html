@@ -2,7 +2,7 @@
 /**
  * 数据库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-11-29 22:07:26
+ * @since 2023-01-11 11:52:08
  */
  -->
  <!DOCTYPE html>
@@ -50,10 +50,12 @@
                     <!-- 使用情况 , userUseInfo ,typeName=text_input, isHideInSearch=true -->
                     <!-- 凭证信息 , voucherStr ,typeName=text_area, isHideInSearch=true -->
                     <!-- 服务端口 , dbPort ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 数据存放 , dataLoc ,typeName=text_input, isHideInSearch=true -->
                     <!-- 本地备份策略 , backupStrategy ,typeName=text_input, isHideInSearch=true -->
                     <!-- 工具备份策略 , toolStrategy ,typeName=text_input, isHideInSearch=true -->
                     <!-- 灾备策略 , disasterRecoveryStrategy ,typeName=text_input, isHideInSearch=true -->
                     <!-- 清理策略 , clearStrategy ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 备份备注 , backupInfo ,typeName=text_area, isHideInSearch=true -->
                     <!-- 选择 , selectedCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- IP , resHostIp ,typeName=text_input, isHideInSearch=true -->
                     <!-- 标签 , labelIds ,typeName=select_box, isHideInSearch=false -->
@@ -61,6 +63,7 @@
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('标签')}" class="search-label labelIds-label">标签</span><span class="search-colon">:</span></div>
                         <div id="labelIds" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_db_label'}" style="width:150px" extraParam="{}"></div>
                     </div>
+                    <!-- 数据存放 , dataLocIds ,typeName=select_box, isHideInSearch=true -->
                     <!-- 数据库状态 , status ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:90px"><span th:text="${lang.translate('数据库状态')}" class="search-label status-label">数据库状态</span><span class="search-colon">:</span></div>

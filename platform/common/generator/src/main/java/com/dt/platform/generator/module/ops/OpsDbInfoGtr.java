@@ -43,6 +43,8 @@ public class OpsDbInfoGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addListProperty(DictItem.class,"labelList","labelList","labelList");
         cfg.getPoClassFile().addListProperty(String.class,"labelIds","labelIds","labelIds");
 
+        cfg.getPoClassFile().addListProperty(DictItem.class,"dataLocData","dataLocData","dataLocData");
+        cfg.getPoClassFile().addListProperty(String.class,"dataLocIds","dataLocIds","dataLocIds");
 
         cfg.view().field(OpsTables.OPS_DB_INFO.NAME).search().fuzzySearch();
         cfg.view().field(OpsTables.OPS_DB_INFO.NOTES).search().fuzzySearch();
@@ -95,10 +97,15 @@ public class OpsDbInfoGtr extends BaseCodeGenerator{
                 .toolbar(false).paging(false)
                 .fillWith(DbInfoMeta.DEPLOY_MODE_DICT).muliti(false).defaultValue("single");
 
+
+
         cfg.view().field(OpsTables.OPS_DB_INFO.SELECTED_CODE).table().disable(true);
 
         cfg.view().field(OpsTables.OPS_DB_INFO.NOTES).form().textInput();
 
+        cfg.view().field(OpsTables.OPS_DB_INFO.DATA_LOC).table().disable(true);
+
+        cfg.view().field(OpsTables.OPS_DB_INFO.BACKUP_INFO).form().textArea().height(Config.textAreaHeight);
         cfg.view().field(OpsTables.OPS_DB_INFO.NAME).form().validate().required();
         cfg.view().field(OpsTables.OPS_DB_INFO.DB_SIZE).form().numberInput().defaultValue(0.0).integer();
         cfg.view().field(OpsTables.OPS_DB_INFO.STATUS).form().validate().required().form()
@@ -125,6 +132,16 @@ public class OpsDbInfoGtr extends BaseCodeGenerator{
                         .valueField(DictItemMeta.CODE).
                         textField(DictItemMeta.LABEL).
                 fillWith(DbInfoMeta.LABEL_LIST).muliti(true);
+
+
+
+        cfg.view().field(DbInfoMeta.DATA_LOC_IDS)
+                .basic().label("数据存放")
+                .table().sort(false)
+                .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=ops_db_data_loc")
+                .valueField(DictItemMeta.CODE).textField(DictItemMeta.LABEL)
+                .toolbar(false).paging(false)
+                .fillWith(DbInfoMeta.DATA_LOC_DATA).muliti(true);
 
 
         cfg.view().search().labelWidth(1,Config.searchLabelWidth);
@@ -178,6 +195,9 @@ public class OpsDbInfoGtr extends BaseCodeGenerator{
         cfg.view().form().addGroup("备份信息",
                 new Object[]{
                         OpsTables.OPS_DB_INFO.BACKUP_STATUS,
+                },
+                new Object[]{
+                        DbInfoMeta.DATA_LOC_IDS,
                 }
         );
 
@@ -193,7 +213,11 @@ public class OpsDbInfoGtr extends BaseCodeGenerator{
         );
 
 
-
+        cfg.view().form().addGroup(null,
+                new Object[]{
+                        OpsTables.OPS_DB_INFO.BACKUP_INFO,
+                }
+        );
 
 
         cfg.view().list().operationColumn().addActionButton("备份记录","openBackupWindow",null,"ops_db_info:backup");
@@ -201,8 +225,6 @@ public class OpsDbInfoGtr extends BaseCodeGenerator{
 
 
         cfg.view().form().addPage("备份情况","backInfoList");
-
-
 
       //  cfg.view().list().operationColumn().addActionButton("备份记录","backupRecord","backupRecord","ops_auto_task:check");
 

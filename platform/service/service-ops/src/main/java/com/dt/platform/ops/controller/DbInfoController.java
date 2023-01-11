@@ -84,7 +84,9 @@ public class DbInfoController extends SuperController {
 		@ApiImplicitParam(name = DbInfoVOMeta.DISASTER_RECOVERY_STRATEGY, value = "灾备策略", required = false, dataTypeClass = String.class),
 		@ApiImplicitParam(name = DbInfoVOMeta.CLEAR_STRATEGY, value = "清理策略", required = false, dataTypeClass = String.class),
 		@ApiImplicitParam(name = DbInfoVOMeta.OPS_USER_LIST, value = "运维账户", required = false, dataTypeClass = String.class),
-		@ApiImplicitParam(name = DbInfoVOMeta.USER_USE_INFO, value = "使用情况", required = false, dataTypeClass = String.class)
+		@ApiImplicitParam(name = DbInfoVOMeta.USER_USE_INFO, value = "使用情况", required = false, dataTypeClass = String.class),
+		@ApiImplicitParam(name = DbInfoVOMeta.DATA_LOC, value = "数据存放", required = false, dataTypeClass = String.class),
+		@ApiImplicitParam(name = DbInfoVOMeta.BACKUP_INFO, value = "备份备注", required = false, dataTypeClass = String.class)
 	})
     @ApiParamSupport(ignoreDBTreatyProperties = true, ignoreDefaultVoProperties = true, ignorePrimaryKey = true)
     @ApiOperationSupport(order = 1, author = "金杰 , maillank@qq.com")
@@ -199,7 +201,9 @@ public class DbInfoController extends SuperController {
 		@ApiImplicitParam(name = DbInfoVOMeta.DISASTER_RECOVERY_STRATEGY, value = "灾备策略", required = false, dataTypeClass = String.class),
 		@ApiImplicitParam(name = DbInfoVOMeta.CLEAR_STRATEGY, value = "清理策略", required = false, dataTypeClass = String.class),
 		@ApiImplicitParam(name = DbInfoVOMeta.OPS_USER_LIST, value = "运维账户", required = false, dataTypeClass = String.class),
-		@ApiImplicitParam(name = DbInfoVOMeta.USER_USE_INFO, value = "使用情况", required = false, dataTypeClass = String.class)
+		@ApiImplicitParam(name = DbInfoVOMeta.USER_USE_INFO, value = "使用情况", required = false, dataTypeClass = String.class),
+		@ApiImplicitParam(name = DbInfoVOMeta.DATA_LOC, value = "数据存放", required = false, dataTypeClass = String.class),
+		@ApiImplicitParam(name = DbInfoVOMeta.BACKUP_INFO, value = "备份备注", required = false, dataTypeClass = String.class)
 	})
     @ApiParamSupport(ignoreDBTreatyProperties = true, ignoreDefaultVoProperties = true)
     @ApiOperationSupport(order = 4, author = "金杰 , maillank@qq.com", ignoreParameters = { DbInfoVOMeta.PAGE_INDEX, DbInfoVOMeta.PAGE_SIZE, DbInfoVOMeta.SEARCH_FIELD, DbInfoVOMeta.FUZZY_FIELD, DbInfoVOMeta.SEARCH_VALUE, DbInfoVOMeta.DIRTY_FIELDS, DbInfoVOMeta.SORT_FIELD, DbInfoVOMeta.SORT_TYPE, DbInfoVOMeta.IDS })
@@ -236,7 +240,9 @@ public class DbInfoController extends SuperController {
 		@ApiImplicitParam(name = DbInfoVOMeta.DISASTER_RECOVERY_STRATEGY, value = "灾备策略", required = false, dataTypeClass = String.class),
 		@ApiImplicitParam(name = DbInfoVOMeta.CLEAR_STRATEGY, value = "清理策略", required = false, dataTypeClass = String.class),
 		@ApiImplicitParam(name = DbInfoVOMeta.OPS_USER_LIST, value = "运维账户", required = false, dataTypeClass = String.class),
-		@ApiImplicitParam(name = DbInfoVOMeta.USER_USE_INFO, value = "使用情况", required = false, dataTypeClass = String.class)
+		@ApiImplicitParam(name = DbInfoVOMeta.USER_USE_INFO, value = "使用情况", required = false, dataTypeClass = String.class),
+		@ApiImplicitParam(name = DbInfoVOMeta.DATA_LOC, value = "数据存放", required = false, dataTypeClass = String.class),
+		@ApiImplicitParam(name = DbInfoVOMeta.BACKUP_INFO, value = "备份备注", required = false, dataTypeClass = String.class)
 	})
     @ApiParamSupport(ignoreDBTreatyProperties = true, ignoreDefaultVoProperties = true)
     @ApiOperationSupport(order = 5, ignoreParameters = { DbInfoVOMeta.PAGE_INDEX, DbInfoVOMeta.PAGE_SIZE, DbInfoVOMeta.SEARCH_FIELD, DbInfoVOMeta.FUZZY_FIELD, DbInfoVOMeta.SEARCH_VALUE, DbInfoVOMeta.DIRTY_FIELDS, DbInfoVOMeta.SORT_FIELD, DbInfoVOMeta.SORT_TYPE, DbInfoVOMeta.IDS })
@@ -261,7 +267,7 @@ public class DbInfoController extends SuperController {
         Result<DbInfo> result = new Result<>();
         DbInfo dbInfo = dbInfoService.getById(id);
         // join 关联的对象
-        dbInfoService.dao().fill(dbInfo).with(DbInfoMeta.HOST).with(DbInfoMeta.HOST).with(DbInfoMeta.TYPE).with(DbInfoMeta.DEPLOY_MODE_DICT).with(DbInfoMeta.LABEL_LIST).execute();
+        dbInfoService.dao().fill(dbInfo).with(DbInfoMeta.HOST).with(DbInfoMeta.HOST).with(DbInfoMeta.TYPE).with(DbInfoMeta.DEPLOY_MODE_DICT).with(DbInfoMeta.LABEL_LIST).with(DbInfoMeta.DATA_LOC_DATA).execute();
         result.success(true).data(dbInfo);
         return result;
     }
@@ -310,7 +316,9 @@ public class DbInfoController extends SuperController {
 		@ApiImplicitParam(name = DbInfoVOMeta.DISASTER_RECOVERY_STRATEGY, value = "灾备策略", required = false, dataTypeClass = String.class),
 		@ApiImplicitParam(name = DbInfoVOMeta.CLEAR_STRATEGY, value = "清理策略", required = false, dataTypeClass = String.class),
 		@ApiImplicitParam(name = DbInfoVOMeta.OPS_USER_LIST, value = "运维账户", required = false, dataTypeClass = String.class),
-		@ApiImplicitParam(name = DbInfoVOMeta.USER_USE_INFO, value = "使用情况", required = false, dataTypeClass = String.class)
+		@ApiImplicitParam(name = DbInfoVOMeta.USER_USE_INFO, value = "使用情况", required = false, dataTypeClass = String.class),
+		@ApiImplicitParam(name = DbInfoVOMeta.DATA_LOC, value = "数据存放", required = false, dataTypeClass = String.class),
+		@ApiImplicitParam(name = DbInfoVOMeta.BACKUP_INFO, value = "备份备注", required = false, dataTypeClass = String.class)
 	})
     @ApiOperationSupport(order = 5, author = "金杰 , maillank@qq.com", ignoreParameters = { DbInfoVOMeta.PAGE_INDEX, DbInfoVOMeta.PAGE_SIZE })
     @SentinelResource(value = DbInfoServiceProxy.QUERY_LIST, blockHandlerClass = { SentinelExceptionUtil.class }, blockHandler = SentinelExceptionUtil.HANDLER)
@@ -348,7 +356,9 @@ public class DbInfoController extends SuperController {
 		@ApiImplicitParam(name = DbInfoVOMeta.DISASTER_RECOVERY_STRATEGY, value = "灾备策略", required = false, dataTypeClass = String.class),
 		@ApiImplicitParam(name = DbInfoVOMeta.CLEAR_STRATEGY, value = "清理策略", required = false, dataTypeClass = String.class),
 		@ApiImplicitParam(name = DbInfoVOMeta.OPS_USER_LIST, value = "运维账户", required = false, dataTypeClass = String.class),
-		@ApiImplicitParam(name = DbInfoVOMeta.USER_USE_INFO, value = "使用情况", required = false, dataTypeClass = String.class)
+		@ApiImplicitParam(name = DbInfoVOMeta.USER_USE_INFO, value = "使用情况", required = false, dataTypeClass = String.class),
+		@ApiImplicitParam(name = DbInfoVOMeta.DATA_LOC, value = "数据存放", required = false, dataTypeClass = String.class),
+		@ApiImplicitParam(name = DbInfoVOMeta.BACKUP_INFO, value = "备份备注", required = false, dataTypeClass = String.class)
 	})
     @ApiOperationSupport(order = 8, author = "金杰 , maillank@qq.com")
     @SentinelResource(value = DbInfoServiceProxy.QUERY_PAGED_LIST, blockHandlerClass = { SentinelExceptionUtil.class }, blockHandler = SentinelExceptionUtil.HANDLER)
@@ -357,7 +367,7 @@ public class DbInfoController extends SuperController {
         Result<PagedList<DbInfo>> result = new Result<>();
         PagedList<DbInfo> list = dbInfoService.queryPagedList(sample, sample.getPageSize(), sample.getPageIndex());
         // join 关联的对象
-        dbInfoService.dao().fill(list).with(DbInfoMeta.HOST).with(DbInfoMeta.HOST).with(DbInfoMeta.TYPE).with(DbInfoMeta.DEPLOY_MODE_DICT).with(DbInfoMeta.LABEL_LIST).execute();
+        dbInfoService.dao().fill(list).with(DbInfoMeta.HOST).with(DbInfoMeta.HOST).with(DbInfoMeta.TYPE).with(DbInfoMeta.DEPLOY_MODE_DICT).with(DbInfoMeta.LABEL_LIST).with(DbInfoMeta.DATA_LOC_DATA).execute();
         result.success(true).data(list);
         return result;
     }

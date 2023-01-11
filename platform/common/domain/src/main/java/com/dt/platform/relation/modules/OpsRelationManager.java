@@ -172,6 +172,13 @@ public class OpsRelationManager extends RelationManager {
                 .using(OpsTables.OPS_DB_INFO.DEPLOY_MODE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
                 .condition("dict_code='ops_db_deploy_mode'");
 
+        this.property(DbInfoMeta.DATA_LOC_DATA_PROP)
+                .using(OpsTables.OPS_DB_INFO.ID).join(OpsTables.OPS_DB_DATA_LOC.DB_INFO_ID)
+                .using(OpsTables.OPS_DB_DATA_LOC.LOC_ID).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='ops_db_data_loc'");
+
+
+
         this.property(DbInfoMeta.BACKUP_INFO_LIST_PROP)
                 .using(OpsTables.OPS_DB_INFO.ID).join(OpsTables.OPS_DB_BACKUP_INFO.DATABASE_ID);
 

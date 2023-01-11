@@ -70,6 +70,7 @@ public class DbInfoServiceImpl extends SuperService<DbInfo> implements IDbInfoSe
 		if(r.isSuccess()){
 			dao.execute("update ops_db_backup_info set database_id=? where selected_code=?",dbInfo.getId(),dbInfo.getSelectedCode());
 			dao.execute("delete from ops_db_info_label where db_id=?",dbInfo.getId());
+			dao.execute("delete from ops_db_data_loc where db_info_id=?",dbInfo.getId());
 			if(dbInfo.getLabelIds()!=null){
 				for(String labelId:dbInfo.getLabelIds()){
 					Insert ins=new Insert("ops_db_info_label");
@@ -79,6 +80,18 @@ public class DbInfoServiceImpl extends SuperService<DbInfo> implements IDbInfoSe
 					dao.execute(ins);
 				}
 			}
+
+			if(dbInfo.getDataLocIds()!=null){
+				for(String value:dbInfo.getDataLocIds()){
+					Insert ins=new Insert("ops_db_data_loc");
+					ins.set("id",IDGenerator.getSnowflakeIdString());
+					ins.set("db_info_id",dbInfo.getId());
+					ins.set("loc_id",value);
+					dao.execute(ins);
+				}
+			}
+
+
 		}
 		return r;
 	}

@@ -24,8 +24,8 @@ import com.github.foxnic.sql.data.ExprRcd;
  * 数据库VO类型
  * <p>数据库 , 数据表 ops_db_info 的通用VO类型</p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-11-29 22:07:25
- * @sign 34945B314FDD9C5B5C62D17AD6EFC0FD
+ * @since 2023-01-11 11:52:07
+ * @sign 62DFC6503B8B14397E15FD04C9DAC032
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -81,6 +81,18 @@ public class DbInfoVO extends DbInfo {
 	*/
 	@ApiModelProperty(required = false,value="排序方式" , notes = "")
 	private String sortType;
+	
+	/**
+	 * 数据来源：前端指定不同的来源，后端按来源执行不同的逻辑
+	*/
+	@ApiModelProperty(required = false,value="数据来源" , notes = "前端指定不同的来源，后端按来源执行不同的逻辑")
+	private String dataOrigin;
+	
+	/**
+	 * 查询逻辑：默认and，可指定 or 
+	*/
+	@ApiModelProperty(required = false,value="查询逻辑" , notes = "默认and，可指定 or ")
+	private String queryLogic;
 	
 	/**
 	 * 主键清单：用于接收批量主键参数
@@ -244,6 +256,44 @@ public class DbInfoVO extends DbInfo {
 	}
 	
 	/**
+	 * 获得 数据来源<br>
+	 * 前端指定不同的来源，后端按来源执行不同的逻辑
+	 * @return 数据来源
+	*/
+	public String getDataOrigin() {
+		return dataOrigin;
+	}
+	
+	/**
+	 * 设置 数据来源
+	 * @param dataOrigin 数据来源
+	 * @return 当前对象
+	*/
+	public DbInfoVO setDataOrigin(String dataOrigin) {
+		this.dataOrigin=dataOrigin;
+		return this;
+	}
+	
+	/**
+	 * 获得 查询逻辑<br>
+	 * 默认and，可指定 or 
+	 * @return 查询逻辑
+	*/
+	public String getQueryLogic() {
+		return queryLogic;
+	}
+	
+	/**
+	 * 设置 查询逻辑
+	 * @param queryLogic 查询逻辑
+	 * @return 当前对象
+	*/
+	public DbInfoVO setQueryLogic(String queryLogic) {
+		this.queryLogic=queryLogic;
+		return this;
+	}
+	
+	/**
 	 * 获得 主键清单<br>
 	 * 用于接收批量主键参数
 	 * @return 主键清单
@@ -337,6 +387,7 @@ public class DbInfoVO extends DbInfo {
 		inst.setVoucherStr(this.getVoucherStr());
 		inst.setId(this.getId());
 		inst.setAdminUserList(this.getAdminUserList());
+		inst.setBackupInfo(this.getBackupInfo());
 		inst.setUserUseInfo(this.getUserUseInfo());
 		inst.setDisasterRecoveryStrategy(this.getDisasterRecoveryStrategy());
 		inst.setToolStrategy(this.getToolStrategy());
@@ -351,6 +402,7 @@ public class DbInfoVO extends DbInfo {
 		inst.setClearStrategy(this.getClearStrategy());
 		inst.setDbPort(this.getDbPort());
 		inst.setCreateBy(this.getCreateBy());
+		inst.setDataLoc(this.getDataLoc());
 		inst.setDeleted(this.getDeleted());
 		inst.setCreateTime(this.getCreateTime());
 		inst.setDeleteTime(this.getDeleteTime());
@@ -366,15 +418,19 @@ public class DbInfoVO extends DbInfo {
 			inst.setType(this.getType());
 			inst.setLabelList(this.getLabelList());
 			inst.setLabelIds(this.getLabelIds());
+			inst.setDataLocData(this.getDataLocData());
 			inst.setPageIndex(this.getPageIndex());
 			inst.setSortType(this.getSortType());
 			inst.setHost(this.getHost());
 			inst.setDirtyFields(this.getDirtyFields());
 			inst.setSortField(this.getSortField());
+			inst.setDataOrigin(this.getDataOrigin());
 			inst.setIds(this.getIds());
 			inst.setBackupInfoIds(this.getBackupInfoIds());
+			inst.setQueryLogic(this.getQueryLogic());
 			inst.setDeployModeDict(this.getDeployModeDict());
 			inst.setSearchValue(this.getSearchValue());
+			inst.setDataLocIds(this.getDataLocIds());
 		}
 		inst.clearModifies();
 		return inst;
@@ -443,6 +499,7 @@ public class DbInfoVO extends DbInfo {
 			this.setVoucherStr(DataParser.parse(String.class, map.get(DbInfoVOMeta.VOUCHER_STR)));
 			this.setId(DataParser.parse(String.class, map.get(DbInfoVOMeta.ID)));
 			this.setAdminUserList(DataParser.parse(String.class, map.get(DbInfoVOMeta.ADMIN_USER_LIST)));
+			this.setBackupInfo(DataParser.parse(String.class, map.get(DbInfoVOMeta.BACKUP_INFO)));
 			this.setUserUseInfo(DataParser.parse(String.class, map.get(DbInfoVOMeta.USER_USE_INFO)));
 			this.setDisasterRecoveryStrategy(DataParser.parse(String.class, map.get(DbInfoVOMeta.DISASTER_RECOVERY_STRATEGY)));
 			this.setToolStrategy(DataParser.parse(String.class, map.get(DbInfoVOMeta.TOOL_STRATEGY)));
@@ -457,6 +514,7 @@ public class DbInfoVO extends DbInfo {
 			this.setClearStrategy(DataParser.parse(String.class, map.get(DbInfoVOMeta.CLEAR_STRATEGY)));
 			this.setDbPort(DataParser.parse(String.class, map.get(DbInfoVOMeta.DB_PORT)));
 			this.setCreateBy(DataParser.parse(String.class, map.get(DbInfoVOMeta.CREATE_BY)));
+			this.setDataLoc(DataParser.parse(String.class, map.get(DbInfoVOMeta.DATA_LOC)));
 			this.setDeleted(DataParser.parse(Integer.class, map.get(DbInfoVOMeta.DELETED)));
 			this.setCreateTime(DataParser.parse(Date.class, map.get(DbInfoVOMeta.CREATE_TIME)));
 			this.setDeleteTime(DataParser.parse(Date.class, map.get(DbInfoVOMeta.DELETE_TIME)));
@@ -473,6 +531,8 @@ public class DbInfoVO extends DbInfo {
 			this.setSortType(DataParser.parse(String.class, map.get(DbInfoVOMeta.SORT_TYPE)));
 			this.setHost(DataParser.parse(Host.class, map.get(DbInfoVOMeta.HOST)));
 			this.setSortField(DataParser.parse(String.class, map.get(DbInfoVOMeta.SORT_FIELD)));
+			this.setDataOrigin(DataParser.parse(String.class, map.get(DbInfoVOMeta.DATA_ORIGIN)));
+			this.setQueryLogic(DataParser.parse(String.class, map.get(DbInfoVOMeta.QUERY_LOGIC)));
 			this.setDeployModeDict(DataParser.parse(DictItem.class, map.get(DbInfoVOMeta.DEPLOY_MODE_DICT)));
 			this.setSearchValue(DataParser.parse(String.class, map.get(DbInfoVOMeta.SEARCH_VALUE)));
 			return true;
@@ -487,6 +547,7 @@ public class DbInfoVO extends DbInfo {
 				this.setVoucherStr( (String)map.get(DbInfoVOMeta.VOUCHER_STR));
 				this.setId( (String)map.get(DbInfoVOMeta.ID));
 				this.setAdminUserList( (String)map.get(DbInfoVOMeta.ADMIN_USER_LIST));
+				this.setBackupInfo( (String)map.get(DbInfoVOMeta.BACKUP_INFO));
 				this.setUserUseInfo( (String)map.get(DbInfoVOMeta.USER_USE_INFO));
 				this.setDisasterRecoveryStrategy( (String)map.get(DbInfoVOMeta.DISASTER_RECOVERY_STRATEGY));
 				this.setToolStrategy( (String)map.get(DbInfoVOMeta.TOOL_STRATEGY));
@@ -501,6 +562,7 @@ public class DbInfoVO extends DbInfo {
 				this.setClearStrategy( (String)map.get(DbInfoVOMeta.CLEAR_STRATEGY));
 				this.setDbPort( (String)map.get(DbInfoVOMeta.DB_PORT));
 				this.setCreateBy( (String)map.get(DbInfoVOMeta.CREATE_BY));
+				this.setDataLoc( (String)map.get(DbInfoVOMeta.DATA_LOC));
 				this.setDeleted( (Integer)map.get(DbInfoVOMeta.DELETED));
 				this.setCreateTime( (Date)map.get(DbInfoVOMeta.CREATE_TIME));
 				this.setDeleteTime( (Date)map.get(DbInfoVOMeta.DELETE_TIME));
@@ -517,6 +579,8 @@ public class DbInfoVO extends DbInfo {
 				this.setSortType( (String)map.get(DbInfoVOMeta.SORT_TYPE));
 				this.setHost( (Host)map.get(DbInfoVOMeta.HOST));
 				this.setSortField( (String)map.get(DbInfoVOMeta.SORT_FIELD));
+				this.setDataOrigin( (String)map.get(DbInfoVOMeta.DATA_ORIGIN));
+				this.setQueryLogic( (String)map.get(DbInfoVOMeta.QUERY_LOGIC));
 				this.setDeployModeDict( (DictItem)map.get(DbInfoVOMeta.DEPLOY_MODE_DICT));
 				this.setSearchValue( (String)map.get(DbInfoVOMeta.SEARCH_VALUE));
 				return true;
@@ -544,6 +608,7 @@ public class DbInfoVO extends DbInfo {
 			this.setVoucherStr(DataParser.parse(String.class, r.getValue(DbInfoVOMeta.VOUCHER_STR)));
 			this.setId(DataParser.parse(String.class, r.getValue(DbInfoVOMeta.ID)));
 			this.setAdminUserList(DataParser.parse(String.class, r.getValue(DbInfoVOMeta.ADMIN_USER_LIST)));
+			this.setBackupInfo(DataParser.parse(String.class, r.getValue(DbInfoVOMeta.BACKUP_INFO)));
 			this.setUserUseInfo(DataParser.parse(String.class, r.getValue(DbInfoVOMeta.USER_USE_INFO)));
 			this.setDisasterRecoveryStrategy(DataParser.parse(String.class, r.getValue(DbInfoVOMeta.DISASTER_RECOVERY_STRATEGY)));
 			this.setToolStrategy(DataParser.parse(String.class, r.getValue(DbInfoVOMeta.TOOL_STRATEGY)));
@@ -558,6 +623,7 @@ public class DbInfoVO extends DbInfo {
 			this.setClearStrategy(DataParser.parse(String.class, r.getValue(DbInfoVOMeta.CLEAR_STRATEGY)));
 			this.setDbPort(DataParser.parse(String.class, r.getValue(DbInfoVOMeta.DB_PORT)));
 			this.setCreateBy(DataParser.parse(String.class, r.getValue(DbInfoVOMeta.CREATE_BY)));
+			this.setDataLoc(DataParser.parse(String.class, r.getValue(DbInfoVOMeta.DATA_LOC)));
 			this.setDeleted(DataParser.parse(Integer.class, r.getValue(DbInfoVOMeta.DELETED)));
 			this.setCreateTime(DataParser.parse(Date.class, r.getValue(DbInfoVOMeta.CREATE_TIME)));
 			this.setDeleteTime(DataParser.parse(Date.class, r.getValue(DbInfoVOMeta.DELETE_TIME)));
@@ -577,6 +643,7 @@ public class DbInfoVO extends DbInfo {
 				this.setVoucherStr( (String)r.getValue(DbInfoVOMeta.VOUCHER_STR));
 				this.setId( (String)r.getValue(DbInfoVOMeta.ID));
 				this.setAdminUserList( (String)r.getValue(DbInfoVOMeta.ADMIN_USER_LIST));
+				this.setBackupInfo( (String)r.getValue(DbInfoVOMeta.BACKUP_INFO));
 				this.setUserUseInfo( (String)r.getValue(DbInfoVOMeta.USER_USE_INFO));
 				this.setDisasterRecoveryStrategy( (String)r.getValue(DbInfoVOMeta.DISASTER_RECOVERY_STRATEGY));
 				this.setToolStrategy( (String)r.getValue(DbInfoVOMeta.TOOL_STRATEGY));
@@ -591,6 +658,7 @@ public class DbInfoVO extends DbInfo {
 				this.setClearStrategy( (String)r.getValue(DbInfoVOMeta.CLEAR_STRATEGY));
 				this.setDbPort( (String)r.getValue(DbInfoVOMeta.DB_PORT));
 				this.setCreateBy( (String)r.getValue(DbInfoVOMeta.CREATE_BY));
+				this.setDataLoc( (String)r.getValue(DbInfoVOMeta.DATA_LOC));
 				this.setDeleted( (Integer)r.getValue(DbInfoVOMeta.DELETED));
 				this.setCreateTime( (Date)r.getValue(DbInfoVOMeta.CREATE_TIME));
 				this.setDeleteTime( (Date)r.getValue(DbInfoVOMeta.DELETE_TIME));
