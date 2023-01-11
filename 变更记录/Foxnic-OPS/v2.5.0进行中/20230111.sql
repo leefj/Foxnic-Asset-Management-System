@@ -1,3 +1,6 @@
+alter table ops_db_info add column data_loc varchar(500);
+alter table ops_db_info add column backup_info varchar(1000);
+
 INSERT INTO `sys_dict` (`id`, `is_tree`, `name`, `code`, `module`, `notes`, `create_by`, `create_time`, `update_by`, `update_time`, `deleted`, `delete_by`, `delete_time`, `version`)
 VALUES
 ('665509322247110656', 0, '数据库备份数据存放', 'ops_db_data_loc', '472036556115279872', '', '110588348101165911', '2023-01-11 10:56:27', NULL, NULL, 0, NULL, NULL, 1);
@@ -8,11 +11,6 @@ VALUES
 ('665509621942714368', '665509322247110656', 'ops_db_data_loc', '', 'nbu', 'NBU', 2, '110588348101165911', '2023-01-11 10:57:38', NULL, NULL, 0, NULL, NULL, 1, 1),
 ('665509825974632448', '665509322247110656', 'ops_db_data_loc', '', 'nbu_other_site', 'NBU(灾备)', 3, '110588348101165911', '2023-01-11 10:58:27', NULL, NULL, 0, NULL, NULL, 1, 1),
 ('665509924184260608', '665509322247110656', 'ops_db_data_loc', '', 'nbu_full', 'NBU及灾备', 3, '110588348101165911', '2023-01-11 10:58:51', NULL, NULL, 0, NULL, NULL, 1, 1);
-
-
-
-alter table ops_db_info add column data_loc varchar(500);
-
 
 CREATE TABLE `ops_db_data_loc` (
                                    `id` varchar(50) NOT NULL COMMENT '主键',
@@ -28,3 +26,4 @@ CREATE TABLE `ops_db_data_loc` (
                                    `version` int(11) NOT NULL DEFAULT '1',
                                    PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='数据库存放位置';
+

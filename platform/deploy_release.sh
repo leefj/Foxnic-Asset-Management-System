@@ -30,7 +30,7 @@ echo "release_dir:$release_dir"
 cd $release_dir
 cp -r $deploy_dir/* .
 
-version=2.4.0
+version=2.5.0
 # process app.jar
 echo "$release_dir/app/app/lib/"
 mkdir -p $release_dir/app/app/lib/
